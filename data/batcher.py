@@ -23,8 +23,8 @@ def coll_fn(data):
 def coll_fn_extract(data):
     def is_good_data(d):
         """ make sure data is not empty"""
-        source_sents, extracts = d
-        return source_sents and extracts
+        source_sents, extracts, query = d
+        return source_sents and extracts and query
     batch = list(filter(is_good_data, data))
     assert all(map(is_good_data, batch))
     return batch
@@ -48,11 +48,12 @@ def prepro_fn(max_src_len, max_tgt_len, batch):
 @curry
 def prepro_fn_extract(max_src_len, max_src_num, batch):
     def prepro_one(sample):
-        source_sents, extracts = sample
+        source_sents, extracts, query = sample
         tokenized_sents = tokenize(max_src_len, source_sents)[:max_src_num]
+        tokenized_query = tokenize(max_src_len, [query])[0]
         cleaned_extracts = list(filter(lambda e: e < len(tokenized_sents),
                                        extracts))
-        return tokenized_sents, cleaned_extracts
+        return tokenized_sents, cleaned_extracts, tokenized_query
     batch = list(map(prepro_one, batch))
     return batch
 
@@ -82,9 +83,10 @@ def convert_batch_copy(unk, word2id, batch):
 @curry
 def convert_batch_extract_ptr(unk, word2id, batch):
     def convert_one(sample):
-        source_sents, extracts = sample
+        source_sents, extracts, query = sample
         id_sents = conver2id(unk, word2id, source_sents)
-        return id_sents, extracts
+        id_query = conver2id(unk, word2id, [query])
+        return id_sents, extracts, id_query[0]
     batch = list(map(convert_one, batch))
     return batch
 
@@ -160,11 +162,11 @@ def batchify_fn_copy(pad, start, end, data, cuda=True):
 
 @curry
 def batchify_fn_extract_ptr(pad, data, cuda=True):
-    source_lists, targets = tuple(map(list, unzip(data)))
+    source_lists, targets, queries = tuple(map(list, unzip(data)))
 
     src_nums = list(map(len, source_lists))
     sources = list(map(pad_batch_tensorize(pad=pad, cuda=cuda), source_lists))
-
+    query = list(map(pad_batch_tensorize(pad=pad, cuda=cuda), [[q] for q in queries]))
     # PAD is -1 (dummy extraction index) for using sequence loss
     target = pad_batch_tensorize(targets, pad=-1, cuda=cuda)
     remove_last = lambda tgt: tgt[:-1]
@@ -173,7 +175,7 @@ def batchify_fn_extract_ptr(pad, data, cuda=True):
         pad=-0, cuda=cuda # use 0 here for feeding first conv sentence repr.
     )
 
-    fw_args = (sources, src_nums, tar_in)
+    fw_args = (sources, src_nums, query, tar_in)
     loss_args = (target, )
     return fw_args, loss_args
 
