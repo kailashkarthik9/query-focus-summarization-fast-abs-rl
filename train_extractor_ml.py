@@ -44,15 +44,15 @@ class ExtractDataset(CnnDmDataset):
 
     def __getitem__(self, i):
         js_data = super().__getitem__(i)
-        art_sents, extracts, query = js_data['article'], js_data['extracted'], js_data['query']
-        return art_sents, extracts, query
+        art_sents, extracts = js_data['article'], js_data['extracted']
+        return art_sents, extracts
 
 
 def build_batchers(net_type, word2id, cuda, debug):
     assert net_type in ['ff', 'rnn']
     prepro = prepro_fn_extract(args.max_word, args.max_sent)
     def sort_key(sample):
-        src_sents, _, _ = sample
+        src_sents, _ = sample
         return len(src_sents)
     batchify_fn = (batchify_fn_extract_ff if net_type == 'ff'
                    else batchify_fn_extract_ptr)

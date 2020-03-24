@@ -36,10 +36,6 @@ class ConvSentEncoder(nn.Module):
         assert self._embedding.weight.size() == embedding.size()
         self._embedding.weight.data.copy_(embedding)
 
-    def get_embedding(self, input_):
-        with torch.no_grad():
-            return self._embedding(input_)
-
 
 class LSTMEncoder(nn.Module):
     def __init__(self, input_dim, n_hidden, n_layer, dropout, bidirectional):
@@ -153,7 +149,7 @@ class ExtractSumm(nn.Module):
 class LSTMPointerNet(nn.Module):
     """Pointer network as in Vinyals et al """
     def __init__(self, input_dim, n_hidden, n_layer,
-                 dropout, n_hop, n_query=0):
+                 dropout, n_hop):
         super().__init__()
         self._init_h = nn.Parameter(torch.Tensor(n_layer, n_hidden))
         self._init_c = nn.Parameter(torch.Tensor(n_layer, n_hidden))
@@ -169,7 +165,7 @@ class LSTMPointerNet(nn.Module):
 
         # attention parameters
         self._attn_wm = nn.Parameter(torch.Tensor(input_dim, n_hidden))
-        self._attn_wq = nn.Parameter(torch.Tensor(n_hidden + n_query, n_hidden))
+        self._attn_wq = nn.Parameter(torch.Tensor(n_hidden, n_hidden))
         self._attn_v = nn.Parameter(torch.Tensor(n_hidden))
         init.xavier_normal_(self._attn_wm)
         init.xavier_normal_(self._attn_wq)
@@ -184,7 +180,7 @@ class LSTMPointerNet(nn.Module):
         init.uniform_(self._hop_v, -INI, INI)
         self._n_hop = n_hop
 
-    def forward(self, attn_mem, mem_sizes, queries, lstm_in):
+    def forward(self, attn_mem, mem_sizes, lstm_in):
         """atten_mem: Tensor of size [batch_size, max_sent_num, input_dim]"""
         attn_feat, hop_feat, lstm_states, init_i = self._prepare(attn_mem)
         lstm_in = torch.cat([init_i, lstm_in], dim=1).transpose(0, 1)
@@ -193,15 +189,11 @@ class LSTMPointerNet(nn.Module):
         for _ in range(self._n_hop):
             query = LSTMPointerNet.attention(
                 hop_feat, query, self._hop_v, self._hop_wq, mem_sizes)
-        queries_summed = [torch.sum(q, dim=1) for q in queries]
-        queries_batched = torch.stack(queries_summed)
-        queries_attention = torch.stack([queries_batched.transpose(0, 1)] * lstm_in.shape[0]).squeeze(1).transpose(0, 1)
-        query_combined = torch.cat([query, queries_attention], dim=2)
         output = LSTMPointerNet.attention_score(
-            attn_feat, query_combined, self._attn_v, self._attn_wq)
+            attn_feat, query, self._attn_v, self._attn_wq)
         return output  # unormalized extraction logit
 
-    def extract(self, attn_mem, mem_sizes, queries, k):
+    def extract(self, attn_mem, mem_sizes, k):
         """extract k sentences, decode only, batch_size==1"""
         attn_feat, hop_feat, lstm_states, lstm_in = self._prepare(attn_mem)
         lstm_in = lstm_in.squeeze(1)
@@ -215,13 +207,8 @@ class LSTMPointerNet(nn.Module):
             for _ in range(self._n_hop):
                 query = LSTMPointerNet.attention(
                     hop_feat, query, self._hop_v, self._hop_wq, mem_sizes)
-            queries_summed = [torch.sum(q, dim=1) for q in queries]
-            queries_batched = torch.stack(queries_summed)
-            queries_attention = torch.stack([queries_batched.transpose(0, 1)] * lstm_in.shape[0]).squeeze(1).transpose(
-                0, 1)
-            query_combined = torch.cat([query, queries_attention], dim=2)
             score = LSTMPointerNet.attention_score(
-                attn_feat, query_combined, self._attn_v, self._attn_wq)
+                attn_feat, query, self._attn_v, self._attn_wq)
             score = score.squeeze()
             for e in extracts:
                 score[e] = -1e6
@@ -282,23 +269,22 @@ class PtrExtractSumm(nn.Module):
         enc_out_dim = lstm_hidden * (2 if bidirectional else 1)
         self._extractor = LSTMPointerNet(
             enc_out_dim, lstm_hidden, lstm_layer,
-            dropout, n_hop, emb_dim
+            dropout, n_hop
         )
 
-    def forward(self, article_sents, sent_nums, queries, target):
+    def forward(self, article_sents, sent_nums, target):
         enc_out = self._encode(article_sents, sent_nums)
-        enc_queries = [self._sent_enc.get_embedding(query) for query in queries]
         bs, nt = target.size()
         d = enc_out.size(2)
         ptr_in = torch.gather(
             enc_out, dim=1, index=target.unsqueeze(2).expand(bs, nt, d)
         )
-        output = self._extractor(enc_out, sent_nums, enc_queries, ptr_in)
+        output = self._extractor(enc_out, sent_nums, ptr_in)
         return output
 
-    def extract(self, article_sents, sent_nums=None, queries=None, k=4):
+    def extract(self, article_sents, sent_nums=None, k=4):
         enc_out = self._encode(article_sents, sent_nums)
-        output = self._extractor.extract(enc_out, sent_nums, queries, k)
+        output = self._extractor.extract(enc_out, sent_nums, k)
         return output
 
     def _encode(self, article_sents, sent_nums):

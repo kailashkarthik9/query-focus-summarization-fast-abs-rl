@@ -45,8 +45,7 @@ class RLDataset(CnnDmDataset):
         js_data = super().__getitem__(i)
         art_sents = js_data['article']
         abs_sents = js_data['abstract']
-        query = js_data['query']
-        return art_sents, abs_sents, query
+        return art_sents, abs_sents
 
 def load_ext_net(ext_dir):
     ext_meta = json.load(open(join(ext_dir, 'meta.json')))
@@ -104,12 +103,10 @@ def configure_training(opt, lr, clip_grad, lr_decay, batch_size,
 
 def build_batchers(batch_size):
     def coll(batch):
-        art_batch, abs_batch, query_batch = unzip(batch)
-        query_batch_list = list(query_batch)
+        art_batch, abs_batch = unzip(batch)
         art_sents = list(filter(bool, map(tokenize(None), art_batch)))
         abs_sents = list(filter(bool, map(tokenize(None), abs_batch)))
-        queries = list(filter(bool, map(tokenize(None), [[query] for query in query_batch_list])))
-        return art_sents, abs_sents, queries
+        return art_sents, abs_sents
     loader = DataLoader(
         RLDataset('train'), batch_size=batch_size,
         shuffle=True, num_workers=4,

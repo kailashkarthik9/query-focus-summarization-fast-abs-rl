@@ -23,11 +23,11 @@ def a2c_validate(agent, abstractor, loader):
     avg_reward = 0
     i = 0
     with torch.no_grad():
-        for art_batch, abs_batch, query_batch in loader:
+        for art_batch, abs_batch in loader:
             ext_sents = []
             ext_inds = []
-            for raw_arts, query in zip(art_batch, query_batch):
-                indices = agent(raw_arts, query)
+            for raw_arts in art_batch:
+                indices = agent(raw_arts)
                 ext_inds += [(len(ext_sents), len(indices)-1)]
                 ext_sents += [raw_arts[idx.item()]
                               for idx in indices if idx.item() < len(raw_arts)]
@@ -52,9 +52,9 @@ def a2c_train_step(agent, abstractor, loader, opt, grad_fn,
     probs = []
     baselines = []
     ext_sents = []
-    art_batch, abs_batch, query_batch = next(loader)
-    for raw_arts, query in zip(art_batch, query_batch):
-        (inds, ms), bs = agent(raw_arts, query)
+    art_batch, abs_batch = next(loader)
+    for raw_arts in art_batch:
+        (inds, ms), bs = agent(raw_arts)
         baselines.append(bs)
         indices.append(inds)
         probs.append(ms)
@@ -100,7 +100,7 @@ def a2c_train_step(agent, abstractor, loader, opt, grad_fn,
     critic_loss = F.mse_loss(baseline, reward)
     # backprop and update
     autograd.backward(
-        [critic_loss.unsqueeze(0)] + losses,
+        [critic_loss] + losses,
         [torch.ones(1).to(critic_loss.device)]*(1+len(losses))
     )
     grad_log = grad_fn()
@@ -128,7 +128,7 @@ def get_grad_fn(agent, clip_grad, max_grad=1e2):
             grad_log['grad_norm'+n] = tot_grad.item()
         grad_norm = clip_grad_norm_(
             [p for p in params if p.requires_grad], clip_grad)
-        # grad_norm = grad_norm.item()
+        grad_norm = grad_norm.item()
         if max_grad is not None and grad_norm >= max_grad:
             print('WARNING: Exploding Gradients {:.2f}'.format(grad_norm))
             grad_norm = max_grad
