@@ -45,7 +45,7 @@ class MatchDataset(CnnDmDataset):
     def __getitem__(self, i):
         js_data = super().__getitem__(i)
         art_sents, abs_sents, extracts = (
-            js_data['article'], js_data['abstract'], js_data['extracted'])
+            js_data['article'], js_data['summary'], js_data['extracted'])
         matched_arts = [art_sents[i] for i in extracts]
         return matched_arts, abs_sents[:len(extracts)]
 

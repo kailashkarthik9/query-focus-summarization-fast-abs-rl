@@ -38,6 +38,31 @@ def compute_rouge_n(output, reference, n=1, mode='f'):
             score = f_score
     return score
 
+@curry
+def compute_rouge_n_with_query(output, reference, query, n=1, mode='f'):
+    """ compute ROUGE-N for a single pair of summary and reference"""
+    assert mode in list('fpr')  # F-1, precision, recall
+    match = _n_gram_match(reference, output, n)
+    if match == 0:
+        score = 0.0
+    else:
+        precision = match / len(output)
+        recall = match / len(reference)
+        f_score = 2 * (precision * recall) / (precision + recall)
+        if mode == 'p':
+            score = precision
+        elif mode == 'r':
+            score = recall
+        else:
+            score = f_score
+    query = ' '.join(query[0])
+    if query in ' '.join(reference):
+        if query in ' '.join(output):
+            score *= 2
+        else:
+            score /= 2
+    return score
+
 
 def _lcs_dp(a, b):
     """ compute the len dp of lcs"""
@@ -76,6 +101,34 @@ def compute_rouge_l(output, reference, mode='f'):
             score = recall
         else:
             score = f_score
+    return score
+
+
+@curry
+def compute_rouge_l_with_query(output, reference, query, mode='f'):
+    """ compute ROUGE-L for a single pair of summary and reference
+    output, reference are list of words
+    """
+    assert mode in list('fpr')  # F-1, precision, recall
+    lcs = _lcs_len(output, reference)
+    if lcs == 0:
+        score = 0.0
+    else:
+        precision = lcs / len(output)
+        recall = lcs / len(reference)
+        f_score = 2 * (precision * recall) / (precision + recall)
+        if mode == 'p':
+            score = precision
+        if mode == 'r':
+            score = recall
+        else:
+            score = f_score
+    query = ' '.join(query[0])
+    if query in ' '.join(reference):
+        if query in ' '.join(output):
+            score *= 2
+        else:
+            score /= 2
     return score
 
 

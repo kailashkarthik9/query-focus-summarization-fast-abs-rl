@@ -12,7 +12,7 @@ from torch.nn import functional as F
 from torch import autograd
 from torch.nn.utils import clip_grad_norm_
 
-from metric import compute_rouge_l, compute_rouge_n
+from metric import compute_rouge_l_with_query, compute_rouge_n_with_query
 from training import BasicPipeline
 
 
@@ -23,20 +23,20 @@ def a2c_validate(agent, abstractor, loader):
     avg_reward = 0
     i = 0
     with torch.no_grad():
-        for art_batch, abs_batch in loader:
+        for art_batch, abs_batch, query_batch in loader:
             ext_sents = []
             ext_inds = []
-            for raw_arts in art_batch:
-                indices = agent(raw_arts)
+            for raw_arts, query in zip(art_batch, query_batch):
+                indices = agent(raw_arts, query)
                 ext_inds += [(len(ext_sents), len(indices)-1)]
                 ext_sents += [raw_arts[idx.item()]
                               for idx in indices if idx.item() < len(raw_arts)]
             all_summs = abstractor(ext_sents)
-            for (j, n), abs_sents in zip(ext_inds, abs_batch):
+            for (j, n), abs_sents, query in zip(ext_inds, abs_batch, query_batch):
                 summs = all_summs[j:j+n]
                 # python ROUGE-1 (not official evaluation)
-                avg_reward += compute_rouge_n(list(concat(summs)),
-                                              list(concat(abs_sents)), n=1)
+                avg_reward += compute_rouge_n_with_query(list(concat(summs)),
+                                              list(concat(abs_sents)), query, n=1)
                 i += 1
     avg_reward /= (i/100)
     print('finished in {}! avg reward: {:.2f}'.format(
@@ -45,16 +45,16 @@ def a2c_validate(agent, abstractor, loader):
 
 
 def a2c_train_step(agent, abstractor, loader, opt, grad_fn,
-                   gamma=0.99, reward_fn=compute_rouge_l,
-                   stop_reward_fn=compute_rouge_n(n=1), stop_coeff=1.0):
+                   gamma=0.99, reward_fn=compute_rouge_l_with_query,
+                   stop_reward_fn=compute_rouge_n_with_query(n=1), stop_coeff=1.0):
     opt.zero_grad()
     indices = []
     probs = []
     baselines = []
     ext_sents = []
-    art_batch, abs_batch = next(loader)
-    for raw_arts in art_batch:
-        (inds, ms), bs = agent(raw_arts)
+    art_batch, abs_batch, query_batch = next(loader)
+    for raw_arts, query in zip(art_batch, query_batch):
+        (inds, ms), bs = agent(raw_arts, query)
         baselines.append(bs)
         indices.append(inds)
         probs.append(ms)
@@ -65,13 +65,13 @@ def a2c_train_step(agent, abstractor, loader, opt, grad_fn,
     i = 0
     rewards = []
     avg_reward = 0
-    for inds, abss in zip(indices, abs_batch):
-        rs = ([reward_fn(summaries[i+j], abss[j])
+    for inds, abss, query in zip(indices, abs_batch, query_batch):
+        rs = ([reward_fn(summaries[i+j], abss[j], query)
               for j in range(min(len(inds)-1, len(abss)))]
               + [0 for _ in range(max(0, len(inds)-1-len(abss)))]
               + [stop_coeff*stop_reward_fn(
                   list(concat(summaries[i:i+len(inds)-1])),
-                  list(concat(abss)))])
+                  list(concat(abss)), query)])
         assert len(rs) == len(inds)
         avg_reward += rs[-1]/stop_coeff
         i += len(inds)-1
@@ -100,7 +100,7 @@ def a2c_train_step(agent, abstractor, loader, opt, grad_fn,
     critic_loss = F.mse_loss(baseline, reward)
     # backprop and update
     autograd.backward(
-        [critic_loss] + losses,
+        [critic_loss.unsqueeze(0)] + losses,
         [torch.ones(1).to(critic_loss.device)]*(1+len(losses))
     )
     grad_log = grad_fn()
@@ -128,7 +128,7 @@ def get_grad_fn(agent, clip_grad, max_grad=1e2):
             grad_log['grad_norm'+n] = tot_grad.item()
         grad_norm = clip_grad_norm_(
             [p for p in params if p.requires_grad], clip_grad)
-        grad_norm = grad_norm.item()
+        # grad_norm = grad_norm.item()
         if max_grad is not None and grad_norm >= max_grad:
             print('WARNING: Exploding Gradients {:.2f}'.format(grad_norm))
             grad_norm = max_grad

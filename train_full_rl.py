@@ -25,7 +25,7 @@ from rl import get_grad_fn
 from rl import A2CPipeline
 from decoding import load_best_ckpt
 from decoding import Abstractor, ArticleBatcher
-from metric import compute_rouge_l, compute_rouge_n
+from metric import compute_rouge_l_with_query, compute_rouge_n_with_query
 
 
 MAX_ABS_LEN = 30
@@ -44,8 +44,9 @@ class RLDataset(CnnDmDataset):
     def __getitem__(self, i):
         js_data = super().__getitem__(i)
         art_sents = js_data['article']
-        abs_sents = js_data['abstract']
-        return art_sents, abs_sents
+        abs_sents = js_data['summary']
+        query = js_data['query']
+        return art_sents, abs_sents, query
 
 def load_ext_net(ext_dir):
     ext_meta = json.load(open(join(ext_dir, 'meta.json')))
@@ -103,10 +104,12 @@ def configure_training(opt, lr, clip_grad, lr_decay, batch_size,
 
 def build_batchers(batch_size):
     def coll(batch):
-        art_batch, abs_batch = unzip(batch)
+        art_batch, abs_batch, query_batch = unzip(batch)
+        query_batch_list = list(query_batch)
         art_sents = list(filter(bool, map(tokenize(None), art_batch)))
         abs_sents = list(filter(bool, map(tokenize(None), abs_batch)))
-        return art_sents, abs_sents
+        queries = list(filter(bool, map(tokenize(None), [[query] for query in query_batch_list])))
+        return art_sents, abs_sents, queries
     loader = DataLoader(
         RLDataset('train'), batch_size=batch_size,
         shuffle=True, num_workers=4,
@@ -136,8 +139,8 @@ def train(args):
     )
     train_batcher, val_batcher = build_batchers(args.batch)
     # TODO different reward
-    reward_fn = compute_rouge_l
-    stop_reward_fn = compute_rouge_n(n=1)
+    reward_fn = compute_rouge_l_with_query
+    stop_reward_fn = compute_rouge_n_with_query(n=1)
 
     # save abstractor binary
     if args.abs_dir is not None:

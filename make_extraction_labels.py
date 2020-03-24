@@ -45,7 +45,7 @@ def process(split, i):
         data = json.loads(f.read())
     tokenize = compose(list, _split_words)
     art_sents = tokenize(data['article'])
-    abs_sents = tokenize(data['abstract'])
+    abs_sents = tokenize(data['summary'])
     if art_sents and abs_sents: # some data contains empty article/abstract
         extracted, scores = get_extract_label(art_sents, abs_sents)
     else:
@@ -78,7 +78,7 @@ def label(split):
             data = json.loads(f.read())
         tokenize = compose(list, _split_words)
         art_sents = tokenize(data['article'])
-        abs_sents = tokenize(data['abstract'])
+        abs_sents = tokenize(data['summary'])
         extracted, scores = get_extract_label(art_sents, abs_sents)
         data['extracted'] = extracted
         data['score'] = scores

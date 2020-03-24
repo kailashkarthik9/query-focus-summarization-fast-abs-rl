@@ -17,7 +17,7 @@ def get_basic_grad_fn(net, clip_grad, max_grad=1e2):
     def f():
         grad_norm = clip_grad_norm_(
             [p for p in net.parameters() if p.requires_grad], clip_grad)
-        grad_norm = grad_norm.item()
+        # grad_norm = grad_norm.item()
         if max_grad is not None and grad_norm >= max_grad:
             print('WARNING: Exploding Gradients {:.2f}'.format(grad_norm))
             grad_norm = max_grad
@@ -216,6 +216,6 @@ class BasicTrainer(object):
                     stop = self.checkpoint()
                     if stop:
                         break
-            print('Training finised in ', timedelta(seconds=time()-start))
+            print('Training finished in ', timedelta(seconds=time()-start))
         finally:
             self._pipeline.terminate()

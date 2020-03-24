@@ -32,7 +32,7 @@ class PtrExtractorRL(nn.Module):
         self._hop_v = nn.Parameter(ptr_net._hop_v.clone())
         self._n_hop = ptr_net._n_hop
 
-    def forward(self, attn_mem, n_step):
+    def forward(self, attn_mem, queries, n_step):
         """atten_mem: Tensor of size [num_sents, input_dim]"""
         attn_feat = torch.mm(attn_mem, self._attn_wm)
         hop_feat = torch.mm(attn_mem, self._hop_wm)
@@ -45,8 +45,13 @@ class PtrExtractorRL(nn.Module):
             for _ in range(self._n_hop):
                 query = PtrExtractorRL.attention(hop_feat, query,
                                                 self._hop_v, self._hop_wq)
+            queries_summed = [torch.sum(q, dim=1) for q in queries]
+            queries_batched = torch.stack(queries_summed)
+            queries_attention = torch.stack([queries_batched.transpose(0, 1)] * lstm_in.shape[0]).squeeze(1).transpose(
+                0, 1)
+            query_combined = torch.cat([query, queries_attention], dim=2)
             score = PtrExtractorRL.attention_score(
-                attn_feat, query, self._attn_v, self._attn_wq)
+                attn_feat, query_combined, self._attn_v, self._attn_wq)
             if self.training:
                 prob = F.softmax(score, dim=-1)
                 out = torch.distributions.Categorical(prob)
@@ -87,10 +92,10 @@ class PtrExtractorRLStop(PtrExtractorRL):
             torch.Tensor(self._lstm_cell.input_size))
         init.uniform_(self._stop, -INI, INI)
 
-    def forward(self, attn_mem, n_ext=None):
+    def forward(self, attn_mem, queries, n_ext=None):
         """atten_mem: Tensor of size [num_sents, input_dim]"""
         if n_ext is not None:
-            return super().forward(attn_mem, n_ext)
+            return super().forward(attn_mem, queries, n_ext)
         max_step = attn_mem.size(0)
         attn_mem = torch.cat([attn_mem, self._stop.unsqueeze(0)], dim=0)
         attn_feat = torch.mm(attn_mem, self._attn_wm)
@@ -105,8 +110,11 @@ class PtrExtractorRLStop(PtrExtractorRL):
             for _ in range(self._n_hop):
                 query = PtrExtractorRL.attention(hop_feat, query,
                                                 self._hop_v, self._hop_wq)
+            queries_summed = [torch.sum(q.unsqueeze(0), dim=1) for q in queries]
+            queries_batched = torch.stack(queries_summed)
+            query_combined = torch.cat([query, queries_batched.squeeze(0)], dim=1)
             score = PtrExtractorRL.attention_score(
-                attn_feat, query, self._attn_v, self._attn_wq)
+                attn_feat, query_combined, self._attn_v, self._attn_wq)
             for o in outputs:
                 score[0, o.item()] = -1e18
             if self.training:
@@ -152,7 +160,7 @@ class PtrScorer(nn.Module):
         # regression layer
         self._score_linear = nn.Linear(self._lstm_cell.input_size, 1)
 
-    def forward(self, attn_mem, n_step):
+    def forward(self, attn_mem, queries, n_step):
         """atten_mem: Tensor of size [num_sents, input_dim]"""
         attn_feat = torch.mm(attn_mem, self._attn_wm)
         hop_feat = torch.mm(attn_mem, self._hop_wm)
@@ -165,8 +173,11 @@ class PtrScorer(nn.Module):
             for _ in range(self._n_hop):
                 query = PtrScorer.attention(hop_feat, hop_feat, query,
                                             self._hop_v, self._hop_wq)
+            queries_summed = [torch.sum(q.unsqueeze(0), dim=1) for q in queries]
+            queries_batched = torch.stack(queries_summed)
+            query_combined = torch.cat([query, queries_batched.squeeze(0)], dim=1)
             output = PtrScorer.attention(
-                attn_mem, attn_feat, query, self._attn_v, self._attn_wq)
+                attn_mem, attn_feat, query_combined, self._attn_v, self._attn_wq)
             score = self._score_linear(output)
             scores.append(score)
             lstm_in = output
@@ -192,20 +203,22 @@ class ActorCritic(nn.Module):
         self._scr = PtrScorer(extractor)
         self._batcher = art_batcher
 
-    def forward(self, raw_article_sents, n_abs=None):
+    def forward(self, raw_article_sents, queries, n_abs=None):
         article_sent = self._batcher(raw_article_sents)
+        queries_words = self._batcher(queries)
         enc_sent = self._sent_enc(article_sent).unsqueeze(0)
         enc_art = self._art_enc(enc_sent).squeeze(0)
+        enc_queries = [self._sent_enc.get_embedding(query) for query in queries_words]
         if n_abs is not None and not self.training:
             n_abs = min(len(raw_article_sents), n_abs)
         if n_abs is None:
-            outputs = self._ext(enc_art)
+            outputs = self._ext(enc_art, enc_queries)
         else:
-            outputs = self._ext(enc_art, n_abs)
+            outputs = self._ext(enc_art, enc_queries, n_abs)
         if self.training:
             if n_abs is None:
                 n_abs = len(outputs[0])
-            scores = self._scr(enc_art, n_abs)
+            scores = self._scr(enc_art, enc_queries, n_abs)
             return outputs, scores
         else:
             return outputs

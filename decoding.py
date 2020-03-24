@@ -24,7 +24,7 @@ except KeyError:
     print('please use environment variable to specify data directories')
 
 class DecodeDataset(CnnDmDataset):
-    """ get the article sentences only (for decoding use)"""
+    """ get the article sentences and query only (for decoding use)"""
     def __init__(self, split):
         assert split in ['val', 'test']
         super().__init__(split, DATASET_DIR)
@@ -32,7 +32,8 @@ class DecodeDataset(CnnDmDataset):
     def __getitem__(self, i):
         js_data = super().__getitem__(i)
         art_sents = js_data['article']
-        return art_sents
+        query = js_data['query']
+        return art_sents, query
 
 
 def make_html_safe(s):
@@ -156,13 +157,16 @@ class Extractor(object):
         self._id2word = {i: w for w, i in word2id.items()}
         self._max_ext = max_ext
 
-    def __call__(self, raw_article_sents):
+    def __call__(self, raw_article_sents, raw_query):
         self._net.eval()
         n_art = len(raw_article_sents)
         articles = conver2id(UNK, self._word2id, raw_article_sents)
+        queries = conver2id(UNK, self._word2id, raw_query)
         article = pad_batch_tensorize(articles, PAD, cuda=False
                                      ).to(self._device)
-        indices = self._net.extract([article], k=min(n_art, self._max_ext))
+        query = pad_batch_tensorize(queries, PAD, cuda=False
+                                     ).to(self._device)
+        indices = self._net.extract([article], k=min(n_art, self._max_ext), queries=[query])
         return indices
 
 
@@ -196,7 +200,7 @@ class RLExtractor(object):
         self._word2id = word2id
         self._id2word = {i: w for w, i in word2id.items()}
 
-    def __call__(self, raw_article_sents):
+    def __call__(self, raw_article_sents, query):
         self._net.eval()
-        indices = self._net(raw_article_sents)
+        indices = self._net(raw_article_sents, query)
         return indices

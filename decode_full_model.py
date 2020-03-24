@@ -44,8 +44,10 @@ def decode(save_path, model_dir, split, batch_size,
 
     # setup loader
     def coll(batch):
-        articles = list(filter(bool, batch))
-        return articles
+        articles_cum_queries = list(filter(bool, batch))
+        articles = [item[0] for item in articles_cum_queries]
+        queries = [item[1] for item in articles_cum_queries]
+        return articles, queries
     dataset = DecodeDataset(split)
 
     n_data = len(dataset)
@@ -69,12 +71,14 @@ def decode(save_path, model_dir, split, batch_size,
     # Decoding
     i = 0
     with torch.no_grad():
-        for i_debug, raw_article_batch in enumerate(loader):
+        for i_debug, raw_article_cum_query_batch in enumerate(loader):
+            raw_article_batch, raw_query_batch = raw_article_cum_query_batch
             tokenized_article_batch = map(tokenize(None), raw_article_batch)
+            tokenized_queries_batch = map(tokenize(None), [[query] for query in raw_query_batch])
             ext_arts = []
             ext_inds = []
-            for raw_art_sents in tokenized_article_batch:
-                ext = extractor(raw_art_sents)[:-1]  # exclude EOE
+            for raw_art_sents, raw_queries in zip(tokenized_article_batch, tokenized_queries_batch):
+                ext = extractor(raw_art_sents, raw_queries)[:-1]  # exclude EOE
                 if not ext:
                     # use top-5 if nothing is extracted
                     # in some rare cases rnn-ext does not extract at all

@@ -25,7 +25,7 @@ def dump(split):
               end='')
         with open(join(data_dir, '{}.json'.format(i))) as f:
             data = json.loads(f.read())
-        abs_sents = data['abstract']
+        abs_sents = data['summary']
         with open(join(dump_dir, '{}.ref'.format(i)), 'w') as f:
             f.write(make_html_safe('\n'.join(abs_sents)))
     print('finished in {}'.format(timedelta(seconds=time()-start)))
