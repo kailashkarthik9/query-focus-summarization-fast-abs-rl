@@ -1,0 +1,1027 @@
+Index: data/batcher.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- data/batcher.py	(revision a3cd65016082ab842be4e42b0b26b7bc046f4ad5)
++++ data/batcher.py	(revision 4bb12122139df36dbbf77b2746f3042cac6b6ba6)
+@@ -23,8 +23,8 @@
+ def coll_fn_extract(data):
+     def is_good_data(d):
+         """ make sure data is not empty"""
+-        source_sents, extracts = d
+-        return source_sents and extracts
++        source_sents, extracts, query = d
++        return source_sents and extracts and query
+     batch = list(filter(is_good_data, data))
+     assert all(map(is_good_data, batch))
+     return batch
+@@ -48,11 +48,12 @@
+ @curry
+ def prepro_fn_extract(max_src_len, max_src_num, batch):
+     def prepro_one(sample):
+-        source_sents, extracts = sample
++        source_sents, extracts, query = sample
+         tokenized_sents = tokenize(max_src_len, source_sents)[:max_src_num]
++        tokenized_query = tokenize(max_src_len, [query])[0]
+         cleaned_extracts = list(filter(lambda e: e < len(tokenized_sents),
+                                        extracts))
+-        return tokenized_sents, cleaned_extracts
++        return tokenized_sents, cleaned_extracts, tokenized_query
+     batch = list(map(prepro_one, batch))
+     return batch
+ 
+@@ -82,9 +83,10 @@
+ @curry
+ def convert_batch_extract_ptr(unk, word2id, batch):
+     def convert_one(sample):
+-        source_sents, extracts = sample
++        source_sents, extracts, query = sample
+         id_sents = conver2id(unk, word2id, source_sents)
+-        return id_sents, extracts
++        id_query = conver2id(unk, word2id, [query])
++        return id_sents, extracts, id_query[0]
+     batch = list(map(convert_one, batch))
+     return batch
+ 
+@@ -160,20 +162,23 @@
+ 
+ @curry
+ def batchify_fn_extract_ptr(pad, data, cuda=True):
+-    source_lists, targets = tuple(map(list, unzip(data)))
++    source_lists, targets, queries = tuple(map(list, unzip(data)))
+ 
+     src_nums = list(map(len, source_lists))
+     sources = list(map(pad_batch_tensorize(pad=pad, cuda=cuda), source_lists))
+-
++    query = list(map(pad_batch_tensorize(pad=pad, cuda=cuda), [[q] for q in queries]))
+     # PAD is -1 (dummy extraction index) for using sequence loss
+     target = pad_batch_tensorize(targets, pad=-1, cuda=cuda)
+-    remove_last = lambda tgt: tgt[:-1]
++    # remove_last = lambda tgt: tgt[:-1]
++    def remove_last(tgt):
++        tgt[1:] = tgt[:-1]
++        return tgt
+     tar_in = pad_batch_tensorize(
+         list(map(remove_last, targets)),
+         pad=-0, cuda=cuda # use 0 here for feeding first conv sentence repr.
+     )
+ 
+-    fw_args = (sources, src_nums, tar_in)
++    fw_args = (sources, src_nums, query, tar_in)
+     loss_args = (target, )
+     return fw_args, loss_args
+ 
+Index: model/extract.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- model/extract.py	(revision a3cd65016082ab842be4e42b0b26b7bc046f4ad5)
++++ model/extract.py	(revision 4bb12122139df36dbbf77b2746f3042cac6b6ba6)
+@@ -36,6 +36,10 @@
+         assert self._embedding.weight.size() == embedding.size()
+         self._embedding.weight.data.copy_(embedding)
+ 
++    def get_embedding(self, input_):
++        with torch.no_grad():
++            return self._embedding(input_)
++
+ 
+ class LSTMEncoder(nn.Module):
+     def __init__(self, input_dim, n_hidden, n_layer, dropout, bidirectional):
+@@ -149,7 +153,7 @@
+ class LSTMPointerNet(nn.Module):
+     """Pointer network as in Vinyals et al """
+     def __init__(self, input_dim, n_hidden, n_layer,
+-                 dropout, n_hop):
++                 dropout, n_hop, n_query=0):
+         super().__init__()
+         self._init_h = nn.Parameter(torch.Tensor(n_layer, n_hidden))
+         self._init_c = nn.Parameter(torch.Tensor(n_layer, n_hidden))
+@@ -165,7 +169,7 @@
+ 
+         # attention parameters
+         self._attn_wm = nn.Parameter(torch.Tensor(input_dim, n_hidden))
+-        self._attn_wq = nn.Parameter(torch.Tensor(n_hidden, n_hidden))
++        self._attn_wq = nn.Parameter(torch.Tensor(n_hidden + n_query, n_hidden))
+         self._attn_v = nn.Parameter(torch.Tensor(n_hidden))
+         init.xavier_normal_(self._attn_wm)
+         init.xavier_normal_(self._attn_wq)
+@@ -180,20 +184,26 @@
+         init.uniform_(self._hop_v, -INI, INI)
+         self._n_hop = n_hop
+ 
+-    def forward(self, attn_mem, mem_sizes, lstm_in):
++    def forward(self, attn_mem, mem_sizes, queries, lstm_in):
+         """atten_mem: Tensor of size [batch_size, max_sent_num, input_dim]"""
+         attn_feat, hop_feat, lstm_states, init_i = self._prepare(attn_mem)
+-        lstm_in = torch.cat([init_i, lstm_in], dim=1).transpose(0, 1)
++        # lstm_in = torch.cat([init_i, lstm_in], dim=1).transpose(0, 1)
++        lstm_in[:, 0, :] = init_i.squeeze(1)
++        lstm_in = lstm_in.transpose(0, 1)
+         query, final_states = self._lstm(lstm_in, lstm_states)
+         query = query.transpose(0, 1)
+         for _ in range(self._n_hop):
+             query = LSTMPointerNet.attention(
+                 hop_feat, query, self._hop_v, self._hop_wq, mem_sizes)
++        queries_summed = [torch.sum(q, dim=1) for q in queries]
++        queries_batched = torch.stack(queries_summed)
++        queries_attention = torch.stack([queries_batched.transpose(0, 1)] * lstm_in.shape[0]).squeeze(1).transpose(0, 1)
++        query_combined = torch.cat([query, queries_attention], dim=2)
+         output = LSTMPointerNet.attention_score(
+-            attn_feat, query, self._attn_v, self._attn_wq)
++            attn_feat, query_combined, self._attn_v, self._attn_wq)
+         return output  # unormalized extraction logit
+ 
+-    def extract(self, attn_mem, mem_sizes, k):
++    def extract(self, attn_mem, mem_sizes, queries, k):
+         """extract k sentences, decode only, batch_size==1"""
+         attn_feat, hop_feat, lstm_states, lstm_in = self._prepare(attn_mem)
+         lstm_in = lstm_in.squeeze(1)
+@@ -207,8 +217,13 @@
+             for _ in range(self._n_hop):
+                 query = LSTMPointerNet.attention(
+                     hop_feat, query, self._hop_v, self._hop_wq, mem_sizes)
++            queries_summed = [torch.sum(q, dim=1) for q in queries]
++            queries_batched = torch.stack(queries_summed)
++            queries_attention = torch.stack([queries_batched.transpose(0, 1)] * lstm_in.shape[0]).squeeze(1).transpose(
++                0, 1)
++            query_combined = torch.cat([query, queries_attention], dim=2)
+             score = LSTMPointerNet.attention_score(
+-                attn_feat, query, self._attn_v, self._attn_wq)
++                attn_feat, query_combined, self._attn_v, self._attn_wq)
+             score = score.squeeze()
+             for e in extracts:
+                 score[e] = -1e6
+@@ -269,22 +284,24 @@
+         enc_out_dim = lstm_hidden * (2 if bidirectional else 1)
+         self._extractor = LSTMPointerNet(
+             enc_out_dim, lstm_hidden, lstm_layer,
+-            dropout, n_hop
++            dropout, n_hop, emb_dim
+         )
+ 
+-    def forward(self, article_sents, sent_nums, target):
++    def forward(self, article_sents, sent_nums, queries, target):
+         enc_out = self._encode(article_sents, sent_nums)
++        enc_queries = [self._sent_enc.get_embedding(query) for query in queries]
+         bs, nt = target.size()
+         d = enc_out.size(2)
+         ptr_in = torch.gather(
+             enc_out, dim=1, index=target.unsqueeze(2).expand(bs, nt, d)
+         )
+-        output = self._extractor(enc_out, sent_nums, ptr_in)
++        output = self._extractor(enc_out, sent_nums, enc_queries, ptr_in)
+         return output
+ 
+-    def extract(self, article_sents, sent_nums=None, k=4):
++    def extract(self, article_sents, sent_nums=None, queries=None, k=4):
+         enc_out = self._encode(article_sents, sent_nums)
+-        output = self._extractor.extract(enc_out, sent_nums, k)
++        enc_queries = [self._sent_enc.get_embedding(query) for query in queries]
++        output = self._extractor.extract(enc_out, sent_nums, enc_queries, k)
+         return output
+ 
+     def _encode(self, article_sents, sent_nums):
+Index: requirements.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- requirements.txt	(revision a3cd65016082ab842be4e42b0b26b7bc046f4ad5)
++++ requirements.txt	(revision 58acbb34ae452278e3df5638568ce8af7649de1a)
+@@ -1,4 +1,4 @@
+-pytorch=0.4.0
++pytorch==0.4.0
+ gensim
+ tensorboardX
+ cytoolz
+Index: train_extractor_ml.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- train_extractor_ml.py	(revision a3cd65016082ab842be4e42b0b26b7bc046f4ad5)
++++ train_extractor_ml.py	(revision 58acbb34ae452278e3df5638568ce8af7649de1a)
+@@ -44,15 +44,15 @@
+ 
+     def __getitem__(self, i):
+         js_data = super().__getitem__(i)
+-        art_sents, extracts = js_data['article'], js_data['extracted']
+-        return art_sents, extracts
++        art_sents, extracts, query = js_data['article'], js_data['extracted'], js_data['query']
++        return art_sents, extracts, query
+ 
+ 
+ def build_batchers(net_type, word2id, cuda, debug):
+     assert net_type in ['ff', 'rnn']
+     prepro = prepro_fn_extract(args.max_word, args.max_sent)
+     def sort_key(sample):
+-        src_sents, _ = sample
++        src_sents, _, _ = sample
+         return len(src_sents)
+     batchify_fn = (batchify_fn_extract_ff if net_type == 'ff'
+                    else batchify_fn_extract_ptr)
+Index: training.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- training.py	(revision a3cd65016082ab842be4e42b0b26b7bc046f4ad5)
++++ training.py	(revision 58acbb34ae452278e3df5638568ce8af7649de1a)
+@@ -17,7 +17,7 @@
+     def f():
+         grad_norm = clip_grad_norm_(
+             [p for p in net.parameters() if p.requires_grad], clip_grad)
+-        grad_norm = grad_norm.item()
++        # grad_norm = grad_norm.item()
+         if max_grad is not None and grad_norm >= max_grad:
+             print('WARNING: Exploding Gradients {:.2f}'.format(grad_norm))
+             grad_norm = max_grad
+@@ -216,6 +216,6 @@
+                     stop = self.checkpoint()
+                     if stop:
+                         break
+-            print('Training finised in ', timedelta(seconds=time()-start))
++            print('Training finished in ', timedelta(seconds=time()-start))
+         finally:
+             self._pipeline.terminate()
+Index: model/rl.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- model/rl.py	(revision 58acbb34ae452278e3df5638568ce8af7649de1a)
++++ model/rl.py	(revision 01e4ca587e62b0efb633864fe2e7672ba87b799f)
+@@ -32,7 +32,7 @@
+         self._hop_v = nn.Parameter(ptr_net._hop_v.clone())
+         self._n_hop = ptr_net._n_hop
+ 
+-    def forward(self, attn_mem, n_step):
++    def forward(self, attn_mem, queries, n_step):
+         """atten_mem: Tensor of size [num_sents, input_dim]"""
+         attn_feat = torch.mm(attn_mem, self._attn_wm)
+         hop_feat = torch.mm(attn_mem, self._hop_wm)
+@@ -45,8 +45,13 @@
+             for _ in range(self._n_hop):
+                 query = PtrExtractorRL.attention(hop_feat, query,
+                                                 self._hop_v, self._hop_wq)
++            queries_summed = [torch.sum(q, dim=1) for q in queries]
++            queries_batched = torch.stack(queries_summed)
++            queries_attention = torch.stack([queries_batched.transpose(0, 1)] * lstm_in.shape[0]).squeeze(1).transpose(
++                0, 1)
++            query_combined = torch.cat([query, queries_attention], dim=2)
+             score = PtrExtractorRL.attention_score(
+-                attn_feat, query, self._attn_v, self._attn_wq)
++                attn_feat, query_combined, self._attn_v, self._attn_wq)
+             if self.training:
+                 prob = F.softmax(score, dim=-1)
+                 out = torch.distributions.Categorical(prob)
+@@ -87,10 +92,10 @@
+             torch.Tensor(self._lstm_cell.input_size))
+         init.uniform_(self._stop, -INI, INI)
+ 
+-    def forward(self, attn_mem, n_ext=None):
++    def forward(self, attn_mem, queries, n_ext=None):
+         """atten_mem: Tensor of size [num_sents, input_dim]"""
+         if n_ext is not None:
+-            return super().forward(attn_mem, n_ext)
++            return super().forward(attn_mem, queries, n_ext)
+         max_step = attn_mem.size(0)
+         attn_mem = torch.cat([attn_mem, self._stop.unsqueeze(0)], dim=0)
+         attn_feat = torch.mm(attn_mem, self._attn_wm)
+@@ -105,8 +110,11 @@
+             for _ in range(self._n_hop):
+                 query = PtrExtractorRL.attention(hop_feat, query,
+                                                 self._hop_v, self._hop_wq)
++            queries_summed = [torch.sum(q.unsqueeze(0), dim=1) for q in queries]
++            queries_batched = torch.stack(queries_summed)
++            query_combined = torch.cat([query, queries_batched.squeeze(0)], dim=1)
+             score = PtrExtractorRL.attention_score(
+-                attn_feat, query, self._attn_v, self._attn_wq)
++                attn_feat, query_combined, self._attn_v, self._attn_wq)
+             for o in outputs:
+                 score[0, o.item()] = -1e18
+             if self.training:
+@@ -152,7 +160,7 @@
+         # regression layer
+         self._score_linear = nn.Linear(self._lstm_cell.input_size, 1)
+ 
+-    def forward(self, attn_mem, n_step):
++    def forward(self, attn_mem, queries, n_step):
+         """atten_mem: Tensor of size [num_sents, input_dim]"""
+         attn_feat = torch.mm(attn_mem, self._attn_wm)
+         hop_feat = torch.mm(attn_mem, self._hop_wm)
+@@ -165,8 +173,11 @@
+             for _ in range(self._n_hop):
+                 query = PtrScorer.attention(hop_feat, hop_feat, query,
+                                             self._hop_v, self._hop_wq)
++            queries_summed = [torch.sum(q.unsqueeze(0), dim=1) for q in queries]
++            queries_batched = torch.stack(queries_summed)
++            query_combined = torch.cat([query, queries_batched.squeeze(0)], dim=1)
+             output = PtrScorer.attention(
+-                attn_mem, attn_feat, query, self._attn_v, self._attn_wq)
++                attn_mem, attn_feat, query_combined, self._attn_v, self._attn_wq)
+             score = self._score_linear(output)
+             scores.append(score)
+             lstm_in = output
+@@ -192,20 +203,22 @@
+         self._scr = PtrScorer(extractor)
+         self._batcher = art_batcher
+ 
+-    def forward(self, raw_article_sents, n_abs=None):
++    def forward(self, raw_article_sents, queries, n_abs=None):
+         article_sent = self._batcher(raw_article_sents)
++        queries_words = self._batcher(queries)
+         enc_sent = self._sent_enc(article_sent).unsqueeze(0)
+         enc_art = self._art_enc(enc_sent).squeeze(0)
++        enc_queries = [self._sent_enc.get_embedding(query) for query in queries_words]
+         if n_abs is not None and not self.training:
+             n_abs = min(len(raw_article_sents), n_abs)
+         if n_abs is None:
+-            outputs = self._ext(enc_art)
++            outputs = self._ext(enc_art, enc_queries)
+         else:
+-            outputs = self._ext(enc_art, n_abs)
++            outputs = self._ext(enc_art, enc_queries, n_abs)
+         if self.training:
+             if n_abs is None:
+                 n_abs = len(outputs[0])
+-            scores = self._scr(enc_art, n_abs)
++            scores = self._scr(enc_art, enc_queries, n_abs)
+             return outputs, scores
+         else:
+             return outputs
+Index: rl.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- rl.py	(revision 58acbb34ae452278e3df5638568ce8af7649de1a)
++++ rl.py	(revision a08a23329bf9a733eed78275c6f9c2551fd481c2)
+@@ -12,7 +12,7 @@
+ from torch import autograd
+ from torch.nn.utils import clip_grad_norm_
+ 
+-from metric import compute_rouge_l, compute_rouge_n
++from metric import compute_rouge_l_with_query, compute_rouge_n_with_query
+ from training import BasicPipeline
+ 
+ 
+@@ -23,20 +23,20 @@
+     avg_reward = 0
+     i = 0
+     with torch.no_grad():
+-        for art_batch, abs_batch in loader:
++        for art_batch, abs_batch, query_batch in loader:
+             ext_sents = []
+             ext_inds = []
+-            for raw_arts in art_batch:
+-                indices = agent(raw_arts)
++            for raw_arts, query in zip(art_batch, query_batch):
++                indices = agent(raw_arts, query)
+                 ext_inds += [(len(ext_sents), len(indices)-1)]
+                 ext_sents += [raw_arts[idx.item()]
+                               for idx in indices if idx.item() < len(raw_arts)]
+             all_summs = abstractor(ext_sents)
+-            for (j, n), abs_sents in zip(ext_inds, abs_batch):
++            for (j, n), abs_sents, query in zip(ext_inds, abs_batch, query_batch):
+                 summs = all_summs[j:j+n]
+                 # python ROUGE-1 (not official evaluation)
+-                avg_reward += compute_rouge_n(list(concat(summs)),
+-                                              list(concat(abs_sents)), n=1)
++                avg_reward += compute_rouge_n_with_query(list(concat(summs)),
++                                              list(concat(abs_sents)), query, n=1)
+                 i += 1
+     avg_reward /= (i/100)
+     print('finished in {}! avg reward: {:.2f}'.format(
+@@ -45,16 +45,16 @@
+ 
+ 
+ def a2c_train_step(agent, abstractor, loader, opt, grad_fn,
+-                   gamma=0.99, reward_fn=compute_rouge_l,
+-                   stop_reward_fn=compute_rouge_n(n=1), stop_coeff=1.0):
++                   gamma=0.99, reward_fn=compute_rouge_l_with_query,
++                   stop_reward_fn=compute_rouge_n_with_query(n=1), stop_coeff=1.0):
+     opt.zero_grad()
+     indices = []
+     probs = []
+     baselines = []
+     ext_sents = []
+-    art_batch, abs_batch = next(loader)
+-    for raw_arts in art_batch:
+-        (inds, ms), bs = agent(raw_arts)
++    art_batch, abs_batch, query_batch = next(loader)
++    for raw_arts, query in zip(art_batch, query_batch):
++        (inds, ms), bs = agent(raw_arts, query)
+         baselines.append(bs)
+         indices.append(inds)
+         probs.append(ms)
+@@ -65,13 +65,13 @@
+     i = 0
+     rewards = []
+     avg_reward = 0
+-    for inds, abss in zip(indices, abs_batch):
+-        rs = ([reward_fn(summaries[i+j], abss[j])
++    for inds, abss, query in zip(indices, abs_batch, query_batch):
++        rs = ([reward_fn(summaries[i+j], abss[j], query)
+               for j in range(min(len(inds)-1, len(abss)))]
+               + [0 for _ in range(max(0, len(inds)-1-len(abss)))]
+               + [stop_coeff*stop_reward_fn(
+                   list(concat(summaries[i:i+len(inds)-1])),
+-                  list(concat(abss)))])
++                  list(concat(abss)), query)])
+         assert len(rs) == len(inds)
+         avg_reward += rs[-1]/stop_coeff
+         i += len(inds)-1
+@@ -100,7 +100,7 @@
+     critic_loss = F.mse_loss(baseline, reward)
+     # backprop and update
+     autograd.backward(
+-        [critic_loss] + losses,
++        [critic_loss.unsqueeze(0)] + losses,
+         [torch.ones(1).to(critic_loss.device)]*(1+len(losses))
+     )
+     grad_log = grad_fn()
+@@ -128,7 +128,7 @@
+             grad_log['grad_norm'+n] = tot_grad.item()
+         grad_norm = clip_grad_norm_(
+             [p for p in params if p.requires_grad], clip_grad)
+-        grad_norm = grad_norm.item()
++        # grad_norm = grad_norm.item()
+         if max_grad is not None and grad_norm >= max_grad:
+             print('WARNING: Exploding Gradients {:.2f}'.format(grad_norm))
+             grad_norm = max_grad
+Index: train_full_rl.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- train_full_rl.py	(revision 58acbb34ae452278e3df5638568ce8af7649de1a)
++++ train_full_rl.py	(revision a08a23329bf9a733eed78275c6f9c2551fd481c2)
+@@ -25,7 +25,7 @@
+ from rl import A2CPipeline
+ from decoding import load_best_ckpt
+ from decoding import Abstractor, ArticleBatcher
+-from metric import compute_rouge_l, compute_rouge_n
++from metric import compute_rouge_l_with_query, compute_rouge_n_with_query
+ 
+ 
+ MAX_ABS_LEN = 30
+@@ -44,8 +44,9 @@
+     def __getitem__(self, i):
+         js_data = super().__getitem__(i)
+         art_sents = js_data['article']
+-        abs_sents = js_data['abstract']
+-        return art_sents, abs_sents
++        abs_sents = js_data['summary']
++        query = js_data['query']
++        return art_sents, abs_sents, query
+ 
+ def load_ext_net(ext_dir):
+     ext_meta = json.load(open(join(ext_dir, 'meta.json')))
+@@ -103,10 +104,12 @@
+ 
+ def build_batchers(batch_size):
+     def coll(batch):
+-        art_batch, abs_batch = unzip(batch)
++        art_batch, abs_batch, query_batch = unzip(batch)
++        query_batch_list = list(query_batch)
+         art_sents = list(filter(bool, map(tokenize(None), art_batch)))
+         abs_sents = list(filter(bool, map(tokenize(None), abs_batch)))
+-        return art_sents, abs_sents
++        queries = list(filter(bool, map(tokenize(None), [[query] for query in query_batch_list])))
++        return art_sents, abs_sents, queries
+     loader = DataLoader(
+         RLDataset('train'), batch_size=batch_size,
+         shuffle=True, num_workers=4,
+@@ -136,8 +139,8 @@
+     )
+     train_batcher, val_batcher = build_batchers(args.batch)
+     # TODO different reward
+-    reward_fn = compute_rouge_l
+-    stop_reward_fn = compute_rouge_n(n=1)
++    reward_fn = compute_rouge_l_with_query
++    stop_reward_fn = compute_rouge_n_with_query(n=1)
+ 
+     # save abstractor binary
+     if args.abs_dir is not None:
+Index: decode_full_model.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- decode_full_model.py	(revision 01e4ca587e62b0efb633864fe2e7672ba87b799f)
++++ decode_full_model.py	(revision b0261338607510ad4468505c699928950bea486c)
+@@ -44,8 +44,10 @@
+ 
+     # setup loader
+     def coll(batch):
+-        articles = list(filter(bool, batch))
+-        return articles
++        articles_cum_queries = list(filter(bool, batch))
++        articles = [item[0] for item in articles_cum_queries]
++        queries = [item[1] for item in articles_cum_queries]
++        return articles, queries
+     dataset = DecodeDataset(split)
+ 
+     n_data = len(dataset)
+@@ -69,12 +71,14 @@
+     # Decoding
+     i = 0
+     with torch.no_grad():
+-        for i_debug, raw_article_batch in enumerate(loader):
++        for i_debug, raw_article_cum_query_batch in enumerate(loader):
++            raw_article_batch, raw_query_batch = raw_article_cum_query_batch
+             tokenized_article_batch = map(tokenize(None), raw_article_batch)
++            tokenized_queries_batch = map(tokenize(None), [[query] for query in raw_query_batch])
+             ext_arts = []
+             ext_inds = []
+-            for raw_art_sents in tokenized_article_batch:
+-                ext = extractor(raw_art_sents)[:-1]  # exclude EOE
++            for raw_art_sents, raw_queries in zip(tokenized_article_batch, tokenized_queries_batch):
++                ext = extractor(raw_art_sents, raw_queries)[:-1]  # exclude EOE
+                 if not ext:
+                     # use top-5 if nothing is extracted
+                     # in some rare cases rnn-ext does not extract at all
+Index: decoding.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- decoding.py	(revision 01e4ca587e62b0efb633864fe2e7672ba87b799f)
++++ decoding.py	(revision b5ddb091ea98ba74bb7783db3d2161fd38544f14)
+@@ -24,7 +24,7 @@
+     print('please use environment variable to specify data directories')
+ 
+ class DecodeDataset(CnnDmDataset):
+-    """ get the article sentences only (for decoding use)"""
++    """ get the article sentences and query only (for decoding use)"""
+     def __init__(self, split):
+         assert split in ['val', 'test']
+         super().__init__(split, DATASET_DIR)
+@@ -32,7 +32,8 @@
+     def __getitem__(self, i):
+         js_data = super().__getitem__(i)
+         art_sents = js_data['article']
+-        return art_sents
++        query = js_data['query']
++        return art_sents, query
+ 
+ 
+ def make_html_safe(s):
+@@ -156,13 +157,16 @@
+         self._id2word = {i: w for w, i in word2id.items()}
+         self._max_ext = max_ext
+ 
+-    def __call__(self, raw_article_sents):
++    def __call__(self, raw_article_sents, raw_query):
+         self._net.eval()
+         n_art = len(raw_article_sents)
+         articles = conver2id(UNK, self._word2id, raw_article_sents)
++        queries = conver2id(UNK, self._word2id, raw_query)
+         article = pad_batch_tensorize(articles, PAD, cuda=False
+                                      ).to(self._device)
+-        indices = self._net.extract([article], k=min(n_art, self._max_ext))
++        query = pad_batch_tensorize(queries, PAD, cuda=False
++                                     ).to(self._device)
++        indices = self._net.extract([article], k=min(n_art, self._max_ext), queries=[query])
+         return indices
+ 
+ 
+@@ -196,7 +200,7 @@
+         self._word2id = word2id
+         self._id2word = {i: w for w, i in word2id.items()}
+ 
+-    def __call__(self, raw_article_sents):
++    def __call__(self, raw_article_sents, query):
+         self._net.eval()
+-        indices = self._net(raw_article_sents)
++        indices = self._net(raw_article_sents, query)
+         return indices
+Index: analyse_query_summaries.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- analyse_query_summaries.py	(revision a3f6f40f70a7acf771b30cc18b75094068f97ef9)
++++ analyse_query_summaries.py	(revision a3f6f40f70a7acf771b30cc18b75094068f97ef9)
+@@ -0,0 +1,39 @@
++import glob
++import json
++import random
++
++
++class ErrorAnalyzer:
++    def __init__(self, dataset_dir, decoded_dir):
++        self.dataset_files = glob.glob(dataset_dir + '/*')
++        self.decoded_dir = decoded_dir + '/'
++
++    def get_samples_for_analysis(self):
++        count = 0
++        samples = []
++        for dataset_file in self.dataset_files:
++            if random.random() > 0.5:
++                continue
++            if count > 50:
++                break
++            data = json.load(open(dataset_file, 'r'))
++            article_id = data['id']
++            query = data['query']
++            expected_summary = data['summary']
++            file_name = dataset_file.split('/')[-1].split('.')[0]
++            with open(self.decoded_dir + file_name + '.dec', 'r') as decoded_file:
++                actual_summaries = decoded_file.readlines()
++            samples.append({
++                'id': article_id,
++                'query': query,
++                'target_summary': expected_summary,
++                'generated_summary': actual_summaries
++            })
++            count += 1
++        return samples
++
++
++if __name__ == '__main__':
++    analyzer = ErrorAnalyzer('/home/ks3740/cnn-dailymail/tmp_files/val', '/home/ks3740/fast_abs_rl/decoded_files/tmp/output')
++    samples = analyzer.get_samples_for_analysis()
++    json.dump(samples, open('analysis_2.json', 'w'), indent=4)
+Index: validate_query_focus.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- validate_query_focus.py	(revision faf3edca53a14cf39dbfde3a94d0d69b6813ed45)
++++ validate_query_focus.py	(revision faf3edca53a14cf39dbfde3a94d0d69b6813ed45)
+@@ -0,0 +1,98 @@
++import glob
++import json
++import random
++
++
++class Validator:
++    def __init__(self, dataset_dir, dataset_2_dir, decoded_dir, decoded_2_dir):
++        self.dataset_files = glob.glob(dataset_dir + '/*')
++        self.dataset_2_dir = dataset_2_dir + '/'
++        self.decoded_dir = decoded_dir + '/'
++        self.decoded_2_dir = decoded_2_dir + '/'
++
++    def get_samples_for_analysis(self):
++        count = 0
++        samples = []
++        for dataset_file in self.dataset_files:
++            if random.random() > 0.2:
++                continue
++            if count > 100:
++                break
++            file_name = dataset_file.split('/')[-1].split('.')[0]
++            data = json.load(open(dataset_file, 'r'))
++            data_2 = json.load(open(self.dataset_2_dir + file_name + '.json', 'r'))
++            article_id = data['id']
++            query = data['query']
++            query_2 = data_2['query']
++            expected_summary = data['summary']
++            expected_summary_2 = data_2['summary']
++            with open(self.decoded_dir + file_name + '.dec', 'r') as decoded_file:
++                actual_summaries = decoded_file.readlines()
++            with open(self.decoded_2_dir + file_name + '.dec', 'r') as decoded_file:
++                actual_summaries_2 = decoded_file.readlines()
++            samples.append({
++                'id': article_id,
++                'query_1': query,
++                'target_summary_1': expected_summary,
++                'generated_summary_1': actual_summaries,
++                'query_2': query_2,
++                'target_summary_2': expected_summary_2,
++                'generated_summary_2': actual_summaries_2
++            })
++            count += 1
++        return samples
++
++
++class QueryValidator:
++    """
++    Find the output in the corresponding dataset folder
++    """
++    def __init__(self, files_dir, map_file):
++        self.files_dir = files_dir
++        self.map_file = json.load(open(map_file, 'r'))
++
++    def validate_focus(self):
++        results = dict()
++        for article, summary_files in self.map_file.items():
++            article_summaries = list()
++            total_summaries = len(summary_files)
++            unique_summaries = 0
++            for summary_file in summary_files:
++                with open(self.files_dir + '/output/' + str(summary_file) + '.dec') as fp:
++                    summary_sentences = set([l.strip() for l in fp.readlines()])  # Can replace with list to see if reordering is something that the model learns to do
++                    if summary_sentences not in article_summaries:
++                        unique_summaries += 1
++                        article_summaries.append(summary_sentences)
++            results[article] = (unique_summaries, total_summaries, [list(s) for s in article_summaries])
++        return results
++
++    @staticmethod
++    def aggregate_results(results):
++        article_scores = list()
++        total_summaries = 0
++        unique_summaries = 0
++        for article, result in results.items():
++            unique_summaries += result[0]
++            total_summaries += result[1]
++            article_scores.append(result[0] / result[1])
++        equal_weight_aggregate = sum(article_scores) / len(article_scores)
++        query_weight_aggregate = unique_summaries / total_summaries
++        print('Equal Weight Aggregate : ' + str(equal_weight_aggregate))
++        print('Query Weight Aggregate : ' + str(query_weight_aggregate))
++        results['equal_weight_aggregate'] = equal_weight_aggregate
++        results['query_weight_aggregate'] = query_weight_aggregate
++
++
++if __name__ == '__main__':
++    #analyzer = Validator('/home/ks3740/cnn-dailymail/augmented_files/val',
++    #                     '/home/ks3740/cnn-dailymail/augmented_files_test_query/val',
++    #                     '/home/ks3740/fast_abs_rl/decoded_files/query_focus_comparison/query_1/output',
++    #                     '/home/ks3740/fast_abs_rl/decoded_files/query_focus_comparison/query_2/output')
++    #samples = analyzer.get_samples_for_analysis()
++    #json.dump(samples, open('comparison_multiple_query.json', 'w'), indent=4)
++    validator = QueryValidator('/home/ks3740/fast_abs_rl/decoded_files/new_model/single_queries_also'
++                               '/query_focus_dataset_with_single_summary',
++                               '/home/ks3740/cnn-dailymail/query_focus_dataset_with_single_summary/val_map.json')
++    results = validator.validate_focus()
++    validator.aggregate_results(results)
++    json.dump(results, open('/home/ks3740/fast_abs_rl/decoded_files/new_model/single_queries_also/query_focus_dataset_with_single_summary/query_focus_results.json', 'w'), indent=4)
+Index: single_document_multiple_queries.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- single_document_multiple_queries.py	(revision faf3edca53a14cf39dbfde3a94d0d69b6813ed45)
++++ single_document_multiple_queries.py	(revision faf3edca53a14cf39dbfde3a94d0d69b6813ed45)
+@@ -0,0 +1,20 @@
++import json
++
++data = json.load(open('../cnn-dailymail/tmp_files/100.json'))
++
++keyphrases = data['keyphrases']
++count = 0
++file_map = dict()
++for kp in keyphrases:
++    data_copy = data.copy()
++    del data_copy['keyphrases']
++    del data_copy['query']
++    del data_copy['summary']
++    del data_copy['extracted']
++    del data_copy['score']
++    data_copy['query'] = kp['keyphrase']
++    data_copy['summary'] = kp['highlights']
++    file_map[count] = kp['keyphrase']
++    json.dump(data_copy, open('../cnn-dailymail/tmp_files/val/' + str(count) + '.json', 'w'), indent=4)
++    count += 1
++json.dump(file_map, open('../cnn-dailymail/tmp_files/100_file_map.json', 'w'), indent=4)
+\ No newline at end of file
+Index: decode_baselines.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- decode_baselines.py	(revision a3f6f40f70a7acf771b30cc18b75094068f97ef9)
++++ decode_baselines.py	(revision b5ddb091ea98ba74bb7783db3d2161fd38544f14)
+@@ -17,7 +17,7 @@
+ from decoding import make_html_safe
+ 
+ 
+-MAX_ABS_NUM = 6  # need to set max sentences to extract for non-RL extractor
++MAX_ABS_NUM = 2  # need to set max sentences to extract for non-RL extractor
+ 
+ 
+ def decode(save_path, abs_dir, ext_dir, split, batch_size, max_len, cuda):
+@@ -38,8 +38,10 @@
+ 
+     # setup loader
+     def coll(batch):
+-        articles = list(filter(bool, batch))
+-        return articles
++        articles_cum_queries = list(filter(bool, batch))
++        articles = [item[0] for item in articles_cum_queries]
++        queries = [item[1] for item in articles_cum_queries]
++        return articles, queries
+     dataset = DecodeDataset(split)
+ 
+     n_data = len(dataset)
+@@ -65,18 +67,20 @@
+     # Decoding
+     i = 0
+     with torch.no_grad():
+-        for i_debug, raw_article_batch in enumerate(loader):
++        for i_debug, raw_article_cum_query_batch in enumerate(loader):
++            raw_article_batch, raw_query_batch = raw_article_cum_query_batch
+             tokenized_article_batch = map(tokenize(None), raw_article_batch)
++            tokenized_queries_batch = map(tokenize(None), [[query] for query in raw_query_batch])
+             ext_arts = []
+             ext_inds = []
+-            for raw_art_sents in tokenized_article_batch:
+-                ext = extractor(raw_art_sents)
++            for raw_art_sents, raw_queries in zip(tokenized_article_batch, tokenized_queries_batch):
++                ext = extractor(raw_art_sents, raw_queries)
+                 ext_inds += [(len(ext_arts), len(ext))]
+                 ext_arts += list(map(lambda i: raw_art_sents[i], ext))
+             dec_outs = abstractor(ext_arts)
+             assert i == batch_size*i_debug
+             for j, n in ext_inds:
+-                decoded_sents = [' '.join(dec) for dec in dec_outs[j:j+n]]
++                decoded_sents = [' '.join(dec) for dec in ext_arts[j:j+n]]
+                 for k, dec_str in enumerate(decoded_sents):
+                     with open(join(save_path, 'output_{}/{}.dec'.format(k, i)),
+                               'w') as f:
+Index: make_eval_references.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- make_eval_references.py	(revision b5ddb091ea98ba74bb7783db3d2161fd38544f14)
++++ make_eval_references.py	(revision 02eb7c3c12029815defd54a4958a2cb428324c5f)
+@@ -25,7 +25,7 @@
+               end='')
+         with open(join(data_dir, '{}.json'.format(i))) as f:
+             data = json.loads(f.read())
+-        abs_sents = data['abstract']
++        abs_sents = data['summary']
+         with open(join(dump_dir, '{}.ref'.format(i)), 'w') as f:
+             f.write(make_html_safe('\n'.join(abs_sents)))
+     print('finished in {}'.format(timedelta(seconds=time()-start)))
+Index: make_extraction_labels.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- make_extraction_labels.py	(revision b5ddb091ea98ba74bb7783db3d2161fd38544f14)
++++ make_extraction_labels.py	(revision 02eb7c3c12029815defd54a4958a2cb428324c5f)
+@@ -45,7 +45,7 @@
+         data = json.loads(f.read())
+     tokenize = compose(list, _split_words)
+     art_sents = tokenize(data['article'])
+-    abs_sents = tokenize(data['abstract'])
++    abs_sents = tokenize(data['summary'])
+     if art_sents and abs_sents: # some data contains empty article/abstract
+         extracted, scores = get_extract_label(art_sents, abs_sents)
+     else:
+@@ -78,7 +78,7 @@
+             data = json.loads(f.read())
+         tokenize = compose(list, _split_words)
+         art_sents = tokenize(data['article'])
+-        abs_sents = tokenize(data['abstract'])
++        abs_sents = tokenize(data['summary'])
+         extracted, scores = get_extract_label(art_sents, abs_sents)
+         data['extracted'] = extracted
+         data['score'] = scores
+Index: train_abstractor.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- train_abstractor.py	(revision b5ddb091ea98ba74bb7783db3d2161fd38544f14)
++++ train_abstractor.py	(revision 02eb7c3c12029815defd54a4958a2cb428324c5f)
+@@ -45,7 +45,7 @@
+     def __getitem__(self, i):
+         js_data = super().__getitem__(i)
+         art_sents, abs_sents, extracts = (
+-            js_data['article'], js_data['abstract'], js_data['extracted'])
++            js_data['article'], js_data['summary'], js_data['extracted'])
+         matched_arts = [art_sents[i] for i in extracts]
+         return matched_arts, abs_sents[:len(extracts)]
+ 
+Index: compare_decoded_files.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- compare_decoded_files.py	(revision faf3edca53a14cf39dbfde3a94d0d69b6813ed45)
++++ compare_decoded_files.py	(revision faf3edca53a14cf39dbfde3a94d0d69b6813ed45)
+@@ -0,0 +1,50 @@
++import glob
++import json
++from rouge import Rouge
++
++rouge = Rouge()
++
++
++class DecodedFilesComparison:
++    """
++    Find the output in the corresponding dataset folder
++    """
++    def __init__(self, dataset, decoded_model_1, decoded_model_2):
++        self.dataset = glob.glob(dataset + '/*')
++        self.decoded_model_1 = decoded_model_1 + '/output/'
++        self.decoded_model_2 = decoded_model_2 + '/output/'
++
++    def compare_models(self):
++        comparison = dict()
++        for data_file in self.dataset:
++            file_name = data_file.split('/')[-1].split('.')[0]
++            data = json.load(open(data_file))
++            query = data['query']
++            summary = data['summary']
++            with open(self.decoded_model_1 + file_name + '.dec') as model_1_file:
++                model_1_decoding = model_1_file.read().splitlines()
++            with open(self.decoded_model_2 + file_name + '.dec') as model_2_file:
++                model_2_decoding = model_2_file.read().splitlines()
++            reference = ' . '.join(summary)
++            hypothesis_1 = ' . '.join(model_1_decoding)
++            hypothesis_2 = ' . '.join(model_2_decoding)
++            score_1 = rouge.get_scores(hypothesis_1, reference)
++            score_2 = rouge.get_scores(hypothesis_2, reference)
++            comparison[file_name] = {
++                'query': query,
++                'reference': summary,
++                'model_1_summary': model_1_decoding,
++                'model_1_score': score_1[0]['rouge-1']['f'],
++                'model_2_summary': model_2_decoding,
++                'model_2_score': score_2[0]['rouge-1']['f'],
++            }
++        return comparison
++
++
++if __name__ == '__main__':
++    comparison = DecodedFilesComparison('/home/ks3740/cnn-dailymail/augmented_files/val',
++                                        '/home/ks3740/unmodified_fast_abs_rl/fast_abs_rl/decoded_files/query_agnostic',
++                                        '/home/ks3740/fast_abs_rl/decoded_files/new_model/single_queries_also'
++                                        '/augmented_dataset')
++    comparison_results = comparison.compare_models()
++    json.dump(comparison_results, open('/home/ks3740/fast_abs_rl/decoded_files/new_model/single_queries_also/augmented_dataset/model_comparison.json', 'w'), indent=4)
+Index: metric.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- metric.py	(revision faf3edca53a14cf39dbfde3a94d0d69b6813ed45)
++++ metric.py	(revision a08a23329bf9a733eed78275c6f9c2551fd481c2)
+@@ -38,6 +38,31 @@
+             score = f_score
+     return score
+ 
++@curry
++def compute_rouge_n_with_query(output, reference, query, n=1, mode='f'):
++    """ compute ROUGE-N for a single pair of summary and reference"""
++    assert mode in list('fpr')  # F-1, precision, recall
++    match = _n_gram_match(reference, output, n)
++    if match == 0:
++        score = 0.0
++    else:
++        precision = match / len(output)
++        recall = match / len(reference)
++        f_score = 2 * (precision * recall) / (precision + recall)
++        if mode == 'p':
++            score = precision
++        elif mode == 'r':
++            score = recall
++        else:
++            score = f_score
++    query = ' '.join(query[0])
++    if query in ' '.join(reference):
++        if query in ' '.join(output):
++            score *= 2
++        else:
++            score /= 2
++    return score
++
+ 
+ def _lcs_dp(a, b):
+     """ compute the len dp of lcs"""
+@@ -77,6 +102,34 @@
+         else:
+             score = f_score
+     return score
++
++
++@curry
++def compute_rouge_l_with_query(output, reference, query, mode='f'):
++    """ compute ROUGE-L for a single pair of summary and reference
++    output, reference are list of words
++    """
++    assert mode in list('fpr')  # F-1, precision, recall
++    lcs = _lcs_len(output, reference)
++    if lcs == 0:
++        score = 0.0
++    else:
++        precision = lcs / len(output)
++        recall = lcs / len(reference)
++        f_score = 2 * (precision * recall) / (precision + recall)
++        if mode == 'p':
++            score = precision
++        if mode == 'r':
++            score = recall
++        else:
++            score = f_score
++    query = ' '.join(query[0])
++    if query in ' '.join(reference):
++        if query in ' '.join(output):
++            score *= 2
++        else:
++            score /= 2
++    return score
+ 
+ 
+ def _lcs(a, b):
