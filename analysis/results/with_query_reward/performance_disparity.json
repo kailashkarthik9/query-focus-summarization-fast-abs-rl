@@ -1,0 +1,305 @@
+{
+    "13103": {
+        "query": "song girl crush",
+        "reference": [
+            "the song girl crush by little big town has been banned by some country stations after listeners complained it ` promotes the gay agenda '"
+        ],
+        "model_1_summary": [
+            "song girl crush by little big town has been banned by listeners .",
+            "some are now claiming the song ` promotes the gay agenda '"
+        ],
+        "model_1_score": 0.7999999950000002,
+        "model_2_summary": [
+            "the problem is one of the verses sung by group member karen fairchild ."
+        ],
+        "model_2_score": 0.15789473234072035
+    },
+    "9727": {
+        "query": "behavior detection officers",
+        "reference": [
+            "mannerisms are assigned points based on their severity and are assessed by trained ` behavior detection officers '"
+        ],
+        "model_1_summary": [
+            "screening of passengers breaks down body language and demeanor .",
+            "mannerisms are assigned points based on their severity and assessed by trained ` behavior detection officers '"
+        ],
+        "model_1_score": 0.7555555507555557,
+        "model_2_summary": [
+            "passengers by observation techniques system , nicknamed spot , breaks down body language and demeanor ."
+        ],
+        "model_2_score": 0.12121211625344373
+    },
+    "12924": {
+        "query": "brutal extremist group",
+        "reference": [
+            "the dull photos appear to be an attempt by the brutal extremist group to show an interest in the environment ."
+        ],
+        "model_1_summary": [
+            "images taken in iraqi province of nineveh , home to some of the most fertile earth .",
+            "photos appear to be an attempt by the brutal extremist group to show an interest in the environment ."
+        ],
+        "model_1_score": 0.6909090862809918,
+        "model_2_summary": [
+            "islamic state have released their most boring and uninspiring propaganda photos ."
+        ],
+        "model_2_score": 0.0645161244536944
+    },
+    "5663": {
+        "query": "kings college london",
+        "reference": [
+            "researchers at kings college london looked at scored over 64 years ."
+        ],
+        "model_1_summary": [
+            "kings college london researchers looked at scores over 64 years .",
+            "theories including better education and improved medical care ."
+        ],
+        "model_1_score": 0.5999999953555556,
+        "model_2_summary": [
+            "theories including better education and improved medical care ."
+        ],
+        "model_2_score": 0.0
+    },
+    "4457": {
+        "query": "coach stuart lancaster",
+        "reference": [
+            "coach stuart lancaster believes the noisy support of a sold-out 82,000 home crowd will have a critical role ."
+        ],
+        "model_1_summary": [
+            "stuart lancaster has urged twickenham to carry the game to france .",
+            "lancaster believes support of a sold-out 82,000 home crowd will have a critical role ."
+        ],
+        "model_1_score": 0.7272727224380167,
+        "model_2_summary": [
+            "stuart lancaster has urged twickenham to order his rbs 6 nations title hopefuls ."
+        ],
+        "model_2_score": 0.12903225319458916
+    },
+    "8485": {
+        "query": "facebook page",
+        "reference": [
+            "supporters set up facebook page ` andreas lubitz , we are against the hunt '"
+        ],
+        "model_1_summary": [
+            "facebook page titled ` andreas lubitz a320 '",
+            "supporters have set up a facebook page ` against the hunt '"
+        ],
+        "model_1_score": 0.6857142808163266,
+        "model_2_summary": [
+            "lubitz 's home that he shared with his girlfriend has been blurred out on maps .",
+            "friends of killer pilot andreas lubitz claim he is being framed for murder ."
+        ],
+        "model_2_score": 0.09090908641528948
+    },
+    "7433": {
+        "query": "new beauty campaign",
+        "reference": [
+            "jessica , 33 , is face of braun 's new beauty campaign ."
+        ],
+        "model_1_summary": [
+            "jessica alba is the star of braun 's new campaign .",
+            "the actress , 33 , showcases her toned and tanned legs and natural beauty ."
+        ],
+        "model_1_score": 0.5945945902118335,
+        "model_2_summary": [
+            "she and her fashion stylists shared advice with women on how to embrace unlimited choices in their lives ."
+        ],
+        "model_2_score": 0.0
+    },
+    "6664": {
+        "query": "old denver broncos quarterback",
+        "reference": [
+            "the 38-year-old denver broncos quarterback will take a pay cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_summary": [
+            "peyton manning has agreed to a $ 4 million paycut with the denver broncos .",
+            "manning 's pay will be cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_score": 0.6382978676143052,
+        "model_2_summary": [
+            "he has spent the week considering his options while sunning it up in miami beach , florida with his wife and two children ."
+        ],
+        "model_2_score": 0.04878048287923905
+    },
+    "10782": {
+        "query": "average fuel consumption",
+        "reference": [
+            "average fuel consumption of up to 85 mpg and co2 emissions are 77g/km ."
+        ],
+        "model_1_summary": [
+            "average fuel consumption of up to 85 mpg and co2 emissions .",
+            "the bmw x5 xdrive40e can run on electric power while on the move ."
+        ],
+        "model_1_score": 0.5789473639196676,
+        "model_2_summary": [
+            "it will be launched at next month 's new york motor show ."
+        ],
+        "model_2_score": 0.0
+    },
+    "10159": {
+        "query": "youtube user mnsterbruiser",
+        "reference": [
+            "youtube user mnsterbruiser filmed the epic sailing fail take place on the black river falls in wisconsin ."
+        ],
+        "model_1_summary": [
+            "youtube user ` mnsterbruiser ' filmed the sailing fail take place on the black river falls in wisconsin .",
+            "footage shows him sat behind his father as rapids throw the boat off balance ."
+        ],
+        "model_1_score": 0.6399999955120002,
+        "model_2_summary": [
+            "mnsterbruiser manages to retain a sense of humor ."
+        ],
+        "model_2_score": 0.07999999564800023
+    },
+    "6033": {
+        "query": "international investment bank credit suisse",
+        "reference": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_1_summary": [
+            "forbes released its billionaires list this week with bill gates .",
+            "gates saw his fortune grow by $ 4.2 billion in the past year alone ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "6143": {
+        "query": "ergonomic seat",
+        "reference": [
+            "each pod is an ergonomic seat which can be transformed into a bed ."
+        ],
+        "model_1_summary": [
+            "already billed as one of the most sleep-friendly airports in the world .",
+            "helsinki airport has become the first in europe to offer sleeping pods .",
+            "the pods are located at two gates inside the terminal ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "each cocoon-like pod is an ergonomic seat which can be transformed into a bed ."
+        ],
+        "model_2_score": 0.9629629579698218
+    },
+    "8387": {
+        "query": "animal services",
+        "reference": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_1_summary": [
+            "one paws-on feline from bonita , california , decided to repay favor with his own ` ultimate meow-ssage '",
+            "cat was filmed as he caressed a woman 's back and shoulders ."
+        ],
+        "model_1_score": 0.0434782564744806,
+        "model_2_summary": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "6429": {
+        "query": "ambulance crew",
+        "reference": [
+            "two doctors battled to revive her as an ambulance crew arrived ."
+        ],
+        "model_1_summary": [
+            "rosie connolly , 21 , fell unconscious at the laboratory spa in mill hill .",
+            "she told staff she had felt unwell in the water and reportedly struggled to clamber out of the club pool ."
+        ],
+        "model_1_score": 0.04347825723062412,
+        "model_2_summary": [
+            "two doctors battled to revive her as an ambulance crew arrived ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "5999": {
+        "query": "mobile world congress",
+        "reference": [
+            "nubo was unveiled at mobile world congress in barcelona ."
+        ],
+        "model_1_summary": [
+            "the surveillance camera called nubo that detects and alerts homeowners and can be fitted inside and out the house .",
+            "sensors detect human shapes automatically if a person is spotted ."
+        ],
+        "model_1_score": 0.051282047731755674,
+        "model_2_summary": [
+            "nubo was unveiled at mobile world congress in barcelona ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "7199": {
+        "query": "natcen social research",
+        "reference": [
+            "study carried out by natcen social research and the university of essex ."
+        ],
+        "model_1_summary": [
+            "party still ` struggles to attract support ' despite shift in public mood .",
+            "political attitudes have returned to the same point as tony blair secured the last of his three election wins for labour ."
+        ],
+        "model_1_score": 0.08510637917609795,
+        "model_2_summary": [
+            "study carried out by natcen social research and the university of essex ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "7032": {
+        "query": "malicious prosecution",
+        "reference": [
+            "he is suing police for malicious prosecution and wrongful imprisonment ."
+        ],
+        "model_1_summary": [
+            "kayode modupe-ojo , a former boyfriend of david beckham 's sister joanne , said his reputation has been destroyed .",
+            "he spent three weeks in jail after falsely being accused of rape by a woman ."
+        ],
+        "model_1_score": 0.044444440987654585,
+        "model_2_summary": [
+            "he is suing the police for malicious prosecution and wrongful imprisonment ."
+        ],
+        "model_2_score": 0.9523809473922903
+    },
+    "9065": {
+        "query": "coroner eleanor mcgann",
+        "reference": [
+            "coroner eleanor mcgann recorded a verdict of accidental death ."
+        ],
+        "model_1_summary": [
+            "inquest at essex coroner 's court today heard in days leading up to the teenager 's death .",
+            "inquest heard that in the days leading up to the teenager 's death ."
+        ],
+        "model_1_score": 0.09999999651250012,
+        "model_2_summary": [
+            "coroner eleanor mcgann recorded a verdict of accidental death ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "10229": {
+        "query": "new cancer treatments",
+        "reference": [
+            "nhs spends less on new cancer treatments than us , spain and scotland ."
+        ],
+        "model_1_summary": [
+            "they reveal waiting times for scans are at their highest in seven years .",
+            "nhs will also announce which life-extending medications will be axed from cancer drugs fund .",
+            "gps in the south of england have complained that nhs managers are delaying patients from having cancer tests ."
+        ],
+        "model_1_score": 0.0666666632722224,
+        "model_2_summary": [
+            "nhs spends less on new cancer treatments than the us , spain and scotland ."
+        ],
+        "model_2_score": 0.9629629579698218
+    },
+    "1943": {
+        "query": "russian youtube user",
+        "reference": [
+            "the heartwarming clip was filmed by russian youtube user , lgreko100 ."
+        ],
+        "model_1_summary": [
+            "video shows the furry animal hiding in a hollowed-out out tree trunk .",
+            "he cautiously reaches his small paws forwards ."
+        ],
+        "model_1_score": 0.0645161244536944,
+        "model_2_summary": [
+            "the heartwarming clip was filmed by russian youtube user lgreko100 ."
+        ],
+        "model_2_score": 0.9523809473922903
+    }
+}

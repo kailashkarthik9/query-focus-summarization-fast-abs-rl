@@ -1,0 +1,328 @@
+{
+    "6664": {
+        "query": "old denver broncos quarterback",
+        "reference": [
+            "the 38-year-old denver broncos quarterback will take a pay cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_summary": [
+            "peyton manning has agreed to a $ 4 million paycut with the denver broncos .",
+            "manning 's pay will be cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_score": 0.6382978676143052,
+        "model_2_summary": [
+            "he has spent the week considering his options while sunning it up in miami beach , florida with his wife and two children .",
+            "peyton manning will return for an 18th nfl season ."
+        ],
+        "model_2_score": 0.07843136798154583
+    },
+    "13269": {
+        "query": "kate mcdonald",
+        "reference": [
+            "kate mcdonald , julia kerr , kate randhawa , briar middleton and olivia van diepen , all age 20 , visited christchurch for a friend 's party ."
+        ],
+        "model_1_summary": [
+            "ms mcdonald , julia kerr , kate randhawa and olivia van diepen visited christchurch .",
+            "julia kerr , olivia van diepen , briar middleton , all age 20 , were attending mutual friend 's 21st birthday ."
+        ],
+        "model_1_score": 0.730158725260771,
+        "model_2_summary": [
+            "the thief returning a swag of stolen goods to kate mcdonald , 20 .",
+            "the text message a remorseful new zealand criminal sent to a university of otago student ."
+        ],
+        "model_2_score": 0.17857142357780628
+    },
+    "6960": {
+        "query": "henderson county sheriff",
+        "reference": [
+            "henderson county sheriff 's office investigator paul steven habelt and deputy tony price ogburn were both fatally shot in 2007 ."
+        ],
+        "model_1_summary": [
+            "the execution was halted by the highest criminal appeals court in texas .",
+            "mays was convicted after a shootout in 2007 left henderson county sheriff 's office investigator paul habelt and deputy tony price ogburn dead ."
+        ],
+        "model_1_score": 0.535714281122449,
+        "model_2_summary": [
+            "randall wayne mays was due to be executed on wednesday but a texas appeals court put a stop to it .",
+            "a convicted cop killer would have used up the state 's last dose of a lethal injection drug ."
+        ],
+        "model_2_score": 0.03389830060327551
+    },
+    "9939": {
+        "query": "old savannah hardin",
+        "reference": [
+            "joyce garrard , 49 , is charged with killing 10-year-old savannah hardin by forcing her to run as punishment for lying about eating candy .",
+            "garrard took the witness stand wednesday to say she never intended any harm to 9-year-old savannah hardin ."
+        ],
+        "model_1_summary": [
+            "joyce garrard , 49 , took the stand in her own defense wednesday .",
+            "joyce hardin garrard took witness stand to say she never intended any harm to 9-year-old savannah hardin ."
+        ],
+        "model_1_score": 0.6849315019628449,
+        "model_2_summary": [
+            "garrad allegedly forced her granddaughter to run to her death at her home in etowah county in 2012 .",
+            "an alabama woman says she would ` rather die ' than hurt the girl ."
+        ],
+        "model_2_score": 0.1866666617386668
+    },
+    "5971": {
+        "query": "average user",
+        "reference": [
+            "and the average user spends 3.6 hours a day on their smartphone ."
+        ],
+        "model_1_summary": [
+            "average user spends 3.6 hours a day on their smartphone .",
+            "study found that the more you use a smartphone , the higher your risk of becoming addicted ."
+        ],
+        "model_1_score": 0.5714285671541951,
+        "model_2_summary": [
+            "13 per cent of 256 participants were addicts .",
+            "study by university of derby says 13 % of us are addicted .",
+            "moodiness , loneliness and jealousy are key indicators of smartphone addiction .",
+            "smartphones really are addictive and the more you use one , the worse it gets ."
+        ],
+        "model_2_score": 0.09677419023413122
+    },
+    "6916": {
+        "query": "advanced blood cancer",
+        "reference": [
+            "in one case , woman given weeks to live cleared of advanced blood cancer ."
+        ],
+        "model_1_summary": [
+            "they have worked out how to teach body 's immune system to identify cancer cells .",
+            "in one case an american woman given just weeks to live was cleared of advanced blood cancer ."
+        ],
+        "model_1_score": 0.553191485178814,
+        "model_2_summary": [
+            "they have worked out how to teach body 's immune system to identify cancer cells .",
+            "she is still alive three years later , her doctor says .",
+            "scientists are having extraordinary success treating cancer with new vaccines .",
+            "both methods involve taking t-cells , which fight infection , and giving them the ability to recognise a special tag ."
+        ],
+        "model_2_score": 0.08219177772189917
+    },
+    "9344": {
+        "query": "mayfair hedge funds",
+        "reference": [
+            "ed miliband has attacked tories for being ` party of mayfair hedge funds '"
+        ],
+        "model_1_summary": [
+            "martin taylor was unveiled last week as the party 's fourth largest donor .",
+            "ed miliband has attacked conservatives for being ` party of mayfair hedge funds '"
+        ],
+        "model_1_score": 0.6190476146031747,
+        "model_2_summary": [
+            "benefactor has become the party 's fourth largest donor over the past three years .",
+            "multi-millionaire hedge fund boss martin taylor handed \u00a3 600,000 to labour party .",
+            "he also stands to cash in from the privatisation of nhs services ."
+        ],
+        "model_2_score": 0.14814814430727036
+    },
+    "10782": {
+        "query": "average fuel consumption",
+        "reference": [
+            "average fuel consumption of up to 85 mpg and co2 emissions are 77g/km ."
+        ],
+        "model_1_summary": [
+            "average fuel consumption of up to 85 mpg and co2 emissions .",
+            "the bmw x5 xdrive40e can run on electric power while on the move ."
+        ],
+        "model_1_score": 0.5789473639196676,
+        "model_2_summary": [
+            "it will be launched at next month 's new york motor show .",
+            "george osborne ratcheted up company car tax for thousands of motorists ."
+        ],
+        "model_2_score": 0.10810810355003672
+    },
+    "12605": {
+        "query": "humans",
+        "reference": [
+            "he studied different types of propulsion that could get humans to mars .",
+            "he thinks nasa 's plan to land humans there in the 2030s is not feasible ."
+        ],
+        "model_1_summary": [
+            "he studied different types of propulsion that could get humans to mars .",
+            "nasa says it 's unlikely to send humans within five decades ."
+        ],
+        "model_1_score": 0.6538461488757397,
+        "model_2_summary": [
+            "dr bertolami from the university of porto was speaking to mailonline .",
+            "the journey of several hundred million miles takes about nine months , one-way .",
+            "one scientist took a look at different types of propulsion - including nuclear .",
+            "nasa says it 's unlikely we 'll send humans within five decades .",
+            "the team found it did not noticeably shorten the mission over other versions .",
+            "theoretical physicist dr paulo gil carried out a study comparing different space propulsion methods for a manned mission to mars .",
+            "the best way to reach mars was a combination of chemical and ion .",
+            "nasa actually attempted to build a nuclear-powered engine before , but the programme was scrapped in 1972 ."
+        ],
+        "model_2_score": 0.19047618739229027
+    },
+    "12402": {
+        "query": "witney constituency",
+        "reference": [
+            "mr cameron says he plans to ` stick with ' voters in his witney constituency ."
+        ],
+        "model_1_summary": [
+            "prime minister said that he ` loves public service '",
+            "cameron said he planned to ` stick with ' voters in his witney constituency ."
+        ],
+        "model_1_score": 0.6153846106508877,
+        "model_2_summary": [
+            "mr cameron dressed down for the event in front of trendy advertising .",
+            "david cameron has said that he will remain in parliament as an mp .",
+            "prime minister david cameron said he will remain in parliament ."
+        ],
+        "model_2_score": 0.15384614974112437
+    },
+    "6033": {
+        "query": "international investment bank credit suisse",
+        "reference": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_1_summary": [
+            "forbes released its billionaires list this week with bill gates .",
+            "gates saw his fortune grow by $ 4.2 billion in the past year alone ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "8387": {
+        "query": "animal services",
+        "reference": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_1_summary": [
+            "one paws-on feline from bonita , california , decided to repay favor with his own ` ultimate meow-ssage '",
+            "cat was filmed as he caressed a woman 's back and shoulders ."
+        ],
+        "model_1_score": 0.0434782564744806,
+        "model_2_summary": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "870": {
+        "query": "controversial police chief tom jackson",
+        "reference": [
+            "controversial police chief tom jackson remains at the helm ."
+        ],
+        "model_1_summary": [
+            "the report details widespread and systemic discrimination against blacks at the hands of officials .",
+            "the three individuals were placed on administrative leave pending an investigation ."
+        ],
+        "model_1_score": 0.11428571046530626,
+        "model_2_summary": [
+            "controversial police chief tom jackson remains at the helm ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "6775": {
+        "query": "cctv camera cars",
+        "reference": [
+            "cctv camera cars that automatically issue fines are to be made illegal too ."
+        ],
+        "model_1_summary": [
+            "traffic wardens will be forced to give drivers ten minutes extra time .",
+            "under a change in the law to take effect within weeks , they will have the right to a ` grace period '",
+            "drivers have complained of returning to their cars moments after a ticket expires .",
+            "new rules will apply to cars parked in a pay-and-display bays or other spaces with time limits ."
+        ],
+        "model_1_score": 0.07499999727812509,
+        "model_2_summary": [
+            "controversial cctv cars that automatically issue fines are to be made illegal too ."
+        ],
+        "model_2_score": 0.9230769180769233
+    },
+    "13248": {
+        "query": "san francisco bay area",
+        "reference": [
+            "the duo live in the san francisco bay area of california ."
+        ],
+        "model_1_summary": [
+            "lola the english bulldog was filmed in action as she joined mila for a keyboard session .",
+            "the canine is seen pressing the keys on a musical toy ."
+        ],
+        "model_1_score": 0.1538461497961868,
+        "model_2_summary": [
+            "the duo live in the san francisco bay area of california ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "795": {
+        "query": "boston marathon bombings",
+        "reference": [
+            "dzhokhar tsarnaev is on trial in 2013 boston marathon bombings ."
+        ],
+        "model_1_summary": [
+            "dzhokhar tsarnaev was born july 22 , 1993 .",
+            "he says tsarnaev 's son was an accomplished boxer ."
+        ],
+        "model_1_score": 0.14285713826530627,
+        "model_2_summary": [
+            "dzhokhar tsarnaev is on trial in the 2013 boston marathon bombings ."
+        ],
+        "model_2_score": 0.9523809473922903
+    },
+    "6135": {
+        "query": "hospital scrubs",
+        "reference": [
+            "the charges said some of the pictures were ` depicting himself in hospital scrubs , wearing his hospital badge and exposing his genitals '"
+        ],
+        "model_1_summary": [
+            "dr. arthur zilberstein 's license being suspended by the medical commission on june 5 , 2014 .",
+            "arthur zilberstein 's ` preoccupation with sexual matters ' caused him to lose his license ."
+        ],
+        "model_1_score": 0.1785714236734695,
+        "model_2_summary": [
+            "some of the pictures were ` depicting himself in hospital scrubs , wearing his hospital badge and exposing his genitals '"
+        ],
+        "model_2_score": 0.9333333283555556
+    },
+    "12576": {
+        "query": "former australian survivor contestant",
+        "reference": [
+            "the former australian survivor contestant lost his appeal in the nsw supreme court on tuesday ."
+        ],
+        "model_1_summary": [
+            "joel betts will spend at least 11 years behind bars .",
+            "joel betts will spend at least 11 years in jail for up to 16 years ."
+        ],
+        "model_1_score": 0.04878048316478331,
+        "model_2_summary": [
+            "the former australian survivor has lost an appeal in the nsw supreme court ."
+        ],
+        "model_2_score": 0.7857142807397959
+    },
+    "11791": {
+        "query": "roadside zoo",
+        "reference": [
+            "in march 2015 iris was retrieved from a roadside zoo in georgia following an undercover peta investigation ."
+        ],
+        "model_1_summary": [
+            "keepers at the 150-acre save the chimps say it was ` love at first sight '",
+            "iris clapped eyes on 40-year-old abdul last month ."
+        ],
+        "model_1_score": 0.09756097075550292,
+        "model_2_summary": [
+            "in march 2015 iris was retrieved from a roadside zoo in georgia ."
+        ],
+        "model_2_score": 0.8275862020451843
+    },
+    "3086": {
+        "query": "team principal john booth",
+        "reference": [
+            "team principal john booth admits team ` have a lot of work to do '"
+        ],
+        "model_1_summary": [
+            "rookie roberto merhi failed to set a time within the 107 per cent rule for qualifying .",
+            "the south yorkshire-based team will race in malaysia ."
+        ],
+        "model_1_score": 0.14999999531250016,
+        "model_2_summary": [
+            "manor team principal john booth concedes his team ` have a lot of work to do '"
+        ],
+        "model_2_score": 0.8749999950195313
+    }
+}

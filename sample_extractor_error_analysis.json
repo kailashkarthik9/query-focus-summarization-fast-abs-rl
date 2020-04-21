@@ -1,0 +1,652 @@
+[
+    {
+        "article": "7401",
+        "query": "job",
+        "extractor_target": [
+            "extra-curricular : john cridland , director general of the confederation of british industry , says pupils need more than just a * s .",
+            "the glut of top grades at gcse and a-level is forcing employers to focus on young people 's extra-curricular activities , according to a business leader ."
+        ],
+        "highlights": [
+            "john cridland says pupils need more than just good grades to get a job .",
+            "suggests extra-curricular activities like theatre clubs key to getting a job ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "8752",
+        "query": "planet",
+        "extractor_target": [
+            "chiron was discovered in 1977 by charles kowal recovery images have been found as far back as 1895 , it was the first-known member of a class of objects now known as centaurs , with an orbit between saturn and uranus .",
+            "` i try to imagine how it would be to stand on the surface of this icy object , small enough that a fast sports car could reach escape velocity and drive off into space , and stare up at a 20 kilometer wide ring system 1,000 times closer than the moon , ' said uffe gr\u00e5e j\u00f8rgensen of the university of copenhagen of the chariklo study ."
+        ],
+        "highlights": [
+            "minor planet is known as chiron and located between saturn and uranus .",
+            "researchers are still unsure how rings stay place on such a small ` planet '"
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "1170",
+        "query": "goodbye letter",
+        "extractor_target": [
+            "investigators found a letter in the waste bin of his dusseldorf , germany , apartment saying that lubitz , 27 , was n't fit to do his job , city prosecutor christoph kumpa said friday . the note , kumpa said , had been `` slashed . ''"
+        ],
+        "highlights": [
+            "investigators found no goodbye letter or evidence of political or religious motivation ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "1516",
+        "query": "ukrainian side",
+        "extractor_target": [
+            "dnipro , playing in their first ever last 16 tie in the europa league , kept frank de boer 's side relatively quiet and head to amsterdam next week in a promising position ."
+        ],
+        "highlights": [
+            "ajax host the ukrainian side on march 19 next thursday in amsterdam ."
+        ],
+        "correct_target": [
+            "de boer 's side improved after the break but failed to register a single shot on target and will have to improve drastically for the second leg in amsterdam next thursday ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": false
+    },
+    {
+        "article": "12883",
+        "query": "first responders",
+        "extractor_target": [
+            "a few hours after being contacted , a dozen members of the rescue service and police department returned to his home and finish mr dabrowski 's shoveling duties in his memory ."
+        ],
+        "highlights": [
+            "but first responders returned to his house and finished shoveling for him ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "4807",
+        "query": "unidentified rider",
+        "extractor_target": [
+            "the unnamed man retches seven times during the one-minute ride in a malaysian theme park ."
+        ],
+        "highlights": [
+            "unidentified rider retches multiple times during one-minute ride in malaysia ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "6064",
+        "query": "shanghai film museum",
+        "extractor_target": [
+            "after a day spent meeting students at a shanghai school , the duke of cambridge found himself meeting paddington bear on the red carpet at a film premiere ."
+        ],
+        "highlights": [
+            "joined paddington bear on the red carpet at the shanghai film museum ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "6962",
+        "query": "flammable hydraulic fluid",
+        "extractor_target": [
+            "bus company translink confirmed the leak was of non-toxic and non-flammable leak of hydraulic fluid ."
+        ],
+        "highlights": [
+            "translink confirmed leak was non-toxic , non-flammable hydraulic fluid ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "13060",
+        "query": "terrible clothes",
+        "extractor_target": [
+            "oversized glasses , terrible hair and creepy moustaches feature throughout the advert to give it an authentic 80s feel ."
+        ],
+        "highlights": [
+            "video features creepy moustaches , terrible clothes and 80s music ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "4707",
+        "query": "steve bruce claims ireland",
+        "extractor_target": [
+            "the hull city manager responded to hughes ' anger at the incident by insisting ireland should already have been sent off following ` the worst challenge on the pitch ' on david meyler at the britannia stadium ."
+        ],
+        "highlights": [
+            "steve bruce claims ireland should have been sent off earlier in the game ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "1255",
+        "query": "great britain face usa",
+        "extractor_target": [
+            "playing america in the davis cup is not what it was twenty years ago , but there is still a cachet about the fixture that was the original challenge match for this competition when it was invented in 1900 ."
+        ],
+        "highlights": [
+            "great britain face usa in the davis cup first round this weekend ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "9964",
+        "query": "national transporation safety board brakes",
+        "extractor_target": [
+            "they said the plane 's automatic brakes were set to ` max , ' but they did not sense any deceleration as the aircraft veered toward flushing bay , according to the national transportation safety board ."
+        ],
+        "highlights": [
+            "pilots told the national transporation safety board brakes were set to ` max '"
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "3023",
+        "query": "sunderland",
+        "extractor_target": [
+            "poyet insists he wants to fight on but there is a feeling he has accepted that his 18-month tenure is coming to an end . saturday 's 4-0 defeat at home to aston villa left them one point above the relegation zone after a run of one win in 12 matches .",
+            "west ham -lrb- home -rrb- - may 9 .",
+            "former holland and rangers boss dick advocaat is the favourite to replace poyet . congerton is close to frank arnesen -- they worked together at chelsea and hamburg -- and he is thought to have recommended advocaat for the role ."
+        ],
+        "highlights": [
+            "sunderland are a point above the relegation zone .",
+            "read : sunderland eye west ham united boss sam allardyce .",
+            "click here for all the latest sunderland news ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "5761",
+        "query": "brazilian rear end beauty contest",
+        "extractor_target": [
+            "andressa urach , 27 , spent a month in intensive care and feared she would lose her leg after fillers ` rotted ' her muscles and had to be removed , triggering a life-threatening infection ."
+        ],
+        "highlights": [
+            "andressa urach , 27 , was runner-up in brazilian rear end beauty contest ."
+        ],
+        "correct_target": [
+            "just weeks after brazil 's miss bumbum runner-up spoke of how plastic surgery ended her in intensive care with rotting legs , the model has been rushed back into hospital ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": false
+    },
+    {
+        "article": "2756",
+        "query": "second grand slam title",
+        "extractor_target": [
+            "reigning us open champion marin cilic is already looking ahead to wimbledon and eyeing his next grand slam title ."
+        ],
+        "highlights": [
+            "marin cilic is chasing a second grand slam title at wimbledon this year ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "1348",
+        "query": "final singles rubbers",
+        "extractor_target": [
+            "andy murray finds himself with the task of killing off america in the davis cup on sunday after great britain 's scratch pair came tantalisingly close to doing the job for him ."
+        ],
+        "highlights": [
+            "great britain lead the usa 2-1 heading into the final singles rubbers ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "9518",
+        "query": "hot air balloon rides",
+        "extractor_target": [
+            "truth be told , i could hardly stop myself from doing a dance . the reason was simple . i live in bristol , which is pretty much home of the hot air balloon ."
+        ],
+        "highlights": [
+            "hot air balloon rides offer great views of temples from above ."
+        ],
+        "correct_target": [
+            "the only way to see the temples ... . from a balloon ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": false
+    },
+    {
+        "article": "11189",
+        "query": "mental health checks",
+        "extractor_target": [
+            "on march 16 cousins , who has a history of serious drug abuse , was assessed at a mental health facility after he was caught behind the secure fences of an sas base ."
+        ],
+        "highlights": [
+            "cousins underwent mental health checks after he was caught behind secure fences of an sas base on march 15 ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "8514",
+        "query": "amenities matter",
+        "extractor_target": [
+            "a survey of 2,000 office employees found that it 's not just location that matters , but also d\u00e9cor , amenities and food menus ."
+        ],
+        "highlights": [
+            "survey of 2,000 employees reveal that location , d\u00e9cor and amenities matter ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "6241",
+        "query": "jfk airport",
+        "extractor_target": [
+            "he stayed behind while other passengers disembarked following the four-hour flight and then entered the flight deck , where he was sat by the window when he was discovered yesterday ."
+        ],
+        "highlights": [
+            "man stayed behind while other passengers disembarked at jfk airport ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "5818",
+        "query": "natural food",
+        "extractor_target": [
+            "according to ms rutzerveld , the project is an example of high-tech but fully natural , healthy , and sustainable food made possible by combining aspects of nature , science , technology and design ."
+        ],
+        "highlights": [
+            "high-tech but fully natural food combines nature , science and technology ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "1532",
+        "query": "lazio midfielder lucas biglia",
+        "extractor_target": [
+            "midfielder lucas biglia -lrb- left -rrb- blasts through the packed box to drive in lazio 's opening goal in the sixth minute ."
+        ],
+        "highlights": [
+            "lazio midfielder lucas biglia opened the scoring early on in the match ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "7713",
+        "query": "gonorrhea",
+        "extractor_target": [
+            "the map above highlights which std had the most new diagnoses annually in a given country , averaged from 2000 to 2013 . certain stds seem to rule certain regions . for example , among northern european and eastern countries , chlamydia was typically the disease with the most new cases . in germany and poland in central europe , hepatitis c was the most frequently diagnosed std . in southwest europe , france , spain , and italy , there were more new hiv cases than any other std . however , looking at rates per individual , new diagnoses of stds -- especially chlamydia -- are still far less common in europe than in the united states .",
+            "washington d.c. , shown in the diagrams under its former name of the district of columbia , had the most syphilis , hiv and gonorrhoea , while kentucky was the state with the highest rates of hepatitis ."
+        ],
+        "highlights": [
+            "gonorrhea rates are still much higher in the us than in europe .",
+            "washington d.c. has the highest incidence of syphilis , hiv and gonorrhea ."
+        ],
+        "correct_target": [
+            "and while the number of americans with gonorrhoea has declined since 1980 , the figure for the us still eclipses rates of its european counterparts ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": false
+    },
+    {
+        "article": "5297",
+        "query": "cheltenham festival",
+        "extractor_target": [
+            "irish trainer gordon elliott is more established than neil mulholland but his efforts in plotting a route back to the festival with his national hunt chase winner cause of causes also deserves praise . the gelding was second at the meeting last year and had run only three times since with his novice status preserved . elliott also set up a 64th birthday winner for owner jp mcmanus .",
+            "it will be a shame if mullins ' total domination of day one overshadows the first festival win of trainer neil mulholland courtesy of the druids nephew in the ultima business solutions handicap chase . mulholland , who runs the young master in this afternoon 's rsa chase , is a trainer going places and now has the grand national in his sights for the druids nephew , who won under barry geraghty .",
+            "the final race of day one now has the less than snappy name of the chaps restaurant barbados novices ' handicap chase . quite a mouthful but welsh trainer rebecca curtis is hoping that might work in her favour after irish cavalier won for owner andrew mciver and gave jockey paul townend his second win of the day . admitting she had never visited the island , curtis said : ` maybe andrew will take me there now . '"
+        ],
+        "highlights": [
+            "trainer neil mulholland picks up first cheltenham festival win .",
+            "click here to see how day one of cheltenham festival unfolded .",
+            "read : cheltenham festival 2015 racing tips day two ."
+        ],
+        "correct_target": [
+            "it will be a shame if mullins ' total domination of day one overshadows the first festival win of trainer neil mulholland courtesy of the druids nephew in the ultima business solutions handicap chase . mulholland , who runs the young master in this afternoon 's rsa chase , is a trainer going places and now has the grand national in his sights for the druids nephew , who won under barry geraghty ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": false
+    },
+    {
+        "article": "9767",
+        "query": "wooden tower",
+        "extractor_target": [
+            "eco warriors who have built a 20ft high tower as they prepare for eviction by bailiffs have warned they ` will not go quietly . '"
+        ],
+        "highlights": [
+            "group has built a 20ft wooden tower which they claim is an art exhibition ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "13023",
+        "query": "bbc boss tony hall",
+        "extractor_target": [
+            "lord hall has received a death threat before . in 1999 he went into hiding under police protection following a call that said he would be ` next ' after the murder of jill dando . at the time , lord hall was chief executive of bbc news ."
+        ],
+        "highlights": [
+            "bbc boss tony hall has been placed under protection of elite bodyguards ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "10828",
+        "query": "organs",
+        "extractor_target": [
+            "according to aviacion digital , an airline industry website , the unnamed boy and his family were attempting to fly - at the hospital 's insistence - on ryanair flight ryr2012 to the capital on the saturday afternoon , the local reported .",
+            "however , the medical team were so concerned he would not make it in time that they considered offering the kidney and liver to someone else ."
+        ],
+        "highlights": [
+            "his family received an unexpected call telling them organs were available .",
+            "medical team considered offering organs to another patient instead ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "11595",
+        "query": "ill wife",
+        "extractor_target": [
+            "harold ambrose , 82 , used a licenced shotgun to shoot his cancer-stricken wife , wendy , as she slept then shot himself , chelmsford coroners ' court heard ."
+        ],
+        "highlights": [
+            "harold ambrose used licenced shotgun to shoot terminally ill wife , wendy ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "3663",
+        "query": "manchester united",
+        "extractor_target": [
+            "steven gerrard 's sending-off was so quick that the clock on the anfield scoreboard was stuck on 00.00 when he was given his marching orders at the start of the second half . the official time referee martin atkinson produced the red card was after just 38 seconds ."
+        ],
+        "highlights": [
+            "gerrard red cards : dismissal against manchester united was his eighth ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "9946",
+        "query": "furry fitness fan",
+        "extractor_target": [
+            "in a 94-second long video the chirpy creature from japan shows how to invigorate the senses with some zealous stretches in bed ."
+        ],
+        "highlights": [
+            "the furry fitness fan lives with his owner in japan ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "10557",
+        "query": "men",
+        "extractor_target": [
+            "killed : victim gilbert drogheo , 32 , was killed after a scuffle on the 4 train on tuesday night .",
+            "the shooting spread panic inside a subway station at the height of the evening rush hour when the retired officer , who 's 69 years old , boarded a brooklyn-bound subway train in manhattan .",
+            "altercation : cell phone footage taken by a witness and shared with cbs new york shows an older man approaching a younger man at the subway station and getting into a scuffle before a shot is heard .",
+            "he was rushed to brooklyn hospital center , where he was pronounced dead ."
+        ],
+        "highlights": [
+            "the ex-officer got into an argument with two young men aboard a southbound train on tuesday afternoon after he stepped between them .",
+            "the three men got off at borough hall and the officer and the argument turned physical between the officer and one of the men .",
+            "witness video showed the two men briefly scuffling before a shot went off .",
+            "one of the men , gilbert drogheo , was shot in the torso and rushed to hospital , where he was later pronounced dead ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "173",
+        "query": "reporters",
+        "extractor_target": [
+            "-lrb- cnn -rrb- when we asked our viewers to tweet their questions about the crash of germanwings flight 9525 , we received hundreds of responses . we put them to our experts and here are answers to six of the most interesting ones ."
+        ],
+        "highlights": [
+            "reporters and experts responded with answers to the most interesting ones ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "4747",
+        "query": "first premier league appearance",
+        "extractor_target": [
+            "kelvin davis had gone almost 15 months since his last appearance in the barclays premier league but ronald koeman thinks it was worth the wait ."
+        ],
+        "highlights": [
+            "kelvin davis made his first premier league appearance in almost 15 months ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "2698",
+        "query": "fellow promotion hopefuls ipswich town",
+        "extractor_target": [
+            "bamford reels away in celebration as he celebrates his goal against ipswich town in the lunchtime kick off ."
+        ],
+        "highlights": [
+            "teessiders put four goals past fellow promotion hopefuls ipswich town ."
+        ],
+        "correct_target": [
+            "aitor karanka hailed his two-goal star striker patrick bamford after middlesbrough romped to a 4-1 victory at home to ipswich ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": false,
+        "note": "Outside knowledge of team synonym used!"
+    },
+    {
+        "article": "7927",
+        "query": "multiple stab wounds",
+        "extractor_target": [
+            "a 20-year-old mother who had allegedly decapitated her three-month-old baby girl was suffering from post-partum depression and ` speaking of demons ' , family members said on tuesday ."
+        ],
+        "highlights": [
+            "three-month-old baby janiyah 's head ` had been severed ' and had multiple stab wounds to the face , coroner said on tuesday ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "585",
+        "query": "bush money machine",
+        "extractor_target": [
+            "washington -lrb- cnn -rrb- jeb bush 's money machine expectations , al gore 's iowa trip , rand paul 's iran strategy and john boehner 's next move were all topics around the `` inside politics '' table this sunday ."
+        ],
+        "highlights": [
+            "the bush money machine faces the expectations game ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "3626",
+        "query": "ibrox club",
+        "extractor_target": [
+            "ashley will receive payment for the loan of five newcastle players including haris vuckic -lrb- centre -rrb- , gael bigirimana -lrb- left -rrb- and remie streete ."
+        ],
+        "highlights": [
+            "the fee is payment for the loan of five newcastle players to the ibrox club ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "3611",
+        "query": "way bets",
+        "extractor_target": [
+            "sportsmail 's peter scudamore and marcus townend reveal their favourites while a group of racing enthusiast celebrities have also shared their tips for the festival on day two ."
+        ],
+        "highlights": [
+            "baradari , souriyan and modus are top each-way bets on day two ."
+        ],
+        "correct_target": [
+            "unknown"
+        ],
+        "query_relevance": false,
+        "summary_relevance": false
+    },
+    {
+        "article": "8721",
+        "query": "social media users",
+        "extractor_target": [
+            "tourists and new yorkers have been slammed for taking selfies while visiting the scene of last week 's devastating gas explosion in the east village ."
+        ],
+        "highlights": [
+            "social media users have been condemned for uploading the vain images ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "1236",
+        "query": "cheltenham festival",
+        "extractor_target": [
+            "with rock on ruby out and mullins-trained mare annie power taking up her entry in tuesday 's mares ' hurdle , the betting is dominated by paul nicholls 's pair saphir du rheu and zarkandar . the champion trainer says there is little between them . there are positive vibes for nicky henderson 's whisper , while best of the irish looks to be lieutenant colonel ."
+        ],
+        "highlights": [
+            "cheltenham festival starts on tuesday and finishes on friday ."
+        ],
+        "correct_target": [
+            "unknown"
+        ],
+        "query_relevance": false,
+        "summary_relevance": false
+    },
+    {
+        "article": "12350",
+        "query": "chemotherapy",
+        "extractor_target": [
+            "ms fortin , left , said the hospital tried to prevent her mother , jackie , right , from visiting her room ."
+        ],
+        "highlights": [
+            "cassandra fortin , 17 , wanted to decline chemotherapy for her cancer ."
+        ],
+        "correct_target": [
+            "ms fortin told people.com that she did not want to undergo chemotherapy and that when she was taken into care the state tried to prevent her mother from paying a visit ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": false
+    },
+    {
+        "article": "9061",
+        "query": "bede academy",
+        "extractor_target": [
+            "the northumberland church of england academy -lrb- ncea -rrb- in ashington , northumberland , is only the second school in the country to offer childcare for newborn babies ."
+        ],
+        "highlights": [
+            "it is only second school in country to do so after st bede academy , bolton ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "6171",
+        "query": "murder mall instagram account",
+        "extractor_target": [
+            "almost 2,000 people follow the account which pokes fun at those less fortunate , as well as police officers , overweight people and anyone else who the account 's owner and contributors deem as providing good comic value ."
+        ],
+        "highlights": [
+            "almost 2000 people follow the murder mall instagram account ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "11180",
+        "query": "duchess",
+        "extractor_target": [
+            "but kate took it in her stride during her visit to the turner contemporary gallery in margate , kent ."
+        ],
+        "highlights": [
+            "duchess of cambridge was visiting art gallery in margate , kent , yesterday ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "5274",
+        "query": "scott quigg fight",
+        "extractor_target": [
+            "i will meet barry mcguigan and carl frampton 's team in london today as we work towards making the fight everyone wants to see between carl and scott quigg . two world champions from britain in the same division -- they simply have to fight ."
+        ],
+        "highlights": [
+            "i will meet team frampton on wednesday to discuss scott quigg fight ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "9253",
+        "query": "speed cameras",
+        "extractor_target": [
+            "the built-in device , called the intelligent speed limiter , automatically detects road signs and cameras and slows the car down where necessary ."
+        ],
+        "highlights": [
+            "cameras detect road signs and speed cameras so the car be slowed down ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "4920",
+        "query": "phone hacking",
+        "extractor_target": [
+            "the 47-year-old former england star started his evidence at the hearing in london to determine what compensation should be paid by mirror group newspapers -lrb- mgn -rrb- in eight representative cases by telling mr justice mann that he was ` fuming ' ."
+        ],
+        "highlights": [
+            "mirror group newspapers face a pay out over phone hacking ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "3192",
+        "query": "leicester manager nigel pearson",
+        "extractor_target": [
+            "the former manchester united forward has barely played for leicester since arriving from old trafford in the summer but manager nigel pearson wants to have all options available as he battles against the odds to keep leicester in the premier league ."
+        ],
+        "highlights": [
+            "leicester manager nigel pearson wants to have options available ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    },
+    {
+        "article": "972",
+        "query": "movie industry",
+        "extractor_target": [
+            "-lrb- cnn -rrb- lynn smith used to lead a fast-paced life as the owner of a london-based film props company ."
+        ],
+        "highlights": [
+            "lynn smith used to work in the movie industry in london ."
+        ],
+        "query_relevance": false,
+        "summary_relevance": true
+    },
+    {
+        "article": "12912",
+        "query": "president obama",
+        "extractor_target": [
+            "prior visit : obama is pictured greeting people at the brookland banquet and conference center in west columbia , south carolina , today before heading to benedict college to participate in the town hall meeting ."
+        ],
+        "highlights": [
+            "president obama spoke at south carolina town hall event this afternoon ."
+        ],
+        "query_relevance": true,
+        "summary_relevance": true
+    }
+]

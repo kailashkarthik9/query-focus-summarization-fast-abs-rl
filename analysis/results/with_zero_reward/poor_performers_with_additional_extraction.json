@@ -1,0 +1,1014 @@
+{
+    "408": {
+        "query": "controversial rice subsidy scheme",
+        "reference": [
+            "case centers on her role in controversial rice subsidy scheme ."
+        ],
+        "model_2_summary": [
+            "former prime minister yingluck shinawatra has been ordered to stand trial ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 0,
+        "extractor_targets": [
+            "-lrb- cnn -rrb- former thai prime minister yingluck shinawatra has been ordered to stand trial over her role in a controversial rice subsidy scheme that cost the country billions ."
+        ],
+        "extractor_output": [
+            "-lrb- cnn -rrb- former thai prime minister yingluck shinawatra has been ordered to stand trial over her role in a controversial rice subsidy scheme that cost the country billions ."
+        ],
+        "extractor_additional_output": [
+            "the rice subsidy program , introduced in 2011 , pledged to pay farmers well above the market rate for their crop ."
+        ]
+    },
+    "8138": {
+        "query": "health benefits",
+        "reference": [
+            "new super food has gained attention for its health benefits ."
+        ],
+        "model_2_summary": [
+            "many are using brown algae as an alternative to green algae .",
+            "there 's been acai , kale , chia , and goji berries ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 1,
+        "extractor_targets": [
+            "there 's been acai , kale , chia , and goji berries . but another obscure superfood new on the market in australia is being heralded for its multiple health and beauty benefits , which include aiding in weight loss , slowing down cellular ageing , energy boosting , reducing skin conditions such as eczema , and giving a glowing complexion ."
+        ],
+        "extractor_output": [
+            "there 's been acai , kale , chia , and goji berries . but another obscure superfood new on the market in australia is being heralded for its multiple health and beauty benefits , which include aiding in weight loss , slowing down cellular ageing , energy boosting , reducing skin conditions such as eczema , and giving a glowing complexion ."
+        ],
+        "extractor_additional_output": [
+            "slimy superfood : many are using brown algae as an alternative to green algae due to its reportedly superior health benefits that include aiding in weight loss , slowing down cellular ageing , and helping skin conditions ."
+        ]
+    },
+    "4897": {
+        "query": "girls scarlett",
+        "reference": [
+            "he enlisted their two girls scarlett , 3 , and sienna , 20 months , to help ."
+        ],
+        "model_2_summary": [
+            "caitlin had no idea what her partner had been planning for weeks .",
+            "caitlin miller first met scott worgan six years ago ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 2,
+        "extractor_targets": [
+            "the central coast dad enlisted daughters scarlett -lrb- right -rrb- , 3 , and sienna -lrb- left -rrb- , 20 months , to help him pop the question ."
+        ],
+        "extractor_output": [
+            "the 29-year-old , from the central coast in nsw , wrote out a series of signs for his romantic proposal and asked his daughters scarlett , 3 , and sienna , 20 months , to hold them up in front of the camera ."
+        ],
+        "extractor_additional_output": [
+            "now scott 's heart-warming proposal video has gone viral after the father-of-two enlisted his impossibly cute little girls to help him pop the question to the love of his life ."
+        ]
+    },
+    "10290": {
+        "query": "violent drunken pranks",
+        "reference": [
+            "the trio staged violent drunken pranks based on the hit tv series jackass ."
+        ],
+        "model_2_summary": [
+            "two men who murdered a friend after getting him to drunkenly perform humiliating ` jackass-style stunts '"
+        ],
+        "model_2_score": 0.0,
+        "new_id": 3,
+        "extractor_targets": [
+            "the old bailey heard that the south african had willingly taken part in the violent games based on the hit tv series ."
+        ],
+        "extractor_output": [
+            "two men who murdered a friend after getting him to drunkenly perform humiliating ` jackass-style stunts ' - including rubbing chilli into his privates - are facing life behind bars ."
+        ],
+        "extractor_additional_output": [
+            "the old bailey heard that the south african had willingly taken part in the violent games based on the hit tv series ."
+        ]
+    },
+    "5275": {
+        "query": "floyd mayweather",
+        "reference": [
+            "then we want the winner of floyd mayweather and manny pacquiao ."
+        ],
+        "model_2_summary": [
+            "kell brook will fight jo jo dan on march 28 .",
+            "dan is going to face a fighter in sheffield who has only thought about fighting for six months ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 4,
+        "extractor_targets": [
+            "it 's nearly time for kell brook to make an emotional walk to the ring and fight jo jo dan on march 28 . he has the world at his feet again and i 'm looking at fights against the likes of juan manuel marquez , brandon rios and keith thurman in the summer and then the winner of manny pacquiao and floyd mayweather . but it was so nearly game over for kell ."
+        ],
+        "extractor_output": [
+            "it 's nearly time for kell brook to make an emotional walk to the ring and fight jo jo dan on march 28 . he has the world at his feet again and i 'm looking at fights against the likes of juan manuel marquez , brandon rios and keith thurman in the summer and then the winner of manny pacquiao and floyd mayweather . but it was so nearly game over for kell ."
+        ],
+        "extractor_additional_output": [
+            "after that , i would love to see kell fight pacquiao or mayweather . anyone would . after those two fight on may 2 , the winner and kell will be the only world champions in the welterweight division . it would be a great unification match ."
+        ]
+    },
+    "7883": {
+        "query": "former clinton staffers",
+        "reference": [
+            "he also demanded documents from former clinton staffers ."
+        ],
+        "model_2_summary": [
+            "a republican-led congressional committee created to look into the 2012 benghazi , libya terror attacks ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 5,
+        "extractor_targets": [
+            "a republican-led congressional committee created to look into the 2012 benghazi , libya terror attacks has formally asked democratic former secretary of state hillary rodham clinton to deliver her now-famous secret email server to a neutral third party for examination ."
+        ],
+        "extractor_output": [
+            "a republican-led congressional committee created to look into the 2012 benghazi , libya terror attacks has formally asked democratic former secretary of state hillary rodham clinton to deliver her now-famous secret email server to a neutral third party for examination ."
+        ],
+        "extractor_additional_output": [
+            "the same committee has already subpoenaed the emails of ` close to a dozen ' people who worked in the state department for hillary clinton when she was secretary of state , the chairman of the u.s. house committee investigating the 2012 benghazi attacks said on thursday ."
+        ]
+    },
+    "12470": {
+        "query": "harry potter stars",
+        "reference": [
+            "she admitted harry potter stars were like family to her ."
+        ],
+        "model_2_summary": [
+            "tom felton , 27 , is familiar with having grown up on screen playing draco malfoy ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 6,
+        "extractor_targets": [
+            "` i wanted the autographs to feel closer to you , it was like a little connection . i have never had a family and following harry potter and watching you all grow up it was like seeing my own family grow up and i got attached . you seemed like a big family and i wanted to be part of that . '"
+        ],
+        "extractor_output": [
+            "it 's something actor tom felton , 27 , is familiar with having grown up on screen playing draco malfoy in the harry potter series ."
+        ],
+        "extractor_additional_output": [
+            "tina said she has enjoyed watching tom grow up from being a boy as draco malfoy in the first harry potter films , left , to the man he is today , right ."
+        ]
+    },
+    "12519": {
+        "query": "old fashioned vintage home",
+        "reference": [
+            "new owners wanted to capture their old fashioned vintage home ."
+        ],
+        "model_2_summary": [
+            "the sisters ' guest room is decorated with pink candlewick bedspreads , an electric fire and family pictures ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 7,
+        "extractor_targets": [
+            "the isle of wight-based photographer was asked to take her camera around the house by the new owners after joy - the last of the taylor family in ryde - sold her house in 2013 to move into a care home ."
+        ],
+        "extractor_output": [
+            "the sisters ' guest room is decorated with pink candlewick bedspreads , an electric fire and family pictures on the mantelpiece . jean 's picture is in the centre , to the right is their brother jim in his royal artillery uniform ."
+        ],
+        "extractor_additional_output": [
+            "jean and joy taylor were born in the house in ryde , isle of wight , in 1916 and 1922 , never married and even shared a bedroom in their family home for 27 years until jean 's death in 2008 ."
+        ]
+    },
+    "7907": {
+        "query": "simon rhodes",
+        "reference": [
+            "simon rhodes wrote to celebrities asking them for motivating messages ."
+        ],
+        "model_2_summary": [
+            "other a-list stars sir david jason and sailor dame ellen macarthur also shared some words of wisdom .",
+            "physicist was portrayed by eddie redmayne in the theory of everything ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 8,
+        "extractor_targets": [
+            "the famous faces put pen to paper for simon rhodes after he asked them for encouraging quotes to spur on staff at his legal firm ."
+        ],
+        "extractor_output": [
+            "other a-list stars , including actor sir ian mckellen , athlete jessica ennis-hill , actor sir david jason and sailor dame ellen macarthur also shared some words of wisdom ."
+        ],
+        "extractor_additional_output": [
+            "jessica ennis-hill revealed that just like everyone else she has days when she does not want to get out of bed ."
+        ]
+    },
+    "101": {
+        "query": "many republicans",
+        "reference": [
+            "white house , many republicans disagree over deal terminology , requirements ."
+        ],
+        "model_2_summary": [
+            "there is no suit on the issue being discussed on capitol hill ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 9,
+        "extractor_targets": [
+            "it 's that skepticism that has largely led the white house to define the deal as a `` nonbinding agreement '' rather than a `` treaty , '' which the constitution requires senate `` advice and consent '' on ."
+        ],
+        "extractor_output": [
+            "that 's infuriating republicans and even some democrats , who are demanding that the obama administration submit any final nuclear deal with iran to congress for approval ."
+        ],
+        "extractor_additional_output": [
+            "but legal experts say that though a court challenge along the lines of pending gop cases on immigration and health care is possible in theory , it would be a long shot ."
+        ]
+    },
+    "11803": {
+        "query": "huge nationwide tax scam",
+        "reference": [
+            "part of a huge nationwide tax scam that has cost taxpayers $ 15.5 million ."
+        ],
+        "model_2_summary": [
+            "fake irs agents have targeted more than 366,000 people with harassing phone calls ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 10,
+        "extractor_targets": [
+            "fake irs agents have now targeted more than 366,000 people with harassing phone calls demanding payments and threatening jail as part of a huge nationwide tax scam that has cost taxpayers $ 15.5 million ."
+        ],
+        "extractor_output": [
+            "fake irs agents have now targeted more than 366,000 people with harassing phone calls demanding payments and threatening jail as part of a huge nationwide tax scam that has cost taxpayers $ 15.5 million ."
+        ],
+        "extractor_additional_output": [
+            "a con artist who told woman she was being convicted of tax fraud seemingly had an attack of guilt after finding out she was pregnant ."
+        ]
+    },
+    "1939": {
+        "query": "incredible escape",
+        "reference": [
+            "skinny houdini makes incredible escape from south african jail cell ."
+        ],
+        "model_2_summary": [
+            "it takes the escapee little time to get his head and shoulders through minuscule gap ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 11,
+        "extractor_targets": [
+            "filmed from inside a south african jail cell the 33 second clip shows the slender man posing briefly inside before hauling himself between the minuscule gap in a furious bid for freedom ."
+        ],
+        "extractor_output": [
+            "local website thesouthafrican.com claims the cell is a standard police holding cell.the escapee achieves the feat with speed and confidence ."
+        ],
+        "extractor_additional_output": [
+            "using the lower bars to hoist himself up the escape artist gets his head and shoulders , after a little effort , through the bars in less than 20 seconds ."
+        ]
+    },
+    "7187": {
+        "query": "war rationing",
+        "reference": [
+            "tv challenge saw them experience post-war rationing and nouvelle cuisine ."
+        ],
+        "model_2_summary": [
+            "in the 1950s the children had to wait for their father to finish his dinner ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 12,
+        "extractor_targets": [
+            "in the 1980s goats cheese , mange tout and kiwi fruit became the foods to impress your dinner party guests . gourmet dishes and nouvelle cuisine took over from the simple but hearty dishes of earlier decades ."
+        ],
+        "extractor_output": [
+            "back in time for dinner , which starts on bbc2 next tuesday , follows the robshaws -- brandon , 53 , rochelle , 52 , and their children miranda , 17 , rosalind , 15 and fred -- from the 1950s to the end of the millennium , with the final episode casting an eye towards the future of food ."
+        ],
+        "extractor_additional_output": [
+            "the robshaw family took on a culinary challenge to eat as a family would have in each decade from the 1950s to the 1990s . pictured -lrb- from left -rrb- rosalind , mother rochelle , fred , father brandon and miranda ` in the 1950s '"
+        ]
+    },
+    "5908": {
+        "query": "masterchef jodie kidd contestant",
+        "reference": [
+            "model and masterchef jodie kidd contestant took her son indio to italy ."
+        ],
+        "model_2_summary": [
+            "delphina valle dell ` erica resort in sardinia is huge '"
+        ],
+        "model_2_score": 0.0,
+        "new_id": 13,
+        "extractor_targets": [
+            "mum 's the word : jodie and her son indio enjoyed their first trip to sardinia ."
+        ],
+        "extractor_output": [
+            "the delphina valle dell ` erica resort in sardinia is huge ."
+        ],
+        "extractor_additional_output": [
+            "but , from the moment we set foot in the 28-hectare resort near santa teresa gallura , i realised my worries were entirely misplaced . frankly , we were bowled over . yes , it is big - in fact it is really two hotels joined together - but it never felt big and there were days when we hardly saw a soul ."
+        ]
+    },
+    "167": {
+        "query": "child abuse charges",
+        "reference": [
+            "mom arrested on child abuse charges , pending results from medical examiner ."
+        ],
+        "model_2_summary": [
+            "the mother of the children was apprehended at a separate location ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 14,
+        "extractor_targets": [
+            "the mother of the children was apprehended at a separate location , and was later arrested on child abuse charges , pending the `` results of the medical examiner 's report , '' a release from the police department said . police have not yet released her name ."
+        ],
+        "extractor_output": [
+            "the mother of the children was apprehended at a separate location , and was later arrested on child abuse charges , pending the `` results of the medical examiner 's report , '' a release from the police department said . police have not yet released her name ."
+        ],
+        "extractor_additional_output": [
+            "there are tentative plans to begin the autopsy tomorrow said ryan bridges , spokesman for the wayne county medical examiner 's office . he added that the office was waiting to allow the bodies to thaw naturally in order to preserve forensic evidence ."
+        ]
+    },
+    "12664": {
+        "query": "grape crops",
+        "reference": [
+            "rhs identify four separate viruses which can obliterate grape crops ."
+        ],
+        "model_2_summary": [
+            "the diseases have damaged vineyards in wine-growing countries around the world .",
+            "england 's fledgling wine industry is threatened by a group of devastating plant diseases ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 15,
+        "extractor_targets": [
+            "experts at the royal horticultural society in recent months have identified four separate viruses which can obliterate grape crops ."
+        ],
+        "extractor_output": [
+            "the diseases , spotted on vines at rhs gardens in wisley , surrey , and the national fruit collection at brogdale . kent , have damaged vineyards in wine-growing countries around the world ."
+        ],
+        "extractor_additional_output": [
+            "the warning comes after wine producers announced this week that they are to apply for the name ` sussex wine ' to be given protected ` designation of origin ' status , putting it in the same league as champagne and bordeaux ."
+        ]
+    },
+    "5216": {
+        "query": "ringside scorecards",
+        "reference": [
+            "he also won easily on all three ringside scorecards ."
+        ],
+        "model_2_summary": [
+            "keith thurman and robert guerrero gave a prime-time television audience ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 16,
+        "extractor_targets": [
+            "thurman knocked guerrero down in the ninth round and won easily on all three ringside scorecards to capture the wba version of the 147-pound crown . but guerrero fought hard and was n't afraid to trade punches even while bleeding from a cut over his left eye late in the bout ."
+        ],
+        "extractor_output": [
+            "keith thurman and robert guerrero gave a prime-time television audience something to watch saturday night ."
+        ],
+        "extractor_additional_output": [
+            "` that 's kind of performance that wins the hearts of fans even when you do n't win the fight , ' guerrero said . ` the fans love that and that 's what boxing is all about . '"
+        ]
+    },
+    "696": {
+        "query": "policy solutions",
+        "reference": [
+            "he presents four policy solutions he says would help end this scourge ."
+        ],
+        "model_2_summary": [
+            "support vetted california organizations that provide free or subsidized housing ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 17,
+        "extractor_targets": [
+            "yet even this region is n't immune from the scourge of child poverty ."
+        ],
+        "extractor_output": [
+            "what you can do : support vetted california organizations that provide free or subsidized housing to low-income families , including family supportive housing and samaritan house . or : petition facebook , apple or google to fund subsidized housing projects in their own backyard ."
+        ],
+        "extractor_additional_output": [
+            "the idea : working families ca n't afford to raise their kids , and better wages would help them do it . the federal minimum wage is worth considerably less now than it was in the 1960s , adjusted for inflation , according to the congressional research service . the federal minimum wage was worth $ 9.27 in 1963 , using july 2013 dollars . now it 's $ 7.25 ."
+        ]
+    },
+    "4473": {
+        "query": "southampton news",
+        "reference": [
+            "click here for all the latest southampton news ."
+        ],
+        "model_2_summary": [
+            "graziano pelle has struggled with form recently .",
+            "ronald koeman has seen a reaction from goal-shy graziano pelle .",
+            "striker enjoyed a dream start to life at st mary 's after moving from feyenoord ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 18,
+        "extractor_targets": [
+            "pelle scored nine goals in his first 12 matches for saints in all competitions and netted the winner on his debut for italy ."
+        ],
+        "extractor_output": [
+            "southampton manager ronald koeman has seen a reaction from goal-shy graziano pelle after dropping him in the league for the first time ."
+        ],
+        "extractor_additional_output": [
+            "the goals have dried up of late , though , and he was replaced in the starting line-up by shane long in sunday 's 1-1 draw at chelsea ."
+        ]
+    },
+    "11933": {
+        "query": "rspca",
+        "reference": [
+            "david o'shannessy of the rspca said its one of the worst cases he 's seen ."
+        ],
+        "model_2_summary": [
+            "thompson made comments at his home after being released on bail .",
+            "nathan thompson , 25 , allegedly loaded 11 bull terriers in his car .",
+            "puppy killer nathan thompson has spoken out after his court hearing ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 19,
+        "extractor_targets": [
+            "rspca nsw chief inspector david o'shannessy said it was definitely one of the worst animal cruelty incidents he has seen in his career ."
+        ],
+        "extractor_output": [
+            "according to the sydney morning herald , thompson made comments at his home after being released on bail saying he knew he looked ` cold blooded ' but he believed he was helping out a friend ."
+        ],
+        "extractor_additional_output": [
+            "the 25-year-old pleaded guilty to four counts of animal cruelty and as a result , has been banned from owning , acquiring , buying or possessing any animal for a decade ."
+        ]
+    },
+    "3521": {
+        "query": "sebastian vettel",
+        "reference": [
+            "ferrari 's sebastian vettel finished the day less than one second slower ."
+        ],
+        "model_2_summary": [
+            "valtteri bottas fastest time on final of 12 days of preseason tests ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 20,
+        "extractor_targets": [
+            "ferrari 's sebastian vettel and sauber 's felipe nasr both trailed the williams driver by less than one second ."
+        ],
+        "extractor_output": [
+            "valtteri bottas steered his williams to the fastest time on the final of 12 days of preseason tests , with ferrari 's sebastian vettel right behind him at the barcelona-catalunya circuit ."
+        ],
+        "extractor_additional_output": [
+            "bottas clocked an early flying lap of 1 minute , 23.063 seconds . the finnish driver and teammate felipe massa have consistently been among the fastest performers with both in the top two times through the final four days of testing ."
+        ]
+    },
+    "4872": {
+        "query": "aston villa midfielder fabian delph",
+        "reference": [
+            "aston villa midfielder fabian delph is struggling with illness ."
+        ],
+        "model_2_summary": [
+            "ryan mason has been called up to the england squad for the first time ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 21,
+        "extractor_targets": [
+            "the football association -lrb- fa -rrb- announced on monday night that mason , 23 , had been drafted into the national squad for the upcoming games against lithuania and italy as fabian delph is struggling with illness and adam lallana has been ruled out through injury ."
+        ],
+        "extractor_output": [
+            "uncapped tottenham midfielder ryan mason has been called up to the england squad for the first time ."
+        ],
+        "extractor_additional_output": [
+            "the football association -lrb- fa -rrb- announced on monday night that mason , 23 , had been drafted into the national squad for the upcoming games against lithuania and italy as fabian delph is struggling with illness and adam lallana has been ruled out through injury ."
+        ]
+    },
+    "8495": {
+        "query": "hippy chic maxi dresses",
+        "reference": [
+            "her designs include floral patterns and hippy chic maxi dresses ."
+        ],
+        "model_2_summary": [
+            "the 70s inspired this short dress which millie rocked with a pair of snakeskin boots ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 22,
+        "extractor_targets": [
+            "the former made in chelsea star 's first fashion collection was such a hit that she 's back with her spring/summer 15 drop - and it 's full of bold floral patterns , hippy chic maxi dresses and the kind of festival fashion staples that she 's made her signature ."
+        ],
+        "extractor_output": [
+            "the former made in chelsea star 's first fashion collection was such a hit that she 's back with her spring/summer 15 drop - and it 's full of bold floral patterns , hippy chic maxi dresses and the kind of festival fashion staples that she 's made her signature ."
+        ],
+        "extractor_additional_output": [
+            "speaking to femail about her new collection of suede dresses and tasseled jackets , the 25-year-old said : ` the range was inspired by my love of festivals and it has a real 70s influence ."
+        ]
+    },
+    "4706": {
+        "query": "goalkeeper adrian",
+        "reference": [
+            "goalkeeper adrian will be available for selection against sunderland ."
+        ],
+        "model_2_summary": [
+            "james tomkins has undergone surgery on his dislocated shoulder ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 23,
+        "extractor_targets": [
+            "` adrian played through the pain , which is not to be underestimated , and he too will be available to face sunderland ."
+        ],
+        "extractor_output": [
+            "james tomkins has undergone surgery on his dislocated shoulder , although west ham hope the defender will be back before the end of the season ."
+        ],
+        "extractor_additional_output": [
+            "tomkins ' presence was certainly missed in saturday 's 3-0 defeat at arsenal , where midfielder cheikhou kouyate had to play at the heart of defence with winston reid also absent ."
+        ]
+    },
+    "1703": {
+        "query": "psg striker zlatan ibrahimovic",
+        "reference": [
+            "chelsea players surrounded referee bjorn kuipers to get psg striker zlatan ibrahimovic sent off on wednesday in their champions league clash ."
+        ],
+        "model_2_summary": [
+            "atletico madrid have hounded and harassed referees over the years ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 24,
+        "extractor_targets": [
+            "so when chelsea surrounded referee bjorn kuipers to get zlatan ibrahimovic sent off on wednesday it was n't something new , or a modern phenomenon that has been creeping up on us . it has nothing to do with foreign players and managers coming into the game . it 's been a part of english football for years ."
+        ],
+        "extractor_output": [
+            "leeds did it under don revie ; sir alex ferguson 's manchester united side did it ; atletico madrid under diego simeone do it . many great sides have hounded and harassed referees over the years . it 's a characteristic at times of their determination to win and their unity ."
+        ],
+        "extractor_additional_output": [
+            "if a referee feels that he is being aggressively hounded by a group of players he should have the power to reverse the decision and award the free kick the other way . so on wednesday night , he could still have sent off ibrahimovic if he really felt it was a red card offence but chelsea would have lost the advantage of a free kick ."
+        ]
+    },
+    "11808": {
+        "query": "teen pregnancies",
+        "reference": [
+            "teen pregnancies in england and wales have fallen to 1960s levels ."
+        ],
+        "model_2_summary": [
+            "it found that the ` facebook generation ' of youngsters are less likely than their predecessors ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 25,
+        "extractor_targets": [
+            "in england and wales teen pregnancies have fallen to levels last seen in the 1960s and official surveys have shown a major drop in drinking among young people . more than a quarter of under-24s are teetotal and fewer than a fifth ever go binge drinking , according to 2013 estimates ."
+        ],
+        "extractor_output": [
+            "it found that the ` facebook generation ' of youngsters are less likely than their predecessors to drink alcohol , smoke tobacco or cannabis , or get bullied ."
+        ],
+        "extractor_additional_output": [
+            "however the study , assembled by academics at st andrews university , complained that despite the increasing levels of health and well-being , adolescents now are just as likely to be fat as the generation of the 2000s . obesity rates , it said , did not decline between 2002 and 2010 ."
+        ]
+    },
+    "6368": {
+        "query": "northern california federal courts",
+        "reference": [
+            "dozens more cases are still pending in northern california federal courts ."
+        ],
+        "model_2_summary": [
+            "the national transportation safety board says the complexity of the boeing 777 's key systems for controlling flight contributed to the accident ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 26,
+        "extractor_targets": [
+            "dozens more cases involving other passengers are still pending in federal court in northern california ."
+        ],
+        "extractor_output": [
+            "the settlement with 72 passengers who filed personal injury claims also includes boeing , which made the airplane , and air cruisers co. , the new jersey company that made its evacuation slides ."
+        ],
+        "extractor_additional_output": [
+            "but the national transportation safety board also said the complexity of the boeing 777 's auto-throttle and auto flight director -- two of the plane 's key systems for controlling flight -- contributed to the accident ."
+        ]
+    },
+    "520": {
+        "query": "live chat",
+        "reference": [
+            "join meerkat founder ben rubin for a live chat at 2 p.m. et wednesday ."
+        ],
+        "model_2_summary": [
+            "the san francisco-based startup launched february 27 .",
+            "the livestreaming app took austin by storm last week ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 27,
+        "extractor_targets": [
+            "what questions do you have about the app , sxsw or entrepreneurship ? do you dream of launching your own startup ? now is your chance to ask the experts how . leave your questions in the comments below or ask them directly on meerkat or twitter at 2 p.m. et wednesday ."
+        ],
+        "extractor_output": [
+            "the livestreaming app took austin by storm last week , with media outlets -- including cnnmoney -- calling it `` the new sxsw sweetheart , '' `` the coolest cat '' and the festival 's `` big star . ''"
+        ],
+        "extractor_additional_output": [
+            "what questions do you have about the app , sxsw or entrepreneurship ? do you dream of launching your own startup ? now is your chance to ask the experts how . leave your questions in the comments below or ask them directly on meerkat or twitter at 2 p.m. et wednesday ."
+        ]
+    },
+    "2642": {
+        "query": "noble family",
+        "reference": [
+            "the 20-bedroom property was bought by a noble family in 1872 ."
+        ],
+        "model_2_summary": [
+            "castello gallenga stuart , near perugia , has been put on market for \u00a3 5million .",
+            "an italian castle used as nazi headquarters during world war ii ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 28,
+        "extractor_targets": [
+            "castello gallenga stuart is believed to have gotten its name when it was bought by the head of the local gallenga family , romeo gallenga and his english wife , mary montgomery stuart , in 1872 ."
+        ],
+        "extractor_output": [
+            "castello gallenga stuart is believed to have gotten its name when it was bought by the head of the local gallenga family , romeo gallenga and his english wife , mary montgomery stuart , in 1872 ."
+        ],
+        "extractor_additional_output": [
+            "the castello gallenga stuart , near the historic city of perugia , umbria , boasts five storeys and 20 bedrooms ."
+        ]
+    },
+    "6358": {
+        "query": "expense watchdog findings",
+        "reference": [
+            "the harrow east mp has refused to accept the expense watchdog findings ."
+        ],
+        "model_2_summary": [
+            "commons officials checked mr blackman 's claims on google maps ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 29,
+        "extractor_targets": [
+            "but the harrow east mp has refused to accept the conclusions , insisting he will hand back only \u00a3 237 - despite being asked to repay more than \u00a3 1,000 ."
+        ],
+        "extractor_output": [
+            "a tory mp is refusing to repay hundreds of pounds in expenses for over-claiming his mileage - after the commons watchdog checked his journeys on google maps ."
+        ],
+        "extractor_additional_output": [
+            "backbencher bob blackman was found to have filed more than 700 claims for travel around his constituency that were either ` inaccurate ' or not allowed under the rules ."
+        ]
+    },
+    "8230": {
+        "query": "police newspaper appeal",
+        "reference": [
+            "he later turned himself into police after seeing a police newspaper appeal ."
+        ],
+        "model_2_summary": [
+            "webster was caught taking photos up women 's skirts at maidenhead lidl ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 30,
+        "extractor_targets": [
+            "however , after seeing an appeal for witnesses to the crime in a local newspaper webster , who now lives with his parents on the outskirts of norwich , turned himself in to police ."
+        ],
+        "extractor_output": [
+            "james webster , 35 , took photos as his victims leaned against the display cabinets in the aisles and eventually attracted suspicions as other shoppers saw him moving the bag he was carrying so that he could get a clear up-skirt view ."
+        ],
+        "extractor_additional_output": [
+            "webster had cut a hole in the bag through which he placed the lens of a camera so he could covertly film between women 's legs ."
+        ]
+    },
+    "2103": {
+        "query": "sim card deal",
+        "reference": [
+            "sim card deal offers 500 mb of 4g , unlimited texts and 200 minutes from \u00a3 5 ."
+        ],
+        "model_2_summary": [
+            "bt will launch its own mobile phone service along with free access to premier league football .",
+            "bt is to launch its own mobile phone service along with free access ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 31,
+        "extractor_targets": [
+            "the cheapest sim card deal offers 500 mb of 4g data , unlimited texts and 200 minutes of calls for \u00a3 5 a month if you are an existing bt broadband customer and \u00a3 10 a month for everyone else ."
+        ],
+        "extractor_output": [
+            "bt is to launch its own mobile phone service along with free access to premier league football on the go starting at \u00a3 5 a month ."
+        ],
+        "extractor_additional_output": [
+            "the move has been welcomed by consumer groups as the telecoms giant attempts to spread its empire from home telephone , internet and pay tv into mobile phones ."
+        ]
+    },
+    "6877": {
+        "query": "peanut butter smoothies",
+        "reference": [
+            "swears by peanut butter smoothies and alkaline food delivery service ."
+        ],
+        "model_2_summary": [
+            "michelle starts the day with scrambled egg on brown toast with tomato ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 32,
+        "extractor_targets": [
+            "loved by daisy lowe and una foden , the alkaline food delivery service allows you to create your own healthy menus , which are delivered straight to your front door ."
+        ],
+        "extractor_output": [
+            "when she 's cooking for herself at home , michelle starts the day with scrambled egg on brown toast with tomato , followed by a high protein banana smoothie with peanut butter . for lunch , she has a turkey or chicken salad sandwich on brown bread and dinner is salad with chicken or prawn ."
+        ],
+        "extractor_additional_output": [
+            "the actress and model , 27 , says she is thrilled to be working with the brand . ` i am really lucky , ' she told femail . ` i have always been a fan of the range and have been using it for years so when they asked me to work with them , i was over the moon . '"
+        ]
+    },
+    "9264": {
+        "query": "local education authority",
+        "reference": [
+            "but local education authority did n't agree with ` flexi-schooling ' approach ."
+        ],
+        "model_2_summary": [
+            "she was prosecuted five times before being jailed for five months ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 33,
+        "extractor_targets": [
+            "but their schools and her local education authority disagreed with her flexible approach and she was prosecuted five times before being jailed for five months ."
+        ],
+        "extractor_output": [
+            "but their schools and her local education authority disagreed with her flexible approach and she was prosecuted five times before being jailed for five months ."
+        ],
+        "extractor_additional_output": [
+            "claudia ward , 42 , said prison was the wake-up call she needed and that her children all now had 100 per cent attendance records ."
+        ]
+    },
+    "8800": {
+        "query": "coroner records mother",
+        "reference": [
+            "coroner records mother-of-two committed suicide ` while stressed '"
+        ],
+        "model_2_summary": [
+            "cancer nurse jane revell , 53 , drowned herself in a hot tub four days later ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 34,
+        "extractor_targets": [
+            "south staffordshire coroner andy haigh concluded mrs revell had committed suicide ` while stressed . '"
+        ],
+        "extractor_output": [
+            "cancer nurse jane revell , 53 , -lrb- pictured -rrb- drowned herself in a hot tub four days before she was due to face disciplinary proceedings , the inquest into her death heard ."
+        ],
+        "extractor_additional_output": [
+            "the allegation was said to be ` of a minor nature ' and not one which could lead to her dismissal , the hearing at cannock coroner 's court was told ."
+        ]
+    },
+    "5894": {
+        "query": "daily mail australia",
+        "reference": [
+            "he told daily mail australia that he would ask her out for dinner ."
+        ],
+        "model_2_summary": [
+            "message soon became a source of huge online interest with the identity of both the author and its intended target generating unexpected publicity ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 35,
+        "extractor_targets": [
+            "mr chalmers came forward on sunday morning to reveal himself as the mystery man , and told daily mail australia that he planned on heading down to the picturesque spot to ask his brunette admirer on a date for the evening ."
+        ],
+        "extractor_output": [
+            "but the message soon became a source of huge online interest with the identity of both the author and its intended target generating unexpected publicity ."
+        ],
+        "extractor_additional_output": [
+            "milne , who is originally from the west coast of scotland , studied at glasgow school of arts before backpacking in new zealand where she will stay for another two months . she said that she had not been expecting the hype surrounding her handwritten note ."
+        ]
+    },
+    "12458": {
+        "query": "selma voting rights movement",
+        "reference": [
+            "she and her and her husband at the time james bevel drafted the first plan for the selma voting rights movement ."
+        ],
+        "model_2_summary": [
+            "he said : ` you ca n't celebrate lessons of history from one period '"
+        ],
+        "model_2_score": 0.0,
+        "new_id": 36,
+        "extractor_targets": [
+            "she told the television station that the pair couple drafted the first plan for the selma voting rights movement after a 1963 church bombing which killed four children ."
+        ],
+        "extractor_output": [
+            "` right now , in 2015 , fifty years after selma , there are laws across this country designed to make it harder for people to vote . as we speak , more of such laws are being proposed , ' he said . ` meanwhile , the voting rights act , the culmination of so much blood , so much sweat and tears , the product of so much sacrifice in the face of wanton violence ... stands weakened . '"
+        ],
+        "extractor_additional_output": [
+            "she told the television station that the pair couple drafted the first plan for the selma voting rights movement after a 1963 church bombing which killed four children ."
+        ]
+    },
+    "1180": {
+        "query": "makeup artist",
+        "reference": [
+            "paolo ballesteros is an actor and makeup artist ."
+        ],
+        "model_2_summary": [
+            "the 32-year-old hosts the filipino show `` eat bulaga ''"
+        ],
+        "model_2_score": 0.0,
+        "new_id": 37,
+        "extractor_targets": [
+            "the actor and makeup artist from the philippines is gaining fans thanks to his instagram account , which features pictures of him transformed to look like various female celebrities . the 32-year-old , who hosts the filipino show `` eat bulaga , '' says he does it using just his skill with makeup and wigs ."
+        ],
+        "extractor_output": [
+            "the actor and makeup artist from the philippines is gaining fans thanks to his instagram account , which features pictures of him transformed to look like various female celebrities . the 32-year-old , who hosts the filipino show `` eat bulaga , '' says he does it using just his skill with makeup and wigs ."
+        ],
+        "extractor_additional_output": [
+            "ballesteros told the huffington post that he stumbled upon his ability after watching tutorials on youtube . soon he was able to transform himself to look like everyone from cate blanchett to first lady michelle obama ."
+        ]
+    },
+    "3607": {
+        "query": "manchester united man",
+        "reference": [
+            "the manchester united man is aiming to get back into the squad ."
+        ],
+        "model_2_summary": [
+            "juan mata has not given up hope of playing for spain again ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 38,
+        "extractor_targets": [
+            "manchester united midfielder juan mata -lrb- left -rrb- is aiming for a return to the spain squad ."
+        ],
+        "extractor_output": [
+            "manchester united midfielder juan mata has not given up hope of playing for spain again ."
+        ],
+        "extractor_additional_output": [
+            "manchester united midfielder juan mata -lrb- left -rrb- is aiming for a return to the spain squad ."
+        ]
+    },
+    "12642": {
+        "query": "obama white house",
+        "reference": [
+            "he blasted the obama white house for appointing ` a political spokesman for al gore ' as his ebola czar ."
+        ],
+        "model_2_summary": [
+            "former texas gov. rick perry compared legal u.s. immigrants to cardboard boxes ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 39,
+        "extractor_targets": [
+            "perry also hammered the obama administration for appointing ron klain as his ebola czar -- ` a political spokesperson for al gore ! '"
+        ],
+        "extractor_output": [
+            "former texas gov. rick perry compared legal u.s. immigrants to cardboard boxes on saturday , bringing some in a des moines , iowa audience to shake their head sin disbelief . ."
+        ],
+        "extractor_additional_output": [
+            "most speakers during the morning session had harsh words for president barack obama 's recent immigration executive actions , which promise to guarantee 5 million or more illegal immigrants that they wo n't be deported through the end of his white house term ."
+        ]
+    },
+    "8973": {
+        "query": "ebola victims",
+        "reference": [
+            "victim had recently returned home from helping ebola victims in africa ."
+        ],
+        "model_2_summary": [
+            "his body was discovered by a shopper early sunday morning ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 40,
+        "extractor_targets": [
+            "he had recently returned from a tour of sierra leone in west africa , supporting the fight against ebola ."
+        ],
+        "extractor_output": [
+            "the 22-year-old , named locally as private shaun cole , was on holiday in the city in florida when it is thought he suffered a trauma to his head , caused by a blunt instrument . ."
+        ],
+        "extractor_additional_output": [
+            "officers are also making enquiries at the motel , according to the daily record , while the owner of the hotel mrs patel told local media that private cole had died from a blunt trauma to the head ."
+        ]
+    },
+    "9048": {
+        "query": "oakland raiders coach",
+        "reference": [
+            "ex-oakland raiders coach said actor lacked respect for players and game ."
+        ],
+        "model_2_summary": [
+            "ferrell took the field during an mlb spring training stunt which benefited cancer research ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 41,
+        "extractor_targets": [
+            "even though will ferrell took the field during an mlb spring training stunt which benefited cancer research , legendary oakland raiders coach john madden apparently did n't think the actor was staying very classy ."
+        ],
+        "extractor_output": [
+            "as part of a new hbo special from funny or die which is dedicated to the fight against cancer , ferrell , 47 , suited up for ten teams - including the oakland athletics - and played all nine positions on the baseball diamond during games in the cactus league in arizona on thursday ."
+        ],
+        "extractor_additional_output": [
+            "even though will ferrell took the field during an mlb spring training stunt which benefited cancer research , legendary oakland raiders coach john madden apparently did n't think the actor was staying very classy ."
+        ]
+    },
+    "10250": {
+        "query": "fizzy soda",
+        "reference": [
+            "suki , 23 , revealed earlier this week that she uses the fizzy soda to rinse her hair because is helps to add texture and volume ."
+        ],
+        "model_2_summary": [
+            "having bought two cans of coca-cola at a nearby store ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 42,
+        "extractor_targets": [
+            "haircare hero : suki waterhouse , 23 , pictured at last week 's insurgent premiere in new york , revealed earlier this week that she rinses her hair in coca-cola to give it added texture and bounce ."
+        ],
+        "extractor_output": [
+            "having bought two cans of coca-cola at a nearby store - unfortunately they were all out of bottles - i made my way home , all the while trying my best to warm up the cans so as not to have to shower myself in freezing cold coke ."
+        ],
+        "extractor_additional_output": [
+            "as suki was n't particularly clear about what method she prefers when it comes to rinsing her hair with fizzy soda , i did some research online to see whether there was a general consensus about the easiest and most effective way to use coca-cola as an alternative to shampoo ."
+        ]
+    },
+    "1484": {
+        "query": "bear witness art sale",
+        "reference": [
+            "it has fetched \u00a3 425,000 as part of sotherby 's bear witness art sale ."
+        ],
+        "model_2_summary": [
+            "the gloomy untitled piece was created by italian artist maurizio cattelan ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 43,
+        "extractor_targets": [
+            "the gloomy untitled piece was created by italian artist maurizio cattelan and was being auctioned by sotherby 's as part of their bear witness art sale , which has already generated \u00a3 26.5 million ."
+        ],
+        "extractor_output": [
+            "the gloomy untitled piece was created by italian artist maurizio cattelan and was being auctioned by sotherby 's as part of their bear witness art sale , which has already generated \u00a3 26.5 million ."
+        ],
+        "extractor_additional_output": [
+            "starting with a 2-1 defeat to scotland , the magnificent granite sculpture charts more than a century of england 's footballing failures , finishing with a 2-1 defeat at the hands of romania in the 1998 world cup ."
+        ]
+    },
+    "5426": {
+        "query": "youth coach licence",
+        "reference": [
+            "has had his fa youth coach licence revoked ."
+        ],
+        "model_2_summary": [
+            "he was convicted of inciting two teenage boys to engage in sexual activity ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 44,
+        "extractor_targets": [
+            "nick lane , defending , said hutchison had already had his fa licence , to teach children , revoked ."
+        ],
+        "extractor_output": [
+            "a youth football coach used his job to groom boys by inviting them to matches and sending them naked photographs on social media ."
+        ],
+        "extractor_additional_output": [
+            "the abuse came to light after the mothers of the two boys , aged 13 and 14 , recognised hutchison , from gateshead , following a conviction last year ."
+        ]
+    },
+    "11720": {
+        "query": "european consumers",
+        "reference": [
+            "uk shoppers also pay around 13 per cent more than european consumers ."
+        ],
+        "model_2_summary": [
+            "successive british governments have complained about global firms ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 45,
+        "extractor_targets": [
+            "uk shoppers also pay around 13 per cent more than some of their european counterparts , the sun reported ."
+        ],
+        "extractor_output": [
+            "british game of thrones fans are paying up to \u00a3 60 more than u.s. shoppers to get their hands on the same products ."
+        ],
+        "extractor_additional_output": [
+            "uk shoppers also pay around 13 per cent more than some of their european counterparts , the sun reported ."
+        ]
+    },
+    "6068": {
+        "query": "supermarket retailers",
+        "reference": [
+            "consumer groups warn the term is open for abuse by supermarket retailers ."
+        ],
+        "model_2_summary": [
+            "consumers are becoming more aware of choosing healthy and sustainable foods ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 46,
+        "extractor_targets": [
+            "there is currently no official definition for free range eggs or meat in australia , which means the term can be open to abuse by retailers and makes it difficult for consumers to choose from ."
+        ],
+        "extractor_output": [
+            "consumers are becoming more aware of choosing healthy and sustainable foods after 18 people became infected by hepatitis a last month from supermarket-bought frozen berries imported from china to australia ."
+        ],
+        "extractor_additional_output": [
+            "there is currently no official or legally enforceable definition for free range eggs or meat in australia , which means the term can be open to abuse by retailers and makes it difficult for people to choose from , consumer groups warn ."
+        ]
+    },
+    "3617": {
+        "query": "sir william spencer",
+        "reference": [
+            "pair are linked by their mutual ancestor , sir william spencer , born in 1555 ."
+        ],
+        "model_2_summary": [
+            "prime minister david cameron has revealed he is the cousin of kim kardashian ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 47,
+        "extractor_targets": [
+            "the prime minister and his celebrity cousin , who shot to fame after starring in a leaked sex tape , are linked by their mutual ancestor , sir william spencer , born in 1555 , according to genealogy website geni.com ."
+        ],
+        "extractor_output": [
+            "the prime minister said he was the thirteenth cousin of the us celebrity , who is married to rapper kanye west ."
+        ],
+        "extractor_additional_output": [
+            "the prime minister and his celebrity cousin , who shot to fame after starring in a leaked sex tape , are linked by their mutual ancestor , sir william spencer , born in 1555 , according to genealogy website geni.com ."
+        ]
+    },
+    "5764": {
+        "query": "bright bodycon dresses",
+        "reference": [
+            "full of bright bodycon dresses and casual tops and jeans ."
+        ],
+        "model_2_summary": [
+            "launched her debut clothing collection with online boutique ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 48,
+        "extractor_targets": [
+            "` i 'm really happy to have collaborated with so in fashion on this collection as i have been a big fan of theirs for a while now and together i think we have really put together a really great collection full of on-trend items and variety . '"
+        ],
+        "extractor_output": [
+            "hot on the heels of her exit from the house , the model has launched her debut clothing collection with online boutique , so in fashion ."
+        ],
+        "extractor_additional_output": [
+            "chloe , who found fame on mtv 's ex on the beach , has designed her new range of ` on-trend items at affordable prices ' for 16-30-year-olds ."
+        ]
+    },
+    "4396": {
+        "query": "premier league football rights",
+        "reference": [
+            "it comes after sky 's \u00a3 4.2 billion payout for premier league football rights ."
+        ],
+        "model_2_summary": [
+            "the bundle does not include its sports channels ."
+        ],
+        "model_2_score": 0.0,
+        "new_id": 49,
+        "extractor_targets": [
+            "families are to foot the bill for sky 's decision to pay \u00a3 4.2 billion for premier league football rights after the firm sneaked out an inflation-busting price rise on budget day ."
+        ],
+        "extractor_output": [
+            "families are to foot the bill for sky 's decision to pay \u00a3 4.2 billion for premier league football rights after the firm sneaked out an inflation-busting price rise on budget day ."
+        ],
+        "extractor_additional_output": [
+            "sky is putting up the price of its family bundle of channels by nine per cent or \u00a3 3 a month , just weeks after it paid \u00a3 4.2 billion for the rights to screen 126 live premier league football games a season from 2016 to 2019 ."
+        ]
+    }
+}

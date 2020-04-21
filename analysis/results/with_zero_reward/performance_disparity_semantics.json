@@ -1,0 +1,387 @@
+{
+    "13103": {
+        "query": "song girl crush",
+        "reference": [
+            "the song girl crush by little big town has been banned by some country stations after listeners complained it ` promotes the gay agenda '"
+        ],
+        "model_1_summary": [
+            "song girl crush by little big town has been banned by listeners .",
+            "some are now claiming the song ` promotes the gay agenda '"
+        ],
+        "model_1_score": 0.7999999950000002,
+        "model_2_summary": [
+            "the problem is one of the verses sung by group member karen fairchild ."
+        ],
+        "model_2_score": 0.15789473234072035,
+        "model_2_similarity": 0.431316077709198,
+        "reference_similarity": 0.3684268593788147,
+        "model_2_similarity_ft": 0.3835022449493408,
+        "reference_similarity_ft": 0.2708950638771057
+    },
+    "12924": {
+        "query": "brutal extremist group",
+        "reference": [
+            "the dull photos appear to be an attempt by the brutal extremist group to show an interest in the environment ."
+        ],
+        "model_1_summary": [
+            "images taken in iraqi province of nineveh , home to some of the most fertile earth .",
+            "photos appear to be an attempt by the brutal extremist group to show an interest in the environment ."
+        ],
+        "model_1_score": 0.6909090862809918,
+        "model_2_summary": [
+            "islamic state have released their most boring and uninspiring propaganda photos ."
+        ],
+        "model_2_score": 0.0645161244536944,
+        "model_2_similarity": 0.32772964239120483,
+        "reference_similarity": 0.3691675066947937,
+        "model_2_similarity_ft": 0.4207882285118103,
+        "reference_similarity_ft": 0.35073351860046387
+    },
+    "4810": {
+        "query": "rock state park",
+        "reference": [
+            "christopher j stewart of aurora was with a young woman and two ` highly intoxicated ' men at starved rock state park near utica ."
+        ],
+        "model_1_summary": [
+            "christopher j. stewart was in starved rock state park near utica with a young woman and two intoxicated men .",
+            "christopher stewart slipped and fell 90 feet off wildcat canyon ."
+        ],
+        "model_1_score": 0.6666666617283951,
+        "model_2_summary": [
+            "the ambulance brought the teenager to a hospital in peoria ."
+        ],
+        "model_2_score": 0.05882352525951587,
+        "model_2_similarity": 0.43592286109924316,
+        "reference_similarity": 0.3171072006225586,
+        "model_2_similarity_ft": 0.5628373920917511,
+        "reference_similarity_ft": 0.545144110918045
+    },
+    "7433": {
+        "query": "new beauty campaign",
+        "reference": [
+            "jessica , 33 , is face of braun 's new beauty campaign ."
+        ],
+        "model_1_summary": [
+            "jessica alba is the star of braun 's new campaign .",
+            "the actress , 33 , showcases her toned and tanned legs and natural beauty ."
+        ],
+        "model_1_score": 0.5945945902118335,
+        "model_2_summary": [
+            "she and her fashion stylists shared advice with women on how to embrace unlimited choices in their lives ."
+        ],
+        "model_2_score": 0.0,
+        "model_2_similarity": 0.33415377140045166,
+        "reference_similarity": 0.24471312761306763,
+        "model_2_similarity_ft": 0.3042259216308594,
+        "reference_similarity_ft": 0.5888551771640778
+    },
+    "6664": {
+        "query": "old denver broncos quarterback",
+        "reference": [
+            "the 38-year-old denver broncos quarterback will take a pay cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_summary": [
+            "peyton manning has agreed to a $ 4 million paycut with the denver broncos .",
+            "manning 's pay will be cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_score": 0.6382978676143052,
+        "model_2_summary": [
+            "he has spent the week considering his options while sunning it up in miami beach , florida with his wife and two children ."
+        ],
+        "model_2_score": 0.04878048287923905,
+        "model_2_similarity": 0.5936259329319,
+        "reference_similarity": 0.3807743787765503,
+        "model_2_similarity_ft": 0.40700215101242065,
+        "reference_similarity_ft": 0.7549008578062057
+    },
+    "10159": {
+        "query": "youtube user mnsterbruiser",
+        "reference": [
+            "youtube user mnsterbruiser filmed the epic sailing fail take place on the black river falls in wisconsin ."
+        ],
+        "model_1_summary": [
+            "youtube user ` mnsterbruiser ' filmed the sailing fail take place on the black river falls in wisconsin .",
+            "footage shows him sat behind his father as rapids throw the boat off balance ."
+        ],
+        "model_1_score": 0.6399999955120002,
+        "model_2_summary": [
+            "mnsterbruiser manages to retain a sense of humor - even when he is underwater ."
+        ],
+        "model_2_score": 0.06451612407908468,
+        "model_2_similarity": 0.6118856966495514,
+        "reference_similarity": 0.4432602524757385,
+        "model_2_similarity_ft": 0.6621583998203278,
+        "reference_similarity_ft": 0.4081631898880005
+    },
+    "4457": {
+        "query": "coach stuart lancaster",
+        "reference": [
+            "coach stuart lancaster believes the noisy support of a sold-out 82,000 home crowd will have a critical role ."
+        ],
+        "model_1_summary": [
+            "stuart lancaster has urged twickenham to carry the game to france .",
+            "lancaster believes support of a sold-out 82,000 home crowd will have a critical role ."
+        ],
+        "model_1_score": 0.7272727224380167,
+        "model_2_summary": [
+            "england head lancaster has backed his side to handle the pressure of their final day shoot-out .",
+            "stuart lancaster wants england to order his rbs 6 nations title hopefuls ."
+        ],
+        "model_2_score": 0.17021276123132653,
+        "model_2_similarity": 0.32948464155197144,
+        "reference_similarity": 0.354539692401886,
+        "model_2_similarity_ft": 0.48462343215942383,
+        "reference_similarity_ft": 0.583515852689743
+    },
+    "2663": {
+        "query": "pretoria country club",
+        "reference": [
+            "coetzee carded a flawless final round of 65 to finish one shot ahead of compatriot jacques blaauw at pretoria country club ."
+        ],
+        "model_1_summary": [
+            "south africa 's george coetzee wins second european tour title .",
+            "coetzee carded a flawless final round of 65 to finish one shot ahead of jacques blaauw ."
+        ],
+        "model_1_score": 0.6666666617447917,
+        "model_2_summary": [
+            "george coetzee put home advantage to full use to win his second european tour title ."
+        ],
+        "model_2_score": 0.1111111062500002,
+        "model_2_similarity": 0.4250725507736206,
+        "reference_similarity": 0.36378908157348633,
+        "model_2_similarity_ft": 0.4152951240539551,
+        "reference_similarity_ft": 0.4291538596153259
+    },
+    "13269": {
+        "query": "kate mcdonald",
+        "reference": [
+            "kate mcdonald , julia kerr , kate randhawa , briar middleton and olivia van diepen , all age 20 , visited christchurch for a friend 's party ."
+        ],
+        "model_1_summary": [
+            "ms mcdonald , julia kerr , kate randhawa and olivia van diepen visited christchurch .",
+            "julia kerr , olivia van diepen , briar middleton , all age 20 , were attending mutual friend 's 21st birthday ."
+        ],
+        "model_1_score": 0.730158725260771,
+        "model_2_summary": [
+            "the thief returning a swag of stolen goods to kate mcdonald , 20 .",
+            "the text message a remorseful new zealand criminal sent to a university of otago student ."
+        ],
+        "model_2_score": 0.17857142357780628,
+        "model_2_similarity": 0.4479812979698181,
+        "reference_similarity": 0.2713046073913574,
+        "model_2_similarity_ft": 0.6712799668312073,
+        "reference_similarity_ft": 0.6093738675117493
+    },
+    "8099": {
+        "query": "rush hour traffic",
+        "reference": [
+            "mark stonis , 35 , from virginia beach , virginia , was forced to pull over during rush hour traffic on monday morning en route to hospital ."
+        ],
+        "model_1_summary": [
+            "mark stonis , 35 , from virginia beach , virginia , was forced to pull over .",
+            "he used a shoe lace to tie off the umbilical cord after his wife went into labor five days early .",
+            "mark stonis , 35 , was forced to pull over during rush hour traffic on monday morning ."
+        ],
+        "model_1_score": 0.5853658492415229,
+        "model_2_summary": [
+            "he used a shoe lace to tie off the umbilical cord after his wife went into labor five days early ."
+        ],
+        "model_2_score": 0.04255318660027218,
+        "model_2_similarity": 0.5209665596485138,
+        "reference_similarity": 0.32090985774993896,
+        "model_2_similarity_ft": 0.3912190794944763,
+        "reference_similarity_ft": 0.5388412773609161
+    },
+    "6033": {
+        "query": "international investment bank credit suisse",
+        "reference": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_1_summary": [
+            "forbes released its billionaires list this week with bill gates .",
+            "gates saw his fortune grow by $ 4.2 billion in the past year alone ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_2_score": 0.999999995,
+        "model_2_similarity": 0.2528839111328125,
+        "reference_similarity": 0.2528839111328125,
+        "model_2_similarity_ft": 0.3899880051612854,
+        "reference_similarity_ft": 0.3899880051612854
+    },
+    "550": {
+        "query": "cnn heroes",
+        "reference": [
+            "do you know a hero ? nominations are open for 2015 cnn heroes ."
+        ],
+        "model_1_summary": [
+            "chelsea elliott went blind in her left eye .",
+            "elliott 's nonprofit offers free vision and hearing screenings to school-age children ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "do you know a hero ? nominations are open for cnn heroes ."
+        ],
+        "model_2_score": 0.959999995008,
+        "model_2_similarity": 0.3459467887878418,
+        "reference_similarity": 0.3511846661567688,
+        "model_2_similarity_ft": 0.5119751393795013,
+        "reference_similarity_ft": 0.5105884373188019
+    },
+    "8387": {
+        "query": "animal services",
+        "reference": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_1_summary": [
+            "one paws-on feline from bonita , california , decided to repay favor with his own ` ultimate meow-ssage '",
+            "cat was filmed as he caressed a woman 's back and shoulders ."
+        ],
+        "model_1_score": 0.0434782564744806,
+        "model_2_summary": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_2_score": 0.999999995,
+        "model_2_similarity": 0.2557992935180664,
+        "reference_similarity": 0.2557992935180664,
+        "model_2_similarity_ft": 0.37565135955810547,
+        "reference_similarity_ft": 0.37565135955810547
+    },
+    "5999": {
+        "query": "mobile world congress",
+        "reference": [
+            "nubo was unveiled at mobile world congress in barcelona ."
+        ],
+        "model_1_summary": [
+            "the surveillance camera called nubo that detects and alerts homeowners and can be fitted inside and out the house .",
+            "sensors detect human shapes automatically if a person is spotted ."
+        ],
+        "model_1_score": 0.051282047731755674,
+        "model_2_summary": [
+            "nubo was unveiled at mobile world congress in barcelona ."
+        ],
+        "model_2_score": 0.999999995,
+        "model_2_similarity": 0.24128109216690063,
+        "reference_similarity": 0.24128109216690063,
+        "model_2_similarity_ft": 0.4150400757789612,
+        "reference_similarity_ft": 0.4150400757789612
+    },
+    "10229": {
+        "query": "new cancer treatments",
+        "reference": [
+            "nhs spends less on new cancer treatments than us , spain and scotland ."
+        ],
+        "model_1_summary": [
+            "they reveal waiting times for scans are at their highest in seven years .",
+            "nhs will also announce which life-extending medications will be axed from cancer drugs fund .",
+            "gps in the south of england have complained that nhs managers are delaying patients from having cancer tests ."
+        ],
+        "model_1_score": 0.0666666632722224,
+        "model_2_summary": [
+            "nhs spends less on new cancer treatments than the us , spain and scotland ."
+        ],
+        "model_2_score": 0.9629629579698218,
+        "model_2_similarity": 0.2828823924064636,
+        "reference_similarity": 0.27107059955596924,
+        "model_2_similarity_ft": 0.4162746071815491,
+        "reference_similarity_ft": 0.4503844380378723
+    },
+    "5133": {
+        "query": "west ham united news",
+        "reference": [
+            "click here for all the latest west ham united news ."
+        ],
+        "model_1_summary": [
+            "west ham midfielder mark noble was snubbed by england manager roy hodgson .",
+            "song posted an image on instagram showing noble with a huge fish in his arms ."
+        ],
+        "model_1_score": 0.10526315401662063,
+        "model_2_summary": [
+            "click here for all the latest west ham united news ."
+        ],
+        "model_2_score": 0.999999995,
+        "model_2_similarity": 0.17249709367752075,
+        "reference_similarity": 0.17249709367752075,
+        "model_2_similarity_ft": 0.23318278789520264,
+        "reference_similarity_ft": 0.23318278789520264
+    },
+    "1943": {
+        "query": "russian youtube user",
+        "reference": [
+            "the heartwarming clip was filmed by russian youtube user , lgreko100 ."
+        ],
+        "model_1_summary": [
+            "video shows the furry animal hiding in a hollowed-out out tree trunk .",
+            "he cautiously reaches his small paws forwards ."
+        ],
+        "model_1_score": 0.0645161244536944,
+        "model_2_summary": [
+            "the heartwarming clip was filmed by russian youtube user lgreko100 ."
+        ],
+        "model_2_score": 0.9523809473922903,
+        "model_2_similarity": 0.180070161819458,
+        "reference_similarity": 0.1985759735107422,
+        "model_2_similarity_ft": 0.3767855763435364,
+        "reference_similarity_ft": 0.5209769904613495
+    },
+    "870": {
+        "query": "controversial police chief tom jackson",
+        "reference": [
+            "controversial police chief tom jackson remains at the helm ."
+        ],
+        "model_1_summary": [
+            "the report details widespread and systemic discrimination against blacks at the hands of officials .",
+            "the three individuals were placed on administrative leave pending an investigation ."
+        ],
+        "model_1_score": 0.11428571046530626,
+        "model_2_summary": [
+            "controversial police chief tom jackson remains at the helm ."
+        ],
+        "model_2_score": 0.999999995,
+        "model_2_similarity": 0.12041527032852173,
+        "reference_similarity": 0.12041527032852173,
+        "model_2_similarity_ft": 0.3229236602783203,
+        "reference_similarity_ft": 0.3229236602783203
+    },
+    "2639": {
+        "query": "aston villa boss tim sherwood",
+        "reference": [
+            "aston villa boss tim sherwood is keen to keep the midfielder next season ."
+        ],
+        "model_1_summary": [
+            "nottingham forest are keen to turn gary gardner 's loan move .",
+            "the england under 21 international scored a spectacular goal for forest on saturday .",
+            "gardner has been a key figure in dougie freedman 's revival ."
+        ],
+        "model_1_score": 0.11999999615200012,
+        "model_2_summary": [
+            "aston villa boss tim sherwood is keen to keep the midfielder next season ."
+        ],
+        "model_2_score": 0.999999995,
+        "model_2_similarity": 0.13980162143707275,
+        "reference_similarity": 0.13980162143707275,
+        "model_2_similarity_ft": 0.2517659664154053,
+        "reference_similarity_ft": 0.2517659664154053
+    },
+    "1878": {
+        "query": "white people",
+        "reference": [
+            "velmanette montgomery said white people can shop at expensive boutiques but black people ca n't ."
+        ],
+        "model_1_summary": [
+            "velmanette montgomery was slammed as a sign that the new york borough is becoming gentrified .",
+            "montgomery d-clinton hill said : ` supermarkets are an important part of the community '"
+        ],
+        "model_1_score": 0.13043477821361074,
+        "model_2_summary": [
+            "velmanette montgomery said white people can shop at expensive boutiques but black people ca n't ."
+        ],
+        "model_2_score": 0.999999995,
+        "model_2_similarity": 0.26232457160949707,
+        "reference_similarity": 0.26232457160949707,
+        "model_2_similarity_ft": 0.3899463415145874,
+        "reference_similarity_ft": 0.3899463415145874
+    }
+}

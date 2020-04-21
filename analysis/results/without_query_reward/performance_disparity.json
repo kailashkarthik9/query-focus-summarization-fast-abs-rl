@@ -1,0 +1,307 @@
+{
+    "10597": {
+        "query": "human rights lawyer amal clooney",
+        "reference": [
+            "human rights lawyer amal clooney will join columbia university as a visiting faculty member and senior fellow at the law school this spring ."
+        ],
+        "model_1_summary": [
+            "amal clooney will join columbia law school as a visiting faculty member this spring .",
+            "she will be a senior fellow with the law school 's human rights institute ."
+        ],
+        "model_1_score": 0.730769225835799,
+        "model_2_summary": [
+            "he previously served as adviser to kofi annan in his role in syria ."
+        ],
+        "model_2_score": 0.05555555094135841
+    },
+    "13103": {
+        "query": "song girl crush",
+        "reference": [
+            "the song girl crush by little big town has been banned by some country stations after listeners complained it ` promotes the gay agenda '"
+        ],
+        "model_1_summary": [
+            "song girl crush by little big town has been banned by listeners .",
+            "some are now claiming the song ` promotes the gay agenda '"
+        ],
+        "model_1_score": 0.7999999950000002,
+        "model_2_summary": [
+            "the problem is one of the verses sung by group member karen fairchild ."
+        ],
+        "model_2_score": 0.15789473234072035
+    },
+    "12924": {
+        "query": "brutal extremist group",
+        "reference": [
+            "the dull photos appear to be an attempt by the brutal extremist group to show an interest in the environment ."
+        ],
+        "model_1_summary": [
+            "images taken in iraqi province of nineveh , home to some of the most fertile earth .",
+            "photos appear to be an attempt by the brutal extremist group to show an interest in the environment ."
+        ],
+        "model_1_score": 0.6909090862809918,
+        "model_2_summary": [
+            "islamic state have released their most boring and uninspiring propaganda photos ."
+        ],
+        "model_2_score": 0.0645161244536944
+    },
+    "8485": {
+        "query": "facebook page",
+        "reference": [
+            "supporters set up facebook page ` andreas lubitz , we are against the hunt '"
+        ],
+        "model_1_summary": [
+            "facebook page titled ` andreas lubitz a320 '",
+            "supporters have set up a facebook page ` against the hunt '"
+        ],
+        "model_1_score": 0.6857142808163266,
+        "model_2_summary": [
+            "lubitz 's home that he shared with his girlfriend has been blurred out on maps .",
+            "friends of killer pilot andreas lubitz claim he is being framed for murder ."
+        ],
+        "model_2_score": 0.09090908641528948
+    },
+    "6664": {
+        "query": "old denver broncos quarterback",
+        "reference": [
+            "the 38-year-old denver broncos quarterback will take a pay cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_summary": [
+            "peyton manning has agreed to a $ 4 million paycut with the denver broncos .",
+            "manning 's pay will be cut from $ 19 million to $ 15 million ."
+        ],
+        "model_1_score": 0.6382978676143052,
+        "model_2_summary": [
+            "he has spent the week considering his options while sunning it up in miami beach , florida with his wife and two children ."
+        ],
+        "model_2_score": 0.04878048287923905
+    },
+    "10782": {
+        "query": "average fuel consumption",
+        "reference": [
+            "average fuel consumption of up to 85 mpg and co2 emissions are 77g/km ."
+        ],
+        "model_1_summary": [
+            "average fuel consumption of up to 85 mpg and co2 emissions .",
+            "the bmw x5 xdrive40e can run on electric power while on the move ."
+        ],
+        "model_1_score": 0.5789473639196676,
+        "model_2_summary": [
+            "it will be launched at next month 's new york motor show ."
+        ],
+        "model_2_score": 0.0
+    },
+    "10159": {
+        "query": "youtube user mnsterbruiser",
+        "reference": [
+            "youtube user mnsterbruiser filmed the epic sailing fail take place on the black river falls in wisconsin ."
+        ],
+        "model_1_summary": [
+            "youtube user ` mnsterbruiser ' filmed the sailing fail take place on the black river falls in wisconsin .",
+            "footage shows him sat behind his father as rapids throw the boat off balance ."
+        ],
+        "model_1_score": 0.6399999955120002,
+        "model_2_summary": [
+            "mnsterbruiser manages to retain a sense of humor - even when he is underwater ."
+        ],
+        "model_2_score": 0.06451612407908468
+    },
+    "2663": {
+        "query": "pretoria country club",
+        "reference": [
+            "coetzee carded a flawless final round of 65 to finish one shot ahead of compatriot jacques blaauw at pretoria country club ."
+        ],
+        "model_1_summary": [
+            "south africa 's george coetzee wins second european tour title .",
+            "coetzee carded a flawless final round of 65 to finish one shot ahead of jacques blaauw ."
+        ],
+        "model_1_score": 0.6666666617447917,
+        "model_2_summary": [
+            "george coetzee put home advantage to full use to win his second european tour title ."
+        ],
+        "model_2_score": 0.1111111062500002
+    },
+    "12823": {
+        "query": "cornish speakers",
+        "reference": [
+            "liberal democrat leader 's generosity to handful of cornish speakers is latest in series of extraordinary gestures to county over recent months ."
+        ],
+        "model_1_summary": [
+            "lib dem leader 's generosity to handful of cornish speakers is the latest in a series of extraordinary gestures to the county over recent months .",
+            "comes a week after the party announced a drop in fuel prices ."
+        ],
+        "model_1_score": 0.6666666620222222,
+        "model_2_summary": [
+            "deputy pm nick clegg made cornish pasties during visit to st merryn school ."
+        ],
+        "model_2_score": 0.11428570961632674
+    },
+    "9939": {
+        "query": "old savannah hardin",
+        "reference": [
+            "joyce garrard , 49 , is charged with killing 10-year-old savannah hardin by forcing her to run as punishment for lying about eating candy .",
+            "garrard took the witness stand wednesday to say she never intended any harm to 9-year-old savannah hardin ."
+        ],
+        "model_1_summary": [
+            "joyce garrard , 49 , took the stand in her own defense wednesday .",
+            "joyce hardin garrard took witness stand to say she never intended any harm to 9-year-old savannah hardin ."
+        ],
+        "model_1_score": 0.6849315019628449,
+        "model_2_summary": [
+            "garrad allegedly forced her granddaughter to run to her death at her home in etowah county in 2012 ."
+        ],
+        "model_2_score": 0.13333332913333346
+    },
+    "6033": {
+        "query": "international investment bank credit suisse",
+        "reference": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_1_summary": [
+            "forbes released its billionaires list this week with bill gates .",
+            "gates saw his fortune grow by $ 4.2 billion in the past year alone ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "international investment bank credit suisse has said there will be 11 trillionaires within two generations ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "6143": {
+        "query": "ergonomic seat",
+        "reference": [
+            "each pod is an ergonomic seat which can be transformed into a bed ."
+        ],
+        "model_1_summary": [
+            "already billed as one of the most sleep-friendly airports in the world .",
+            "helsinki airport has become the first in europe to offer sleeping pods .",
+            "the pods are located at two gates inside the terminal ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "each cocoon-like pod is an ergonomic seat which can be transformed into a bed ."
+        ],
+        "model_2_score": 0.9629629579698218
+    },
+    "8387": {
+        "query": "animal services",
+        "reference": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_1_summary": [
+            "one paws-on feline from bonita , california , decided to repay favor with his own ` ultimate meow-ssage '",
+            "cat was filmed as he caressed a woman 's back and shoulders ."
+        ],
+        "model_1_score": 0.0434782564744806,
+        "model_2_summary": [
+            "the animal was previously listed for adoption by the san diego department of animal services ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "6429": {
+        "query": "ambulance crew",
+        "reference": [
+            "two doctors battled to revive her as an ambulance crew arrived ."
+        ],
+        "model_1_summary": [
+            "rosie connolly , 21 , fell unconscious at the laboratory spa in mill hill .",
+            "she told staff she had felt unwell in the water and reportedly struggled to clamber out of the club pool ."
+        ],
+        "model_1_score": 0.04347825723062412,
+        "model_2_summary": [
+            "two doctors battled to revive her as an ambulance crew arrived ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "8280": {
+        "query": "smartphone users",
+        "reference": [
+            "most smartphone users have no idea how closely they are being tracked ."
+        ],
+        "model_1_summary": [
+            "apps can collect a device 's coordinates on average of 6,200 times over two weeks .",
+            "scientists asked 23 users of android 's version 4.3 to install software that logged app requests ."
+        ],
+        "model_1_score": 0.04444444053333368,
+        "model_2_summary": [
+            "most smartphone users have no idea how closely they are being tracked ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "5999": {
+        "query": "mobile world congress",
+        "reference": [
+            "nubo was unveiled at mobile world congress in barcelona ."
+        ],
+        "model_1_summary": [
+            "the surveillance camera called nubo that detects and alerts homeowners and can be fitted inside and out the house .",
+            "sensors detect human shapes automatically if a person is spotted ."
+        ],
+        "model_1_score": 0.051282047731755674,
+        "model_2_summary": [
+            "nubo was unveiled at mobile world congress in barcelona ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "4903": {
+        "query": "long hair",
+        "reference": [
+            "she is described as white , in her mid-20s with long hair ."
+        ],
+        "model_1_summary": [
+            "the 45-year-old driver was operating his metropolitan transportation authority vehicle in the flatiron district .",
+            "the new york police department is searching for a woman who threw hot coffee in a bus driver 's face .",
+            "woman threw hot coffee in a bus driver 's face on saint patrick 's day ."
+        ],
+        "model_1_score": 0.06349206040816341,
+        "model_2_summary": [
+            "she is described as white , in her mid-20s with long hair ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "7213": {
+        "query": "murder weapon",
+        "reference": [
+            "the murder weapon has never been found ."
+        ],
+        "model_1_summary": [
+            "former new england patriots player aaron hernandez can be seen on surveillance video .",
+            "it was the most conclusive testimony to date in hernandez 's hand around the time of the slaying .",
+            "hernandez is charged with murder in the killing of odin lloyd ."
+        ],
+        "model_1_score": 0.0784313701806998,
+        "model_2_summary": [
+            "the murder weapon has never been found ."
+        ],
+        "model_2_score": 0.999999995
+    },
+    "6122": {
+        "query": "old danish photographer",
+        "reference": [
+            "the unusual scene was captured by 55-year-old danish photographer , birger baastrup ."
+        ],
+        "model_1_summary": [
+            "the two men were spotted of the rocky coast of st. therese in juneau .",
+            "a couple of thick-skinned surfers in alaska were caught on camera as they went head to head with the local pros ."
+        ],
+        "model_1_score": 0.041666662916667006,
+        "model_2_summary": [
+            "the unusual scene was captured by 55-year-old danish photographer birger baastrup ."
+        ],
+        "model_2_score": 0.9565217341398866
+    },
+    "7607": {
+        "query": "jaguar land rover",
+        "reference": [
+            "jaguar land rover has breathed new life into its iconic defender model ."
+        ],
+        "model_1_summary": [
+            "manufacture of current version of all-terrain vehicle , first made in 1948 and one of the first cars owned by the queen .",
+            "there had been rumours that a factory would be created in coventry ."
+        ],
+        "model_1_score": 0.0,
+        "model_2_summary": [
+            "jaguar land rover breathed new life into its iconic defender ."
+        ],
+        "model_2_score": 0.9090909041322315
+    }
+}
