@@ -69,7 +69,7 @@ class Abstractor(object):
         self._id2word = {i: w for w, i in word2id.items()}
         self._max_len = max_len
 
-    def _prepro(self, raw_article_sents):
+    def _prepro(self, raw_article_sents, queries):
         ext_word2id = dict(self._word2id)
         ext_id2word = dict(self._id2word)
         for raw_words in raw_article_sents:
@@ -85,13 +85,16 @@ class Abstractor(object):
         extend_art = pad_batch_tensorize(extend_arts, PAD, cuda=False
                                         ).to(self._device)
         extend_vsize = len(ext_word2id)
-        dec_args = (article, art_lens, extend_art, extend_vsize,
+        queries = conver2id(UNK, self._word2id, queries)
+        query = pad_batch_tensorize(queries, PAD, cuda=False
+                                      ).to(self._device)
+        dec_args = (article, art_lens, extend_art, extend_vsize, query,
                     START, END, UNK, self._max_len)
         return dec_args, ext_id2word
 
-    def __call__(self, raw_article_sents):
+    def __call__(self, raw_article_sents, queries):
         self._net.eval()
-        dec_args, id2word = self._prepro(raw_article_sents)
+        dec_args, id2word = self._prepro(raw_article_sents, queries)
         decs, attns = self._net.batch_decode(*dec_args)
         def argmax(arr, keys):
             return arr[max(range(len(arr)), key=lambda i: keys[i].item())]
@@ -110,9 +113,9 @@ class Abstractor(object):
 
 
 class BeamAbstractor(Abstractor):
-    def __call__(self, raw_article_sents, beam_size=5, diverse=1.0):
+    def __call__(self, raw_article_sents, queries, beam_size=5, diverse=1.0):
         self._net.eval()
-        dec_args, id2word = self._prepro(raw_article_sents)
+        dec_args, id2word = self._prepro(raw_article_sents, queries)
         dec_args = (*dec_args, beam_size, diverse)
         all_beams = self._net.batched_beamsearch(*dec_args)
         all_beams = list(starmap(_process_beam(id2word),
@@ -176,11 +179,14 @@ class ArticleBatcher(object):
         self._word2id = word2id
         self._device = torch.device('cuda' if cuda else 'cpu')
 
-    def __call__(self, raw_article_sents):
+    def __call__(self, raw_article_sents, queries):
         articles = conver2id(UNK, self._word2id, raw_article_sents)
         article = pad_batch_tensorize(articles, PAD, cuda=False
                                      ).to(self._device)
-        return article
+        queries = conver2id(UNK, self._word2id, queries)
+        query = pad_batch_tensorize(queries, PAD, cuda=False
+                                      ).to(self._device)
+        return article, query
 
 class RLExtractor(object):
     def __init__(self, ext_dir, cuda=True):

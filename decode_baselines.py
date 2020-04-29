@@ -32,7 +32,7 @@ def decode(save_path, abs_dir, ext_dir, split, batch_size, max_len, cuda):
     if ext_dir is None:
         # NOTE: if no abstractor is provided then
         #       it would be  the lead-N extractor
-        extractor = lambda art_sents: list(range(len(art_sents)))[:MAX_ABS_NUM]
+        extractor = lambda art_sents, _: list(range(len(art_sents)))[:MAX_ABS_NUM]
     else:
         extractor = Extractor(ext_dir, max_ext=MAX_ABS_NUM, cuda=cuda)
 
@@ -73,14 +73,16 @@ def decode(save_path, abs_dir, ext_dir, split, batch_size, max_len, cuda):
             tokenized_queries_batch = map(tokenize(None), [[query] for query in raw_query_batch])
             ext_arts = []
             ext_inds = []
+            queries = []
             for raw_art_sents, raw_queries in zip(tokenized_article_batch, tokenized_queries_batch):
                 ext = extractor(raw_art_sents, raw_queries)
                 ext_inds += [(len(ext_arts), len(ext))]
                 ext_arts += list(map(lambda i: raw_art_sents[i], ext))
-            dec_outs = abstractor(ext_arts)
+                queries += [raw_queries[0] for _ in range(len(ext))]
+            dec_outs = abstractor(ext_arts, queries)
             assert i == batch_size*i_debug
             for j, n in ext_inds:
-                decoded_sents = [' '.join(dec) for dec in ext_arts[j:j+n]]
+                decoded_sents = [' '.join(dec) for dec in dec_outs[j:j+n]]
                 for k, dec_str in enumerate(decoded_sents):
                     with open(join(save_path, 'output_{}/{}.dec'.format(k, i)),
                               'w') as f:

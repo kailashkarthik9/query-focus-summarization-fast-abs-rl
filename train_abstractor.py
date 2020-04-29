@@ -44,10 +44,10 @@ class MatchDataset(CnnDmDataset):
 
     def __getitem__(self, i):
         js_data = super().__getitem__(i)
-        art_sents, abs_sents, extracts = (
-            js_data['article'], js_data['summary'], js_data['extracted'])
+        art_sents, abs_sents, extracts, query = (
+            js_data['article'], js_data['summary'], js_data['extracted'], js_data['query'])
         matched_arts = [art_sents[i] for i in extracts]
-        return matched_arts, abs_sents[:len(extracts)]
+        return matched_arts, abs_sents[:len(extracts)], query
 
 
 def configure_net(vocab_size, emb_dim,
@@ -84,7 +84,7 @@ def configure_training(opt, lr, clip_grad, lr_decay, batch_size):
 def build_batchers(word2id, cuda, debug):
     prepro = prepro_fn(args.max_art, args.max_abs)
     def sort_key(sample):
-        src, target = sample
+        src, target, query = sample
         return (len(target), len(src))
     batchify = compose(
         batchify_fn_copy(PAD, START, END, cuda=cuda),

@@ -46,16 +46,16 @@ class CopySumm(Seq2SeqSumm):
             self._attn_wq, self._projection
         )
 
-    def forward(self, article, art_lens, abstract, extend_art, extend_vsize):
+    def forward(self, article, art_lens, abstract, extend_art, extend_vsize, query, query_ext):
         attention, init_dec_states = self.encode(article, art_lens)
         mask = len_mask(art_lens, attention.device).unsqueeze(-2)
         logit = self._decoder(
             (attention, mask, extend_art, extend_vsize),
-            init_dec_states, abstract
+            init_dec_states, abstract, query
         )
         return logit
 
-    def batch_decode(self, article, art_lens, extend_art, extend_vsize,
+    def batch_decode(self, article, art_lens, extend_art, extend_vsize, query,
                      go, eos, unk, max_len):
         """ greedy decode support batching"""
         batch_size = len(art_lens)
@@ -69,13 +69,13 @@ class CopySumm(Seq2SeqSumm):
         states = init_dec_states
         for i in range(max_len):
             tok, states, attn_score = self._decoder.decode_step(
-                tok, states, attention)
+                tok, states, attention, query)
             attns.append(attn_score)
             outputs.append(tok[:, 0].clone())
             tok.masked_fill_(tok >= vsize, unk)
         return outputs, attns
 
-    def decode(self, article, extend_art, extend_vsize, go, eos, unk, max_len):
+    def decode(self, article, extend_art, extend_vsize, query, go, eos, unk, max_len):
         vsize = self._embedding.num_embeddings
         attention, init_dec_states = self.encode(article)
         attention = (attention, None, extend_art, extend_vsize)
@@ -85,7 +85,7 @@ class CopySumm(Seq2SeqSumm):
         states = init_dec_states
         for i in range(max_len):
             tok, states, attn_score = self._decoder.decode_step(
-                tok, states, attention)
+                tok, states, attention, query)
             if tok[0, 0].item() == eos:
                 break
             outputs.append(tok[0, 0].item())
@@ -95,7 +95,7 @@ class CopySumm(Seq2SeqSumm):
         return outputs, attns
 
     def batched_beamsearch(self, article, art_lens,
-                           extend_art, extend_vsize,
+                           extend_art, extend_vsize, query,
                            go, eos, unk, max_len, beam_size, diverse=1.0):
         batch_size = len(art_lens)
         vsize = self._embedding.num_embeddings
@@ -122,7 +122,7 @@ class CopySumm(Seq2SeqSumm):
             token.masked_fill_(token >= vsize, unk)
 
             topk, lp, states, attn_score = self._decoder.topk_step(
-                token, states, attention, beam_size)
+                token, states, attention, query,  beam_size)
 
             batch_i = 0
             for i, (beam, finished) in enumerate(zip(all_beams,
@@ -177,7 +177,7 @@ class CopyLSTMDecoder(AttentionalLSTMDecoder):
         super().__init__(*args, **kwargs)
         self._copy = copy
 
-    def _step(self, tok, states, attention):
+    def _step(self, tok, states, attention, queries):
         prev_states, prev_out = states
         lstm_in = torch.cat(
             [self._embedding(tok).squeeze(1), prev_out],
@@ -185,7 +185,11 @@ class CopyLSTMDecoder(AttentionalLSTMDecoder):
         )
         states = self._lstm(lstm_in, prev_states)
         lstm_out = states[0][-1]
-        query = torch.mm(lstm_out, self._attn_w)
+        queries = [self._embedding(query) for query in queries]
+        queries_summed = [torch.sum(q, dim=0) for q in queries]
+        queries_batched = torch.stack(queries_summed)
+        query_combined = torch.cat([lstm_out, queries_batched], dim=1)
+        query = torch.mm(query_combined, self._attn_w)
         attention, attn_mask, extend_src, extend_vsize = attention
         context, score = step_attention(
             query, attention, attention, attn_mask)
@@ -206,7 +210,7 @@ class CopyLSTMDecoder(AttentionalLSTMDecoder):
         return lp, (states, dec_out), score
 
 
-    def topk_step(self, tok, states, attention, k):
+    def topk_step(self, tok, states, attention, queries, k):
         """tok:[BB, B], states ([L, BB, B, D]*2, [BB, B, D])"""
         (h, c), prev_out = states
 
@@ -223,8 +227,12 @@ class CopyLSTMDecoder(AttentionalLSTMDecoder):
                   c.contiguous().view(nl, beam, batch, -1))
         lstm_out = states[0][-1]
 
+        queries = [self._embedding(query) for query in queries]
+        queries_summed = [torch.sum(q, dim=0) for q in queries]
+        queries_batched = torch.stack(queries_summed)
+        query_combined = torch.cat([lstm_out, queries_batched], dim=1)
         # attention is beamable
-        query = torch.matmul(lstm_out, self._attn_w)
+        query = torch.matmul(query_combined, self._attn_w)
         attention, attn_mask, extend_src, extend_vsize = attention
         context, score = step_attention(
             query, attention, attention, attn_mask)

@@ -44,7 +44,7 @@ class Seq2SeqSumm(nn.Module):
         self._dec_c = nn.Linear(enc_out_dim, n_hidden, bias=False)
         # multiplicative attention
         self._attn_wm = nn.Parameter(torch.Tensor(enc_out_dim, n_hidden))
-        self._attn_wq = nn.Parameter(torch.Tensor(n_hidden, n_hidden))
+        self._attn_wq = nn.Parameter(torch.Tensor(n_hidden + emb_dim, n_hidden))
         init.xavier_normal_(self._attn_wm)
         init.xavier_normal_(self._attn_wq)
         # project decoder output to emb_dim, then
@@ -60,10 +60,10 @@ class Seq2SeqSumm(nn.Module):
             self._attn_wq, self._projection
         )
 
-    def forward(self, article, art_lens, abstract):
+    def forward(self, article, art_lens, abstract, query):
         attention, init_dec_states = self.encode(article, art_lens)
         mask = len_mask(art_lens, attention.device).unsqueeze(-2)
-        logit = self._decoder((attention, mask), init_dec_states, abstract)
+        logit = self._decoder((attention, mask), init_dec_states, abstract, query)
         return logit
 
     def encode(self, article, art_lens=None):
@@ -97,7 +97,7 @@ class Seq2SeqSumm(nn.Module):
         ))
         return attention, (init_dec_states, init_attn_out)
 
-    def batch_decode(self, article, art_lens, go, eos, max_len):
+    def batch_decode(self, article, art_lens, query, go, eos, max_len):
         """ greedy decode support batching"""
         batch_size = len(art_lens)
         attention, init_dec_states = self.encode(article, art_lens)
@@ -109,12 +109,12 @@ class Seq2SeqSumm(nn.Module):
         states = init_dec_states
         for i in range(max_len):
             tok, states, attn_score = self._decoder.decode_step(
-                tok, states, attention)
+                tok, states, attention, query)
             outputs.append(tok[:, 0])
             attns.append(attn_score)
         return outputs, attns
 
-    def decode(self, article, go, eos, max_len):
+    def decode(self, article, query, go, eos, max_len):
         attention, init_dec_states = self.encode(article)
         attention = (attention, None)
         tok = torch.LongTensor([go]).to(article.device)
@@ -123,7 +123,7 @@ class Seq2SeqSumm(nn.Module):
         states = init_dec_states
         for i in range(max_len):
             tok, states, attn_score = self._decoder.decode_step(
-                tok, states, attention)
+                tok, states, attention, query)
             if tok[0, 0].item() == eos:
                 break
             outputs.append(tok[0, 0].item())
@@ -135,6 +135,10 @@ class Seq2SeqSumm(nn.Module):
         assert self._embedding.weight.size() == embedding.size()
         self._embedding.weight.data.copy_(embedding)
 
+    def get_embedding(self, input_):
+        with torch.no_grad():
+            return self._embedding(input_)
+
 
 class AttentionalLSTMDecoder(object):
     def __init__(self, embedding, lstm, attn_w, projection):
@@ -144,18 +148,18 @@ class AttentionalLSTMDecoder(object):
         self._attn_w = attn_w
         self._projection = projection
 
-    def __call__(self, attention, init_states, target):
+    def __call__(self, attention, init_states, target, queries):
         max_len = target.size(1)
         states = init_states
         logits = []
         for i in range(max_len):
             tok = target[:, i:i+1]
-            logit, states, _ = self._step(tok, states, attention)
+            logit, states, _ = self._step(tok, states, attention, queries)
             logits.append(logit)
         logit = torch.stack(logits, dim=1)
         return logit
 
-    def _step(self, tok, states, attention):
+    def _step(self, tok, states, attention, queries):
         prev_states, prev_out = states
         lstm_in = torch.cat(
             [self._embedding(tok).squeeze(1), prev_out],
@@ -163,7 +167,11 @@ class AttentionalLSTMDecoder(object):
         )
         states = self._lstm(lstm_in, prev_states)
         lstm_out = states[0][-1]
-        query = torch.mm(lstm_out, self._attn_w)
+        queries = [self._embedding(query) for query in queries]
+        queries_summed = [torch.sum(q, dim=0) for q in queries]
+        queries_batched = torch.stack(queries_summed)
+        query_combined = torch.cat([lstm_out, queries_batched], dim=1)
+        query = torch.mm(query_combined, self._attn_w)
         attention, attn_mask = attention
         context, score = step_attention(
             query, attention, attention, attn_mask)
@@ -172,7 +180,7 @@ class AttentionalLSTMDecoder(object):
         logit = torch.mm(dec_out, self._embedding.weight.t())
         return logit, states, score
 
-    def decode_step(self, tok, states, attention):
-        logit, states, score = self._step(tok, states, attention)
+    def decode_step(self, tok, states, attention, queries):
+        logit, states, score = self._step(tok, states, attention, queries)
         out = torch.max(logit, dim=1, keepdim=True)[1]
         return out, states, score

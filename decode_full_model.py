@@ -77,6 +77,7 @@ def decode(save_path, model_dir, split, batch_size,
             tokenized_queries_batch = map(tokenize(None), [[query] for query in raw_query_batch])
             ext_arts = []
             ext_inds = []
+            queries = []
             for raw_art_sents, raw_queries in zip(tokenized_article_batch, tokenized_queries_batch):
                 ext = extractor(raw_art_sents, raw_queries)[:-1]  # exclude EOE
                 if not ext:
@@ -87,11 +88,12 @@ def decode(save_path, model_dir, split, batch_size,
                     ext = [i.item() for i in ext]
                 ext_inds += [(len(ext_arts), len(ext))]
                 ext_arts += [raw_art_sents[i] for i in ext]
+                queries += [raw_queries[0] for _ in range(len(ext))]
             if beam_size > 1:
-                all_beams = abstractor(ext_arts, beam_size, diverse)
+                all_beams = abstractor(ext_arts, queries, beam_size, diverse)
                 dec_outs = rerank_mp(all_beams, ext_inds)
             else:
-                dec_outs = abstractor(ext_arts)
+                dec_outs = abstractor(ext_arts, queries)
             assert i == batch_size*i_debug
             for j, n in ext_inds:
                 decoded_sents = [' '.join(dec) for dec in dec_outs[j:j+n]]

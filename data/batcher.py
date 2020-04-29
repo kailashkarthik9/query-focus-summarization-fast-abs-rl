@@ -12,13 +12,14 @@ import torch.multiprocessing as mp
 
 # Batching functions
 def coll_fn(data):
-    source_lists, target_lists = unzip(data)
+    source_lists, target_lists, query_lists = unzip(data)
     # NOTE: independent filtering works because
     #       source and targets are matched properly by the Dataset
     sources = list(filter(bool, concat(source_lists)))
     targets = list(filter(bool, concat(target_lists)))
-    assert all(sources) and all(targets)
-    return sources, targets
+    queries = list(filter(bool, concat(query_lists)))
+    assert all(sources) and all(targets) and all(queries)
+    return sources, targets, [''.join(queries)]
 
 def coll_fn_extract(data):
     def is_good_data(d):
@@ -39,10 +40,11 @@ def conver2id(unk, word2id, words_list):
 
 @curry
 def prepro_fn(max_src_len, max_tgt_len, batch):
-    sources, targets = batch
+    sources, targets, query = batch
     sources = tokenize(max_src_len, sources)
     targets = tokenize(max_tgt_len, targets)
-    batch = list(zip(sources, targets))
+    tokenized_query = tokenize(max_src_len, query)[0]
+    batch = list(zip(sources, targets, tokenized_query))
     return batch
 
 @curry
@@ -67,7 +69,7 @@ def convert_batch(unk, word2id, batch):
 
 @curry
 def convert_batch_copy(unk, word2id, batch):
-    sources, targets = map(list, unzip(batch))
+    sources, targets, query = map(list, unzip(batch))
     ext_word2id = dict(word2id)
     for source in sources:
         for word in source:
@@ -77,7 +79,9 @@ def convert_batch_copy(unk, word2id, batch):
     sources = conver2id(unk, word2id, sources)
     tar_ins = conver2id(unk, word2id, targets)
     targets = conver2id(unk, ext_word2id, targets)
-    batch = list(zip(sources, src_exts, tar_ins, targets))
+    query_exts = conver2id(unk, ext_word2id, query)
+    queries = conver2id(unk, word2id, query)
+    batch = list(zip(sources, src_exts, tar_ins, targets, queries, query_exts))
     return batch
 
 @curry
@@ -140,7 +144,7 @@ def batchify_fn(pad, start, end, data, cuda=True):
 
 @curry
 def batchify_fn_copy(pad, start, end, data, cuda=True):
-    sources, ext_srcs, tar_ins, targets = tuple(map(list, unzip(data)))
+    sources, ext_srcs, tar_ins, targets, queries, query_exts = tuple(map(list, unzip(data)))
 
     src_lens = [len(src) for src in sources]
     sources = [src for src in sources]
@@ -149,13 +153,18 @@ def batchify_fn_copy(pad, start, end, data, cuda=True):
     tar_ins = [[start] + tgt for tgt in tar_ins]
     targets = [tgt + [end] for tgt in targets]
 
+    queries = [q for q in queries]
+    query_exts = [q for q in query_exts]
+
     source = pad_batch_tensorize(sources, pad, cuda)
     tar_in = pad_batch_tensorize(tar_ins, pad, cuda)
     target = pad_batch_tensorize(targets, pad, cuda)
     ext_src = pad_batch_tensorize(ext_srcs, pad, cuda)
+    queries_ = pad_batch_tensorize(queries, pad, cuda)
+    query_exts_ = pad_batch_tensorize(query_exts, pad, cuda)
 
     ext_vsize = ext_src.max().item() + 1
-    fw_args = (source, src_lens, tar_in, ext_src, ext_vsize)
+    fw_args = (source, src_lens, tar_in, ext_src, ext_vsize, queries_, query_exts_)
     loss_args = (target, )
     return fw_args, loss_args
 
